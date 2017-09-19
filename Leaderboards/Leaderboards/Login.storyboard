@@ -36,15 +36,29 @@
                                     <action selector="registerButtonTapped:" destination="uVk-D3-EKg" eventType="touchUpInside" id="RPz-xN-kUU"/>
                                 </connections>
                             </button>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="WIc-RK-y5G">
+                                <rect key="frame" x="67" y="89" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="SCR-mq-ww3" appends="YES" id="BzR-wj-QWP"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="AQl-oj-4qQ"/>
                     <connections>
+                        <outlet property="playerImageView" destination="WIc-RK-y5G" id="4kS-qJ-hOI"/>
                         <outlet property="usernameTextField" destination="IYD-7T-aOk" id="ToZ-Op-PZa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkx-A1-Hek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="SCR-mq-ww3">
+                    <connections>
+                        <action selector="playerImageViewTapped:" destination="uVk-D3-EKg" id="jLC-Z1-bPR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1088.8" y="172.26386806596702"/>
         </scene>
@@ -67,10 +81,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e31-7J-8Gp">
+                                <rect key="frame" x="67" y="87" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="playerImageView" destination="e31-7J-8Gp" id="0gX-ci-dlr"/>
                         <outlet property="welcomeLabel" destination="WBe-H7-rci" id="wq1-zm-hzd"/>
                     </connections>
                 </viewController>
@@ -97,4 +116,7 @@
             <point key="canvasLocation" x="149.59999999999999" y="172.26386806596702"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="image_placeholder" width="400" height="400"/>
+    </resources>
 </document>
