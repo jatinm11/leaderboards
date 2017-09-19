@@ -12,7 +12,7 @@ import CloudKit
 struct Player {
     
     let recordID: CKRecordID
-//    let playspaces: [CKReference]?
+    let playspaces: [CKReference]
     let username: String
     let photo: UIImage?
     let appleUserRef: CKReference
@@ -44,24 +44,33 @@ extension Player {
     static let appleUserRefKey = "appleUserRef"
     
     init?(record: CKRecord) {
-        guard //let playspaces = record[Player.playspacesKey] as? [CKReference],
-            let username = record[Player.usernameKey] as? String,
-//            let photoAsset = record[Player.photoKey] as? CKAsset,
-//            let photoData = try? Data(contentsOf: photoAsset.fileURL),
-//            let photo = UIImage(data: photoData),
+        guard let username = record[Player.usernameKey] as? String,
             let appleUserRef = record[Player.appleUserRefKey] as? CKReference else { return nil }
         
         self.recordID = record.recordID
-//        self.playspaces = playspaces
+        
+        if let playspaces = record[Player.playspacesKey] as? [CKReference] {
+            self.playspaces = playspaces
+        } else {
+            self.playspaces = []
+        }
+        
         self.username = username
-        self.photo = nil
+        
+        if let photoAsset = record[Player.photoKey] as? CKAsset, let photoData = try? Data(contentsOf: photoAsset.fileURL) {
+            let photo = UIImage(data: photoData)
+            self.photo = photo
+        } else {
+            self.photo = nil
+        }
+        
         self.appleUserRef = appleUserRef
     }
     
     var CKRepresentation: CKRecord {
         let record = CKRecord(recordType: Player.recordType, recordID: recordID)
         
-//        record.setValue(playspaces, forKey: Player.playspacesKey)
+        record.setValue(playspaces, forKey: Player.playspacesKey)
         record.setValue(username, forKey: Player.usernameKey)
         record.setValue(photoAsset, forKey: Player.photoKey)
         record.setValue(appleUserRef, forKey: Player.appleUserRefKey)

@@ -11,11 +11,13 @@ import UIKit
 class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var playerImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         welcomeLabel.text = "Hi, \(PlayerController.shared.currentPlayer?.username ?? "Player")"
+        playerImageView.image = PlayerController.shared.currentPlayer?.photo
     }
 
     override func didReceiveMemoryWarning() {

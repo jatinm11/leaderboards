@@ -29,7 +29,7 @@ class PlayerController {
             guard let appleUsersRecordID = appleUsersRecordID else { completion(false); return }
             let appleUserRef = CKReference(recordID: appleUsersRecordID, action: .deleteSelf)
             
-            let player = Player(recordID: CKRecordID(recordName: UUID().uuidString), username: username, photo: photo, appleUserRef: appleUserRef)
+            let player = Player(recordID: CKRecordID(recordName: UUID().uuidString), playspaces: [], username: username, photo: photo, appleUserRef: appleUserRef)
             
             let playerRecord = player.CKRepresentation
             
