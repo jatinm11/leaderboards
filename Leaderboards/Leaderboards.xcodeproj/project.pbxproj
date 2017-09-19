@@ -65,6 +65,8 @@
 		61FAEE501F717A1A00D509E6 /* Leaderboards */ = {
 			isa = PBXGroup;
 			children = (
+				61FAEE731F71819900D509E6 /* View Controller */,
+				61FAEE721F71817E00D509E6 /* Model Controller */,
 				61FAEE6E1F717E1C00D509E6 /* Leaderboards.entitlements */,
 				61FAEE6B1F717AE500D509E6 /* Models */,
 				61FAEE6C1F717B1000D509E6 /* Resources */,
@@ -109,6 +111,20 @@
 				61FAEE701F717E2100D509E6 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61FAEE721F71817E00D509E6 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Model Controller";
+			sourceTree = "<group>";
+		};
+		61FAEE731F71819900D509E6 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
