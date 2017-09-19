@@ -11,6 +11,10 @@
 		61FAEE571F717A1A00D509E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE551F717A1A00D509E6 /* Main.storyboard */; };
 		61FAEE591F717A1A00D509E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE581F717A1A00D509E6 /* Assets.xcassets */; };
 		61FAEE5C1F717A1A00D509E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE5A1F717A1A00D509E6 /* LaunchScreen.storyboard */; };
+		61FAEE671F717AB200D509E6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE631F717AB200D509E6 /* Player.swift */; };
+		61FAEE681F717AB200D509E6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE641F717AB200D509E6 /* Match.swift */; };
+		61FAEE691F717AB200D509E6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE651F717AB200D509E6 /* Game.swift */; };
+		61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE661F717AB200D509E6 /* Playspace.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		61FAEE581F717A1A00D509E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61FAEE5B1F717A1A00D509E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61FAEE5D1F717A1B00D509E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61FAEE631F717AB200D509E6 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		61FAEE641F717AB200D509E6 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		61FAEE651F717AB200D509E6 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		61FAEE661F717AB200D509E6 /* Playspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playspace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +60,41 @@
 		61FAEE501F717A1A00D509E6 /* Leaderboards */ = {
 			isa = PBXGroup;
 			children = (
-				61FAEE511F717A1A00D509E6 /* AppDelegate.swift */,
-				61FAEE551F717A1A00D509E6 /* Main.storyboard */,
-				61FAEE581F717A1A00D509E6 /* Assets.xcassets */,
-				61FAEE5A1F717A1A00D509E6 /* LaunchScreen.storyboard */,
-				61FAEE5D1F717A1B00D509E6 /* Info.plist */,
+				61FAEE6B1F717AE500D509E6 /* Models */,
+				61FAEE6C1F717B1000D509E6 /* Resources */,
+				61FAEE6D1F717B1B00D509E6 /* Storyboards */,
 			);
 			path = Leaderboards;
+			sourceTree = "<group>";
+		};
+		61FAEE6B1F717AE500D509E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				61FAEE631F717AB200D509E6 /* Player.swift */,
+				61FAEE641F717AB200D509E6 /* Match.swift */,
+				61FAEE651F717AB200D509E6 /* Game.swift */,
+				61FAEE661F717AB200D509E6 /* Playspace.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		61FAEE6C1F717B1000D509E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				61FAEE511F717A1A00D509E6 /* AppDelegate.swift */,
+				61FAEE5D1F717A1B00D509E6 /* Info.plist */,
+				61FAEE581F717A1A00D509E6 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		61FAEE6D1F717B1B00D509E6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				61FAEE551F717A1A00D509E6 /* Main.storyboard */,
+				61FAEE5A1F717A1A00D509E6 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +170,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61FAEE671F717AB200D509E6 /* Player.swift in Sources */,
 				61FAEE521F717A1A00D509E6 /* AppDelegate.swift in Sources */,
+				61FAEE681F717AB200D509E6 /* Match.swift in Sources */,
+				61FAEE691F717AB200D509E6 /* Game.swift in Sources */,
+				61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
