@@ -16,6 +16,11 @@
 		61FAEE691F717AB200D509E6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE651F717AB200D509E6 /* Game.swift */; };
 		61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE661F717AB200D509E6 /* Playspace.swift */; };
 		61FAEE711F717E2100D509E6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FAEE701F717E2100D509E6 /* CloudKit.framework */; };
+		74DEFF9B1F718FA600030ED9 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFF9A1F718FA600030ED9 /* PlayerController.swift */; };
+		74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */; };
+		74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DEFF9F1F71986F00030ED9 /* Login.storyboard */; };
+		74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA11F7199D200030ED9 /* LoginViewController.swift */; };
+		74DEFFA41F71A63C00030ED9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */; };
 		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
 		61FAEE751F71861A00D509E6 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE741F71861A00D509E6 /* PlayerViewController.swift */; };
 		61FAEE771F71874700D509E6 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */; };
@@ -37,6 +42,11 @@
 		61FAEE661F717AB200D509E6 /* Playspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playspace.swift; sourceTree = "<group>"; };
 		61FAEE6E1F717E1C00D509E6 /* Leaderboards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Leaderboards.entitlements; sourceTree = "<group>"; };
 		61FAEE701F717E2100D509E6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		74DEFF9A1F718FA600030ED9 /* PlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		74DEFF9F1F71986F00030ED9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		74DEFFA11F7199D200030ED9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
 		61FAEE741F71861A00D509E6 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -77,6 +87,7 @@
 		61FAEE501F717A1A00D509E6 /* Leaderboards */ = {
 			isa = PBXGroup;
 			children = (
+				74DEFF9C1F718FCD00030ED9 /* Helpers */,
 				61FAEE731F71819900D509E6 /* View Controller */,
 				61FAEE721F71817E00D509E6 /* Model Controller */,
 				61FAEE6E1F717E1C00D509E6 /* Leaderboards.entitlements */,
@@ -114,6 +125,7 @@
 				61FAEE551F717A1A00D509E6 /* Players.storyboard */,
 				61FAEE781F71887100D509E6 /* Leaderboards.storyboard */,
 				61FAEE5A1F717A1A00D509E6 /* LaunchScreen.storyboard */,
+				74DEFF9F1F71986F00030ED9 /* Login.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -129,6 +141,7 @@
 		61FAEE721F71817E00D509E6 /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
+				74DEFF9A1F718FA600030ED9 /* PlayerController.swift */,
 				AB3DF1711F71845F00498B8B /* PlayspaceController.swift */,
 			);
 			name = "Model Controller";
@@ -137,12 +150,22 @@
 		61FAEE731F71819900D509E6 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				74DEFFA11F7199D200030ED9 /* LoginViewController.swift */,
+				74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */,
 				61FAEE741F71861A00D509E6 /* PlayerViewController.swift */,
 				61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */,
 				61FAEE7A1F718C0000D509E6 /* LeaderboardTableViewCell.swift */,
 				61FAEE7C1F718C2800D509E6 /* LeaderboardViewController.swift */,
 			);
 			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		74DEFF9C1F718FCD00030ED9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */,
 				61FAEE5C1F717A1A00D509E6 /* LaunchScreen.storyboard in Resources */,
 				61FAEE591F717A1A00D509E6 /* Assets.xcassets in Resources */,
 				61FAEE791F71887100D509E6 /* Leaderboards.storyboard in Resources */,
@@ -227,12 +251,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74DEFFA41F71A63C00030ED9 /* WelcomeViewController.swift in Sources */,
+				61FAEE671F717AB200D509E6 /* Player.swift in Sources */,
+				61FAEE521F717A1A00D509E6 /* AppDelegate.swift in Sources */,
+				74DEFF9B1F718FA600030ED9 /* PlayerController.swift in Sources */,
 				61FAEE771F71874700D509E6 /* PlayerTableViewCell.swift in Sources */,
 				61FAEE7B1F718C0000D509E6 /* LeaderboardTableViewCell.swift in Sources */,
 				61FAEE671F717AB200D509E6 /* Player.swift in Sources */,
 				61FAEE521F717A1A00D509E6 /* AppDelegate.swift in Sources */,
 				61FAEE7D1F718C2800D509E6 /* LeaderboardViewController.swift in Sources */,
 				61FAEE681F717AB200D509E6 /* Match.swift in Sources */,
+				74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */,
+				74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */,
 				61FAEE691F717AB200D509E6 /* Game.swift in Sources */,
 				AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */,
 				61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */,
