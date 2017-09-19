@@ -15,6 +15,7 @@
 		61FAEE681F717AB200D509E6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE641F717AB200D509E6 /* Match.swift */; };
 		61FAEE691F717AB200D509E6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE651F717AB200D509E6 /* Game.swift */; };
 		61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE661F717AB200D509E6 /* Playspace.swift */; };
+		61FAEE711F717E2100D509E6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FAEE701F717E2100D509E6 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,8 @@
 		61FAEE641F717AB200D509E6 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		61FAEE651F717AB200D509E6 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		61FAEE661F717AB200D509E6 /* Playspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playspace.swift; sourceTree = "<group>"; };
+		61FAEE6E1F717E1C00D509E6 /* Leaderboards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Leaderboards.entitlements; sourceTree = "<group>"; };
+		61FAEE701F717E2100D509E6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61FAEE711F717E2100D509E6 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +50,7 @@
 			children = (
 				61FAEE501F717A1A00D509E6 /* Leaderboards */,
 				61FAEE4F1F717A1A00D509E6 /* Products */,
+				61FAEE6F1F717E2100D509E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +65,7 @@
 		61FAEE501F717A1A00D509E6 /* Leaderboards */ = {
 			isa = PBXGroup;
 			children = (
+				61FAEE6E1F717E1C00D509E6 /* Leaderboards.entitlements */,
 				61FAEE6B1F717AE500D509E6 /* Models */,
 				61FAEE6C1F717B1000D509E6 /* Resources */,
 				61FAEE6D1F717B1B00D509E6 /* Storyboards */,
@@ -97,6 +103,14 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		61FAEE6F1F717E2100D509E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61FAEE701F717E2100D509E6 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,6 +145,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = M67BJVKLC2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -297,6 +319,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Leaderboards/Leaderboards.entitlements;
 				DEVELOPMENT_TEAM = M67BJVKLC2;
 				INFOPLIST_FILE = Leaderboards/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -310,6 +333,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Leaderboards/Leaderboards.entitlements;
 				DEVELOPMENT_TEAM = M67BJVKLC2;
 				INFOPLIST_FILE = Leaderboards/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
