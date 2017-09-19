@@ -16,6 +16,7 @@
 		61FAEE691F717AB200D509E6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE651F717AB200D509E6 /* Game.swift */; };
 		61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE661F717AB200D509E6 /* Playspace.swift */; };
 		61FAEE711F717E2100D509E6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FAEE701F717E2100D509E6 /* CloudKit.framework */; };
+		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		61FAEE661F717AB200D509E6 /* Playspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playspace.swift; sourceTree = "<group>"; };
 		61FAEE6E1F717E1C00D509E6 /* Leaderboards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Leaderboards.entitlements; sourceTree = "<group>"; };
 		61FAEE701F717E2100D509E6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		61FAEE721F71817E00D509E6 /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AB3DF1711F71845F00498B8B /* PlayspaceController.swift */,
 			);
 			name = "Model Controller";
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				61FAEE521F717A1A00D509E6 /* AppDelegate.swift in Sources */,
 				61FAEE681F717AB200D509E6 /* Match.swift in Sources */,
 				61FAEE691F717AB200D509E6 /* Game.swift in Sources */,
+				AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */,
 				61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +382,7 @@
 				61FAEE621F717A1B00D509E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
