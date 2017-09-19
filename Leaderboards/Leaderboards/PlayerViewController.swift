@@ -27,6 +27,8 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as! PlayerTableViewCell
+        let player = PlayerController.shared.currentPlayer
+        cell.player = player
         return cell
     }
     

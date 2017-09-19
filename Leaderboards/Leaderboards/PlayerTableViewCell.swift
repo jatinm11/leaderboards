@@ -15,4 +15,20 @@ class PlayerTableViewCell: UITableViewCell {
     @IBOutlet var playerImageView: UIImageView!
     @IBOutlet var playerNameLabel: UILabel!
     
+    // MARK:- Properties
+    
+    var player: Player? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    // MARK :- Functions
+    
+    func updateViews() {
+        if let player = player {
+            playerNameLabel.text = player.username
+            playerImageView.image = player.photo
+        }
+    }
 }

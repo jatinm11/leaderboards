@@ -18,7 +18,19 @@ class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet var matchesLossLabel: UILabel!
     @IBOutlet var totalPointsLabel: UILabel!
     
+    // MARK :- Properties
     
+    var player: Player? {
+        didSet {
+            updateName()
+        }
+    }
     
+    // MARK :- Functions
     
+    func updateName() {
+        if let player = player {
+            playerImage.image = player.photo
+        }
+    }
 }
