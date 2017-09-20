@@ -15,11 +15,15 @@ class PlayerController {
     
     let currentPlayerWasSetNotification = Notification.Name("currentPlayerWasSet")
     
+    var isFirstTime: Bool = false
+    
     var currentPlayer: Player? {
         didSet {
-            
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: self.currentPlayerWasSetNotification, object: nil)
+            if !isFirstTime {
+                DispatchQueue.main.async {
+                    self.isFirstTime = true
+                    NotificationCenter.default.post(name: self.currentPlayerWasSetNotification, object: nil)
+                }
             }
         }
     }
@@ -70,9 +74,16 @@ class PlayerController {
         }
     }
     
-    func updatePlayer(_ player: Player) {
+    func updatePlayer(_ player: Player, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         let playerRecord = player.CKRepresentation
-        CloudKitManager.shared.updateRecords([playerRecord], perRecordCompletion: nil, completion: nil)
+        CloudKitManager.shared.updateRecords([playerRecord], perRecordCompletion: nil) { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
     
     func fetchPlayspacesFor(_ player: Player, completion: @escaping (_ success: Bool) -> Void = { _ in }) {

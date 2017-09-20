@@ -38,7 +38,7 @@ class PlayspacesViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Join", style: .default, handler: { (_) in
             guard let password = alert.textFields?.first?.text, !password.isEmpty else { return }
-            
+            PlayspaceController.shared.joinPlayspaceWith(password: password)
         }))
         
         present(alert, animated: true, completion: nil)

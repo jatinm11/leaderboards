@@ -27,7 +27,7 @@
 		74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DEFF9F1F71986F00030ED9 /* Login.storyboard */; };
 		74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA11F7199D200030ED9 /* LoginViewController.swift */; };
 		74DEFFA41F71A63C00030ED9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */; };
-		74DEFFA61F71DD8B00030ED9 /* PlayspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA51F71DD8B00030ED9 /* PlayspaceViewController.swift */; };
+		74DEFFA61F71DD8B00030ED9 /* PlayspacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */; };
 		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +55,7 @@
 		74DEFF9F1F71986F00030ED9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		74DEFFA11F7199D200030ED9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		74DEFFA51F71DD8B00030ED9 /* PlayspaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceViewController.swift; sourceTree = "<group>"; };
+		74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspacesViewController.swift; sourceTree = "<group>"; };
 		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,7 +161,7 @@
 				61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */,
 				61FAEE7A1F718C0000D509E6 /* LeaderboardTableViewCell.swift */,
 				61FAEE7C1F718C2800D509E6 /* LeaderboardViewController.swift */,
-				74DEFFA51F71DD8B00030ED9 /* PlayspaceViewController.swift */,
+				74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -270,7 +270,7 @@
 				74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */,
 				61FAEE691F717AB200D509E6 /* Game.swift in Sources */,
 				AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */,
-				74DEFFA61F71DD8B00030ED9 /* PlayspaceViewController.swift in Sources */,
+				74DEFFA61F71DD8B00030ED9 /* PlayspacesViewController.swift in Sources */,
 				61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */,
 				61FAEE751F71861A00D509E6 /* PlayerViewController.swift in Sources */,
 			);
