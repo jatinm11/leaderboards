@@ -27,6 +27,7 @@
 		74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA11F7199D200030ED9 /* LoginViewController.swift */; };
 		74DEFFA41F71A63C00030ED9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */; };
 		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
+		AB86E01E1F72BDF1001A0A4E /* Match.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB86E01D1F72BDF1001A0A4E /* Match.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		74DEFFA11F7199D200030ED9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
+		AB86E01D1F72BDF1001A0A4E /* Match.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Match.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				61FAEE781F71887100D509E6 /* Leaderboards.storyboard */,
 				61FAEE5A1F717A1A00D509E6 /* LaunchScreen.storyboard */,
 				74DEFF9F1F71986F00030ED9 /* Login.storyboard */,
+				AB86E01D1F72BDF1001A0A4E /* Match.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			files = (
 				74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */,
 				61FAEE5C1F717A1A00D509E6 /* LaunchScreen.storyboard in Resources */,
+				AB86E01E1F72BDF1001A0A4E /* Match.storyboard in Resources */,
 				61FAEE591F717A1A00D509E6 /* Assets.xcassets in Resources */,
 				61FAEE791F71887100D509E6 /* Leaderboards.storyboard in Resources */,
 				61FAEE571F717A1A00D509E6 /* Players.storyboard in Resources */,
