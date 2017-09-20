@@ -64,6 +64,13 @@ class PlayspacesViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGamesViewController" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate

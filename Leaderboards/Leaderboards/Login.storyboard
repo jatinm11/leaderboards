@@ -120,6 +120,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="pYk-H8-mmj" kind="show" identifier="toGamesViewController" id="ZaT-y2-i9i"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -159,6 +162,139 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JZ2-GL-f9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2482" y="170"/>
+        </scene>
+        <!--Games View Controller-->
+        <scene sceneID="jas-BI-SI9">
+            <objects>
+                <viewController id="pYk-H8-mmj" customClass="GamesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Yc-HV-L96"/>
+                        <viewControllerLayoutGuide type="bottom" id="FWa-Fw-CA5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jpL-qF-NYc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RXh-Ez-mrs">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameCell" id="e56-g9-Csp">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e56-g9-Csp" id="IYS-No-ygE">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="l1Q-QG-KAJ" kind="show" id="Z0K-hM-UXG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oro-la-zgb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Games" id="FII-n1-h7E">
+                                        <barButtonItem key="leftBarButtonItem" title="Join" id="Nll-Fy-MQI">
+                                            <connections>
+                                                <segue destination="RsE-YT-OY4" kind="presentation" id="DeP-Hv-05y"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ew-dP-G6N"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Oro-la-zgb" firstAttribute="top" secondItem="1Yc-HV-L96" secondAttribute="bottom" id="9qQ-Ct-acD"/>
+                            <constraint firstItem="RXh-Ez-mrs" firstAttribute="top" secondItem="Oro-la-zgb" secondAttribute="bottom" id="CrW-13-RlH"/>
+                            <constraint firstItem="Oro-la-zgb" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" id="FWC-qY-G1P"/>
+                            <constraint firstItem="RXh-Ez-mrs" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" id="RZO-vV-fEM"/>
+                            <constraint firstAttribute="trailing" secondItem="RXh-Ez-mrs" secondAttribute="trailing" id="cI2-Zv-ivI"/>
+                            <constraint firstItem="FWa-Fw-CA5" firstAttribute="top" secondItem="RXh-Ez-mrs" secondAttribute="bottom" id="eai-U1-hM1"/>
+                            <constraint firstAttribute="trailing" secondItem="Oro-la-zgb" secondAttribute="trailing" id="o81-Vj-gcs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="RXh-Ez-mrs" id="GRP-gQ-6rv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eyB-0x-5hZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3247" y="170"/>
+        </scene>
+        <!--Leaderboards-->
+        <scene sceneID="lD2-nZ-59R">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Leaderboards" id="l1Q-QG-KAJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8pF-o4-sFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3339" y="613"/>
+        </scene>
+        <!--Join Game View Controller-->
+        <scene sceneID="o2M-NP-p0O">
+            <objects>
+                <viewController id="RsE-YT-OY4" customClass="JoinGameViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LDb-U9-jOc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vl9-YM-vTC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AtL-L8-HAU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rf0-QE-oWf">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameCell" id="pXN-az-AyR">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pXN-az-AyR" id="uxY-ap-HMn">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PW-Fw-M7Q">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Join Game" id="IEs-Hk-MDx">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="z9x-Bb-xxl">
+                                            <connections>
+                                                <action selector="cancelBarButtonItemTapped:" destination="RsE-YT-OY4" id="TBU-En-Z0J"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Iid-YF-mLo">
+                                            <connections>
+                                                <action selector="addGameBarButtonItemTapped:" destination="RsE-YT-OY4" id="HXp-Qg-zBQ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0PW-Fw-M7Q" firstAttribute="leading" secondItem="AtL-L8-HAU" secondAttribute="leading" id="4Je-ft-Wfh"/>
+                            <constraint firstAttribute="trailing" secondItem="0PW-Fw-M7Q" secondAttribute="trailing" id="LrG-rs-599"/>
+                            <constraint firstItem="0PW-Fw-M7Q" firstAttribute="top" secondItem="LDb-U9-jOc" secondAttribute="bottom" id="M9C-ru-dSd"/>
+                            <constraint firstAttribute="trailing" secondItem="rf0-QE-oWf" secondAttribute="trailing" id="VM4-Ab-b3O"/>
+                            <constraint firstItem="rf0-QE-oWf" firstAttribute="leading" secondItem="AtL-L8-HAU" secondAttribute="leading" id="btE-PZ-WAk"/>
+                            <constraint firstItem="Vl9-YM-vTC" firstAttribute="top" secondItem="rf0-QE-oWf" secondAttribute="bottom" id="eqr-sK-DkU"/>
+                            <constraint firstItem="rf0-QE-oWf" firstAttribute="top" secondItem="0PW-Fw-M7Q" secondAttribute="bottom" id="zzc-Xp-M9U"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="rf0-QE-oWf" id="pda-H6-9PR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fsi-wo-52n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4020" y="170"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TGG-BK-CaX">
