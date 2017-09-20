@@ -11,17 +11,24 @@ import CloudKit
 
 class PlayspaceController {
     
-    static let sharedInstance = PlayspaceController()
+    static let shared = PlayspaceController()
     
     fileprivate static let playspaceKey = "playspace"
     
     var playspaces: [Playspace] = []
     
-    // Create playspace
-    func addPlayspaceWith(recordID: CKRecordID, name: String) {
-        let playspace = Playspace(recordID: recordID, name: name, password: randomString(length: 4))
-        playspaces.append(playspace)
+    func createPlayspaceWith(name: String) {
+        let playspace = Playspace(recordID: CKRecordID(recordName: UUID().uuidString), name: name, password: randomString(length: 4))
+        
+        CloudKitManager.shared.saveRecord(playspace.CKRepresentation, completion: nil)
+        
+        if var currentPlayer = PlayerController.shared.currentPlayer {
+            currentPlayer.playspaces.append(CKReference(record: playspace.CKRepresentation, action: .none))
+            PlayerController.shared.updatePlayer(currentPlayer)
+        }
     }
+    
+    
     
     func randomString(length:Int) -> String {
         let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

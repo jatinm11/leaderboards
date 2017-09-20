@@ -33,7 +33,7 @@ class PlayerController {
             
             let playerRecord = player.CKRepresentation
             
-            CKContainer.default().publicCloudDatabase.save(playerRecord) { (record, error) in
+            CloudKitManager.shared.saveRecord(playerRecord) { (record, error) in
                 if let error = error { print(error.localizedDescription) }
                 
                 guard let record = record,
@@ -68,6 +68,40 @@ class PlayerController {
                 completion(true)
             })
         }
+    }
+    
+    func updatePlayer(_ player: Player) {
+        let playerRecord = player.CKRepresentation
+        CloudKitManager.shared.updateRecords([playerRecord], perRecordCompletion: nil, completion: nil)
+    }
+    
+    func fetchPlayspacesFor(_ player: Player, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        var playspaceRecordIDs = [CKRecordID]()
+        
+        for playspace in player.playspaces {
+            playspaceRecordIDs.append(playspace.recordID)
+        }
+        
+        CloudKitManager.shared.fetchRecords(withIDs: playspaceRecordIDs) { (playspacesDictionary, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            var playspaceRecords = [CKRecord]()
+            guard let playspacesDictionary = playspacesDictionary else { completion(false); return }
+            for playspaceRecord in playspacesDictionary.values {
+                playspaceRecords.append(playspaceRecord)
+            }
+            
+            let playspaces = playspaceRecords.flatMap { Playspace(record: $0) }
+            PlayspaceController.shared.playspaces = playspaces
+            completion(true)
+        }
+        
+    
+        
     }
     
 }
