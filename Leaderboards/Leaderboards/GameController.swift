@@ -30,6 +30,8 @@ class GameController {
                 completion(false)
                 return
             }
+            
+            completion(true)
         }
     }
     
@@ -66,6 +68,21 @@ class GameController {
         }
         self.gamesNotBelongingToCurrentPlayer = gamesNotBelongingToCurrentPlayer
         self.gamesBelongingToCurrentPlayer = gamesBelongingToCurrentPlayer
+    }
+    
+    func addCurrentPlayerToGame(_ game: Game, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        var game = game
+        guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(false); return }
+        game.players.append(CKReference(record: currentPlayer.CKRepresentation, action: .none))
+        
+        CloudKitManager.shared.updateRecords([game.CKRepresentation], perRecordCompletion: nil) { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
     
 }

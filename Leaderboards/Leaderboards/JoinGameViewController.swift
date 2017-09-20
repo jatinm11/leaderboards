@@ -18,6 +18,23 @@ class JoinGameViewController: UIViewController {
     
     
     @IBAction func addGameBarButtonItemTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Add New Game", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter Name"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
+            guard let name = alert.textFields?.first?.text, !name.isEmpty else { return }
+            GameController.shared.createGameWith(name: name, completion: { (success) in
+                if success {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+        }))
+        
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -53,6 +70,15 @@ extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
         cell.textLabel?.text = GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row].name
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let game = GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row]
+        GameController.shared.addCurrentPlayerToGame(game) { (success) in
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
 }

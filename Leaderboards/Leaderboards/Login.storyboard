@@ -186,6 +186,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="l1Q-QG-KAJ" kind="show" id="Z0K-hM-UXG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -198,11 +201,7 @@
                                                 <segue destination="RsE-YT-OY4" kind="presentation" id="DeP-Hv-05y"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ew-dP-G6N">
-                                            <connections>
-                                                <action selector="addGameBarButtonItemTapped:" destination="pYk-H8-mmj" id="UKC-1U-A9U"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ew-dP-G6N"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -225,6 +224,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyB-0x-5hZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3247" y="170"/>
+        </scene>
+        <!--Leaderboards-->
+        <scene sceneID="lD2-nZ-59R">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Leaderboards" id="l1Q-QG-KAJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8pF-o4-sFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3339" y="613"/>
         </scene>
         <!--Join Game View Controller-->
         <scene sceneID="o2M-NP-p0O">

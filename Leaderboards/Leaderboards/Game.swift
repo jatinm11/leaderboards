@@ -14,7 +14,7 @@ struct Game {
     let recordID: CKRecordID
     let name: String
     let playspace: CKReference
-    let players: [CKReference]
+    var players: [CKReference]
     
 }
 
