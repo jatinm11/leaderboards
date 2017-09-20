@@ -126,15 +126,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VsB-Ug-RHM">
-                                <rect key="frame" x="329" y="42" width="30" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="+"/>
-                                <connections>
-                                    <segue destination="mUW-ev-KSp" kind="show" id="5Y0-ou-Arl"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -145,14 +136,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXQ-4g-wdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="96.799999999999997" y="169.56521739130437"/>
-        </scene>
-        <!--Match-->
-        <scene sceneID="QQd-Zi-Rxm">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Match" id="mUW-ev-KSp" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hjk-5I-0ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="799" y="169"/>
         </scene>
     </scenes>
 </document>
