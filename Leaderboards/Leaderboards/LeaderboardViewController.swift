@@ -32,5 +32,6 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
 }
