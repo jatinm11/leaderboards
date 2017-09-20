@@ -76,9 +76,9 @@ class CloudKitManager {
         
         operation.perRecordCompletionBlock = perRecordCompletion
         
-        //operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
-            //(completion?(records, error))!
-        //}
+        operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
+            (completion?(records, error))
+        }
         
         publicDB.add(operation)
     }
