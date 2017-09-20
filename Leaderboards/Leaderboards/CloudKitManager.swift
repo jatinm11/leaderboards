@@ -21,6 +21,12 @@ class CloudKitManager {
         }
     }
     
+    func fetchRecords(withIDs recordIDs: [CKRecordID], completion: ((_ records: [CKRecordID: CKRecord]?, _ error: Error?) -> Void)?) {
+        let fetchRecordsOperation = CKFetchRecordsOperation(recordIDs: recordIDs)
+        fetchRecordsOperation.fetchRecordsCompletionBlock = completion
+        publicDB.add(fetchRecordsOperation)
+    }
+    
     func fetchRecordsWithType(_ type: String, predicate: NSPredicate = NSPredicate(value: true), recordFetchedBlock: ((_ record: CKRecord) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
         
         var fetchedRecords: [CKRecord] = []
@@ -51,6 +57,30 @@ class CloudKitManager {
         
         queryOperation.queryCompletionBlock = queryCompletionBlock
         self.publicDB.add(queryOperation)
+    }
+    
+    func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
+        
+        publicDB.save(record, completionHandler: { (record, error) in
+            
+            completion?(record, error)
+        })
+    }
+    
+    func updateRecords(_ records: [CKRecord], perRecordCompletion: ((_ record: CKRecord?, _ error: Error?) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.queuePriority = .high
+        operation.qualityOfService = .userInteractive
+        
+        operation.perRecordCompletionBlock = perRecordCompletion
+        
+        //operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
+            //(completion?(records, error))!
+        //}
+        
+        publicDB.add(operation)
     }
     
 }

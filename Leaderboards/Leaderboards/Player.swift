@@ -12,7 +12,7 @@ import CloudKit
 struct Player {
     
     let recordID: CKRecordID
-    let playspaces: [CKReference]
+    var playspaces: [CKReference]
     let username: String
     let photo: UIImage?
     let appleUserRef: CKReference

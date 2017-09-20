@@ -66,12 +66,12 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(segueToWelcomeVC), name: PlayerController.shared.currentPlayerWasSetNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(segueToPlayspacesViewController), name: PlayerController.shared.currentPlayerWasSetNotification, object: nil)
     }
     
-    func segueToWelcomeVC() {
+    func segueToPlayspacesViewController() {
         DispatchQueue.main.async {
-            let welcomeVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "welcomeVC")
+            let welcomeVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
             self.navigationController?.pushViewController(welcomeVC, animated: true)
         }
     }
