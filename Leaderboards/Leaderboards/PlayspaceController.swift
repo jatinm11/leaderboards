@@ -17,6 +17,8 @@ class PlayspaceController {
     
     var playspaces: [Playspace] = []
     
+    var currentPlayspace: Playspace?
+    
     func createPlayspaceWith(name: String) {
         let playspace = Playspace(recordID: CKRecordID(recordName: UUID().uuidString), name: name, password: randomString(length: 4))
         
@@ -51,6 +53,8 @@ class PlayspaceController {
             }
         }
     }
+    
+    
     
     func randomString(length:Int) -> String {
         let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

@@ -14,6 +14,7 @@ struct Game {
     let recordID: CKRecordID
     let name: String
     let playspace: CKReference
+    let players: [CKReference]
     
 }
 
@@ -24,6 +25,7 @@ extension Game {
     static let nameKey = "name"
     static let playspaceKey = "playspace"
     static let recordType = "Game"
+    static let playersKey = "players"
     
     init?(record: CKRecord) {
         guard let name = record[Game.nameKey] as? String,
@@ -32,6 +34,12 @@ extension Game {
         self.recordID = record.recordID
         self.name = name
         self.playspace = playspace
+        
+        if let players = record[Game.playersKey] as? [CKReference] {
+            self.players = players
+        } else {
+            self.players = []
+        }
     }
     
     var CKRepresentation: CKRecord {
@@ -39,6 +47,7 @@ extension Game {
         
         record.setValue(name, forKey: Game.nameKey)
         record.setValue(playspace, forKey: Game.playspaceKey)
+        record.setValue(players, forKey: Game.playersKey)
         
         return record
     }
