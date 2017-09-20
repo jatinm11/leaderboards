@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		619BC9331F71AED7009EAD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE511F717A1A00D509E6 /* AppDelegate.swift */; };
+		619BC9351F71E22F009EAD70 /* LeaderboardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619BC9341F71E22F009EAD70 /* LeaderboardsController.swift */; };
 		61EA7AF11F71ADF0009D780A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE631F717AB200D509E6 /* Player.swift */; };
 		61FAEE571F717A1A00D509E6 /* Players.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE551F717A1A00D509E6 /* Players.storyboard */; };
 		61FAEE591F717A1A00D509E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE581F717A1A00D509E6 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		619BC9341F71E22F009EAD70 /* LeaderboardsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardsController.swift; sourceTree = "<group>"; };
 		61FAEE4E1F717A1A00D509E6 /* Leaderboards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leaderboards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FAEE511F717A1A00D509E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61FAEE561F717A1A00D509E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Players.storyboard; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			children = (
 				74DEFF9A1F718FA600030ED9 /* PlayerController.swift */,
 				AB3DF1711F71845F00498B8B /* PlayspaceController.swift */,
+				619BC9341F71E22F009EAD70 /* LeaderboardsController.swift */,
 			);
 			name = "Model Controller";
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				61FAEE7D1F718C2800D509E6 /* LeaderboardViewController.swift in Sources */,
 				61FAEE681F717AB200D509E6 /* Match.swift in Sources */,
 				74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */,
+				619BC9351F71E22F009EAD70 /* LeaderboardsController.swift in Sources */,
 				74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */,
 				61FAEE691F717AB200D509E6 /* Game.swift in Sources */,
 				AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */,
