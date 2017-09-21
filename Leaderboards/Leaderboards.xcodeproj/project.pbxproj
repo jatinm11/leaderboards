@@ -31,8 +31,8 @@
 		74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */; };
 		74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DEFF9F1F71986F00030ED9 /* Login.storyboard */; };
 		74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA11F7199D200030ED9 /* LoginViewController.swift */; };
-		74DEFFA41F71A63C00030ED9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */; };
 		74DEFFA61F71DD8B00030ED9 /* PlayspacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */; };
+		AB36E4A51F731D9A00B93655 /* NewUserSelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */; };
 		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
 		AB86E01E1F72BDF1001A0A4E /* Match.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB86E01D1F72BDF1001A0A4E /* Match.storyboard */; };
 /* End PBXBuildFile section */
@@ -65,8 +65,8 @@
 		74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		74DEFF9F1F71986F00030ED9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		74DEFFA11F7199D200030ED9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspacesViewController.swift; sourceTree = "<group>"; };
+		AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSelectImageViewController.swift; sourceTree = "<group>"; };
 		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
 		AB86E01D1F72BDF1001A0A4E /* Match.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Match.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				74DEFFA11F7199D200030ED9 /* LoginViewController.swift */,
-				74DEFFA31F71A63C00030ED9 /* WelcomeViewController.swift */,
 				61FAEE741F71861A00D509E6 /* PlayerViewController.swift */,
 				61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */,
 				61FAEE7A1F718C0000D509E6 /* LeaderboardTableViewCell.swift */,
@@ -180,6 +179,7 @@
 				748E61F51F72F9A800759243 /* JoinGameViewController.swift */,
 				748E61F71F731C9B00759243 /* NewMatchViewController.swift */,
 				748E61F91F73316700759243 /* SelectOpponentViewController.swift */,
+				AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -278,8 +278,8 @@
 			files = (
 				619BC9331F71AED7009EAD70 /* AppDelegate.swift in Sources */,
 				748E61F81F731C9B00759243 /* NewMatchViewController.swift in Sources */,
+				AB36E4A51F731D9A00B93655 /* NewUserSelectImageViewController.swift in Sources */,
 				61EA7AF11F71ADF0009D780A /* Player.swift in Sources */,
-				74DEFFA41F71A63C00030ED9 /* WelcomeViewController.swift in Sources */,
 				74DEFF9B1F718FA600030ED9 /* PlayerController.swift in Sources */,
 				61FAEE771F71874700D509E6 /* PlayerTableViewCell.swift in Sources */,
 				748E61F21F72DB0000759243 /* GamesViewController.swift in Sources */,

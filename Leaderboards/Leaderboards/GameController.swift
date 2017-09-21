@@ -19,6 +19,7 @@ class GameController {
     
     var gamesNotBelongingToCurrentPlayer = [Game]()
     var gamesBelongingToCurrentPlayer = [Game]()
+    var playersBelongingToCurrentGame = [Player]()
     
     func createGameWith(name: String, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentPlayerRecord = PlayerController.shared.currentPlayer?.CKRepresentation,
@@ -57,6 +58,7 @@ class GameController {
         }
     }
     
+    
     func sortGamesForCurrentPlayer() {
         var gamesNotBelongingToCurrentPlayer = [Game]()
         let gamesBelongingToCurrentPlayer = games.filter { (game) -> Bool in
@@ -76,7 +78,6 @@ class GameController {
         var game = game
         guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(false); return }
         game.players.append(CKReference(record: currentPlayer.CKRepresentation, action: .none))
-        
         CloudKitManager.shared.updateRecords([game.CKRepresentation], perRecordCompletion: nil) { (_, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -114,7 +115,6 @@ class GameController {
             PlayerController.shared.opponents = opponents
             completion(true)
         }
-        
     }
     
 }
