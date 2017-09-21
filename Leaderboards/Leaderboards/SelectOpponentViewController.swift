@@ -12,6 +12,8 @@ class SelectOpponentViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    weak var newMatchVC: NewMatchViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +55,11 @@ extension SelectOpponentViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "opponentCell", for: indexPath)
         cell.textLabel?.text = PlayerController.shared.opponents[indexPath.row].username
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        newMatchVC?.opponent = PlayerController.shared.opponents[indexPath.row]
+        dismiss(animated: true, completion: nil)
     }
     
 }

@@ -95,12 +95,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSD-W9-rqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="MGO-0S-lic">
                     <connections>
-                        <segue destination="gnr-NR-d57" kind="presentation" identifier="toSelectOpponentVC" id="eyG-CD-v4I"/>
+                        <action selector="opponentImageOrLabelTapped:" destination="uKw-JF-nEd" id="vqU-SI-KJt"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="eP9-WN-1dD">
                     <connections>
-                        <segue destination="gnr-NR-d57" kind="presentation" identifier="toSelectOpponentVC" id="4EJ-KO-6vb"/>
+                        <action selector="opponentImageOrLabelTapped:" destination="uKw-JF-nEd" id="xrb-HP-WVc"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -109,7 +109,7 @@
         <!--Select Opponent View Controller-->
         <scene sceneID="fHx-mo-Xex">
             <objects>
-                <viewController id="gnr-NR-d57" customClass="SelectOpponentViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selectOpponentVC" id="gnr-NR-d57" customClass="SelectOpponentViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gEA-Qr-grr"/>
                         <viewControllerLayoutGuide type="bottom" id="Jie-Hz-rVl"/>
@@ -164,7 +164,4 @@
     <resources>
         <image name="image_placeholder" width="400" height="400"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="4EJ-KO-6vb"/>
-    </inferredMetricsTieBreakers>
 </document>
