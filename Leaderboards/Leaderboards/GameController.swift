@@ -88,7 +88,7 @@ class GameController {
         }
     }
     
-    func fetchPlayersForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+    func fetchOpponentsForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentGame = currentGame else { completion(false); return }
         
         let opponentsRecordIDs = currentGame.players.flatMap { $0.recordID }.filter {
@@ -113,6 +113,30 @@ class GameController {
             
             let opponents = opponentsRecords.flatMap { Player(record: $0) }
             PlayerController.shared.opponents = opponents
+            completion(true)
+        }
+    }
+    
+    func fetchAllPlayersForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        guard let currentGame = currentGame else { completion(false); return }
+        
+        let playerRecordIDs = currentGame.players.flatMap { $0.recordID }
+        
+        CloudKitManager.shared.fetchRecords(withIDs: playerRecordIDs) { (playerRecordsDictionary, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            guard let playerRecordsDictionary = playerRecordsDictionary else { completion(false); return }
+            var playersRecords = [CKRecord]()
+            for playerRecord in playerRecordsDictionary.values {
+                playersRecords.append(playerRecord)
+            }
+            
+            let players = playersRecords.flatMap { Player(record: $0) }
+            self.playersBelongingToCurrentGame = players
             completion(true)
         }
     }

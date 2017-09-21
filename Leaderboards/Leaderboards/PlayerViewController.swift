@@ -19,15 +19,25 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GameController.shared.fetchAllPlayersForCurrentGame { (success) in
+            DispatchQueue.main.async {
+                self.playerTableView.reloadData()
+            }
+        }
+    }
+    
     // MARK:- TableView data source.
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return GameController.shared.playersBelongingToCurrentGame.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as! PlayerTableViewCell
-        
+        let player = GameController.shared.playersBelongingToCurrentGame[indexPath.row]
+        cell.player = player
         return cell
     }
     

@@ -24,7 +24,7 @@ class SelectOpponentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        GameController.shared.fetchPlayersForCurrentGame { (success) in
+        GameController.shared.fetchOpponentsForCurrentGame { (success) in
             if success {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -32,16 +32,6 @@ class SelectOpponentViewController: UIViewController {
             }
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
