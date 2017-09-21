@@ -283,10 +283,10 @@
             </objects>
             <point key="canvasLocation" x="3584.8000000000002" y="169.56521739130437"/>
         </scene>
-        <!--Leaderboards-->
+        <!--Match-->
         <scene sceneID="lD2-nZ-59R">
             <objects>
-                <viewControllerPlaceholder storyboardName="Leaderboards" id="l1Q-QG-KAJ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Match" id="l1Q-QG-KAJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8pF-o4-sFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3339" y="613"/>
