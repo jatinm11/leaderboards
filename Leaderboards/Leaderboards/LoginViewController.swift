@@ -8,14 +8,20 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var createUsernameLabel: UILabel!
+    @IBOutlet weak var createUsernameLabelCenterY: NSLayoutConstraint!
+    
+    //    var createUsernameLabel = UILabel()
+    var labelHasMoved = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(segueToPlayspacesViewController), name: PlayerController.shared.currentPlayerWasSetNotification, object: nil)
+        createUsernameLabel.alpha = 0.0
     }
     
     func segueToPlayspacesViewController() {
@@ -31,7 +37,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         alert.addAction(dismissAction)
         present(alert, animated: true, completion: nil)
     }
-        
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toNewUserSelectImageVC" {
             guard let username = usernameTextField.text, !username.isEmpty else {
@@ -43,6 +49,22 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
+    
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if labelHasMoved == false {
+            labelHasMoved = true
+            createUsernameLabelCenterY.constant = createUsernameLabelCenterY.constant - usernameTextField.frame.height
+            
+            UIView.animate(withDuration: 0.5) {
+                self.createUsernameLabel.frame = CGRect(x: self.usernameTextField.frame.origin.x, y: self.usernameTextField.frame.origin.y  - self.usernameTextField.frame.height, width: self.usernameTextField.frame.width, height: self.usernameTextField.frame.height)
+                
+                self.createUsernameLabel.alpha = 1.0
+            }
+        }
+    }
 }
 
 
