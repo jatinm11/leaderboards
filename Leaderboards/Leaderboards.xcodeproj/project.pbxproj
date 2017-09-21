@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		619BC9331F71AED7009EAD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE511F717A1A00D509E6 /* AppDelegate.swift */; };
-		619BC9351F71E22F009EAD70 /* LeaderboardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619BC9341F71E22F009EAD70 /* LeaderboardsController.swift */; };
+		619BC9351F71E22F009EAD70 /* MatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619BC9341F71E22F009EAD70 /* MatchController.swift */; };
 		61EA7AF11F71ADF0009D780A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE631F717AB200D509E6 /* Player.swift */; };
 		61FAEE571F717A1A00D509E6 /* Players.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE551F717A1A00D509E6 /* Players.storyboard */; };
 		61FAEE591F717A1A00D509E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE581F717A1A00D509E6 /* Assets.xcassets */; };
@@ -25,6 +25,8 @@
 		748E61F21F72DB0000759243 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748E61F11F72DB0000759243 /* GamesViewController.swift */; };
 		748E61F41F72DD2E00759243 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748E61F31F72DD2E00759243 /* GameController.swift */; };
 		748E61F61F72F9A800759243 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748E61F51F72F9A800759243 /* JoinGameViewController.swift */; };
+		748E61F81F731C9B00759243 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748E61F71F731C9B00759243 /* NewMatchViewController.swift */; };
+		748E61FA1F73316700759243 /* SelectOpponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748E61F91F73316700759243 /* SelectOpponentViewController.swift */; };
 		74DEFF9B1F718FA600030ED9 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFF9A1F718FA600030ED9 /* PlayerController.swift */; };
 		74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */; };
 		74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DEFF9F1F71986F00030ED9 /* Login.storyboard */; };
@@ -36,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		619BC9341F71E22F009EAD70 /* LeaderboardsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardsController.swift; sourceTree = "<group>"; };
+		619BC9341F71E22F009EAD70 /* MatchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchController.swift; sourceTree = "<group>"; };
 		61FAEE4E1F717A1A00D509E6 /* Leaderboards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leaderboards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FAEE511F717A1A00D509E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61FAEE561F717A1A00D509E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Players.storyboard; sourceTree = "<group>"; };
@@ -57,6 +59,8 @@
 		748E61F11F72DB0000759243 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		748E61F31F72DD2E00759243 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		748E61F51F72F9A800759243 /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
+		748E61F71F731C9B00759243 /* NewMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchViewController.swift; sourceTree = "<group>"; };
+		748E61F91F73316700759243 /* SelectOpponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOpponentViewController.swift; sourceTree = "<group>"; };
 		74DEFF9A1F718FA600030ED9 /* PlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		74DEFF9F1F71986F00030ED9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -156,7 +160,7 @@
 			children = (
 				74DEFF9A1F718FA600030ED9 /* PlayerController.swift */,
 				AB3DF1711F71845F00498B8B /* PlayspaceController.swift */,
-				619BC9341F71E22F009EAD70 /* LeaderboardsController.swift */,
+				619BC9341F71E22F009EAD70 /* MatchController.swift */,
 				748E61F31F72DD2E00759243 /* GameController.swift */,
 			);
 			name = "Model Controller";
@@ -173,6 +177,8 @@
 				74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */,
 				748E61F11F72DB0000759243 /* GamesViewController.swift */,
 				748E61F51F72F9A800759243 /* JoinGameViewController.swift */,
+				748E61F71F731C9B00759243 /* NewMatchViewController.swift */,
+				748E61F91F73316700759243 /* SelectOpponentViewController.swift */,
 				AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */,
 			);
 			name = "View Controller";
@@ -271,16 +277,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				619BC9331F71AED7009EAD70 /* AppDelegate.swift in Sources */,
+				748E61F81F731C9B00759243 /* NewMatchViewController.swift in Sources */,
 				AB36E4A51F731D9A00B93655 /* NewUserSelectImageViewController.swift in Sources */,
 				61EA7AF11F71ADF0009D780A /* Player.swift in Sources */,
 				74DEFF9B1F718FA600030ED9 /* PlayerController.swift in Sources */,
 				61FAEE771F71874700D509E6 /* PlayerTableViewCell.swift in Sources */,
 				748E61F21F72DB0000759243 /* GamesViewController.swift in Sources */,
+				748E61FA1F73316700759243 /* SelectOpponentViewController.swift in Sources */,
 				61FAEE7B1F718C0000D509E6 /* LeaderboardTableViewCell.swift in Sources */,
 				61FAEE7D1F718C2800D509E6 /* LeaderboardViewController.swift in Sources */,
 				61FAEE681F717AB200D509E6 /* Match.swift in Sources */,
 				74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */,
-				619BC9351F71E22F009EAD70 /* LeaderboardsController.swift in Sources */,
+				619BC9351F71E22F009EAD70 /* MatchController.swift in Sources */,
 				74DEFF9E1F718FE200030ED9 /* CloudKitManager.swift in Sources */,
 				61FAEE691F717AB200D509E6 /* Game.swift in Sources */,
 				748E61F41F72DD2E00759243 /* GameController.swift in Sources */,

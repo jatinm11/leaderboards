@@ -15,6 +15,8 @@ class GameController {
     
     var games = [Game]()
     
+    var currentGame: Game?
+    
     var gamesNotBelongingToCurrentPlayer = [Game]()
     var gamesBelongingToCurrentPlayer = [Game]()
     var playersBelongingToCurrentGame = [Player]()
@@ -86,10 +88,33 @@ class GameController {
         }
     }
     
-    
     func fetchPlayersForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-        var playersBelongingToCurrentGame = [Player]()
-        let players = CKReference(recordID: <#T##CKRecordID#>, action: <#T##CKReferenceAction#>)
+        guard let currentGame = currentGame else { completion(false); return }
+        
+        let opponentsRecordIDs = currentGame.players.flatMap { $0.recordID }.filter {
+            if $0 == PlayerController.shared.currentPlayer?.recordID {
+                return false
+            }
+            return true
+        }
+        
+        CloudKitManager.shared.fetchRecords(withIDs: opponentsRecordIDs) { (playerRecordsDictionary, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            guard let playerRecordsDictionary = playerRecordsDictionary else { completion(false); return }
+            var opponentsRecords = [CKRecord]()
+            for playerRecord in playerRecordsDictionary.values {
+                opponentsRecords.append(playerRecord)
+            }
+            
+            let opponents = opponentsRecords.flatMap { Player(record: $0) }
+            PlayerController.shared.opponents = opponents
+            completion(true)
+        }
     }
     
 }

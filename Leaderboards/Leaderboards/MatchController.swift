@@ -9,12 +9,11 @@
 import Foundation
 import CloudKit
 
-class LeaderboardsController {
+class MatchController {
     
-    static let shared = LeaderboardsController()
+    static let shared = MatchController()
     
     func fetchMatches(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-     
         
     }
     

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uKw-JF-nEd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--New Match View Controller-->
         <scene sceneID="Bh9-LA-1vd">
             <objects>
-                <viewController id="uKw-JF-nEd" sceneMemberID="viewController">
+                <viewController id="uKw-JF-nEd" customClass="NewMatchViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iJb-m6-l63"/>
                         <viewControllerLayoutGuide type="bottom" id="ydM-MU-CVG"/>
@@ -22,8 +22,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wdf-Ss-KJO">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Wdf-Ss-KJO">
                                 <rect key="frame" x="112" y="324" width="150" height="125"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="MGO-0S-lic" appends="YES" id="NPj-PX-xc0"/>
+                                </connections>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-UQ-rWs">
                                 <rect key="frame" x="112" y="107" width="150" height="125"/>
@@ -31,7 +35,7 @@
                                     <constraint firstAttribute="height" constant="125" id="6HI-bW-nfJ"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-bW-OOj">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-bW-OOj">
                                 <rect key="frame" x="139" y="240" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="gLA-8d-rLy"/>
@@ -40,12 +44,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qnm-sm-y3s">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qnm-sm-y3s">
                                 <rect key="frame" x="139" y="457" width="97" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2e-Ri-ORQ">
+                                <rect key="frame" x="139" y="295" width="77" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eP9-WN-1dD" appends="YES" id="pru-in-2oX"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GR5-F7-Swu">
+                                <rect key="frame" x="132" y="78" width="110" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -63,10 +85,83 @@
                             <constraint firstItem="kWv-UQ-rWs" firstAttribute="centerX" secondItem="fmP-qb-GEU" secondAttribute="centerX" id="hSp-fR-MfG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currentPlayerImageView" destination="kWv-UQ-rWs" id="b3A-Zl-pgT"/>
+                        <outlet property="currentPlayerNameLabel" destination="GR5-F7-Swu" id="S0X-si-dGL"/>
+                        <outlet property="opponentImageView" destination="Wdf-Ss-KJO" id="mgI-gT-JQ4"/>
+                        <outlet property="opponentNameLabel" destination="h2e-Ri-ORQ" id="wMl-pY-wac"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSD-W9-rqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="MGO-0S-lic">
+                    <connections>
+                        <action selector="opponentImageOrLabelTapped:" destination="uKw-JF-nEd" id="vqU-SI-KJt"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="eP9-WN-1dD">
+                    <connections>
+                        <action selector="opponentImageOrLabelTapped:" destination="uKw-JF-nEd" id="xrb-HP-WVc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-159.19999999999999" y="159.67016491754123"/>
         </scene>
+        <!--Select Opponent View Controller-->
+        <scene sceneID="fHx-mo-Xex">
+            <objects>
+                <viewController storyboardIdentifier="selectOpponentVC" id="gnr-NR-d57" customClass="SelectOpponentViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gEA-Qr-grr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jie-Hz-rVl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="j0e-3T-f78">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yp3-TA-X7G">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="opponentCell" id="QLL-jK-T0c">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QLL-jK-T0c" id="asv-ij-ijr">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiw-4b-Ozo">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Select Opponent" id="YOG-L2-wVo">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CNg-hc-M8I"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fiw-4b-Ozo" firstAttribute="top" secondItem="gEA-Qr-grr" secondAttribute="bottom" id="0HT-AX-o8a"/>
+                            <constraint firstItem="yp3-TA-X7G" firstAttribute="top" secondItem="fiw-4b-Ozo" secondAttribute="bottom" id="3bM-7C-1RJ"/>
+                            <constraint firstItem="Jie-Hz-rVl" firstAttribute="top" secondItem="yp3-TA-X7G" secondAttribute="bottom" id="DwK-y0-Oaq"/>
+                            <constraint firstItem="yp3-TA-X7G" firstAttribute="leading" secondItem="j0e-3T-f78" secondAttribute="leading" id="FAl-Rq-bPe"/>
+                            <constraint firstItem="fiw-4b-Ozo" firstAttribute="leading" secondItem="j0e-3T-f78" secondAttribute="leading" id="YRO-kw-x86"/>
+                            <constraint firstAttribute="trailing" secondItem="yp3-TA-X7G" secondAttribute="trailing" id="bJE-WL-8pT"/>
+                            <constraint firstAttribute="trailing" secondItem="fiw-4b-Ozo" secondAttribute="trailing" id="qui-y5-OCn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="yp3-TA-X7G" id="hVt-Ct-BTX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wkm-sf-sTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624" y="158"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="image_placeholder" width="400" height="400"/>
+    </resources>
 </document>

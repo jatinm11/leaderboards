@@ -64,12 +64,7 @@ class PlayspacesViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toGamesViewController" {
-            guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
-        }
-    }
+    
     
 }
 
@@ -85,6 +80,10 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playspaceCell", for: indexPath)
         cell.textLabel?.text = PlayspaceController.shared.playspaces[indexPath.row].name
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
     }
     
 }
