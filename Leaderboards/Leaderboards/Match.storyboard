@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,30 +21,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Wdf-Ss-KJO">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Wdf-Ss-KJO">
                                 <rect key="frame" x="112" y="324" width="150" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="MGO-0S-lic" appends="YES" id="NPj-PX-xc0"/>
                                 </connections>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-UQ-rWs">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-UQ-rWs">
                                 <rect key="frame" x="112" y="107" width="150" height="125"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="6HI-bW-nfJ"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-bW-OOj">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-bW-OOj">
                                 <rect key="frame" x="139" y="240" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="gLA-8d-rLy"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qnm-sm-y3s">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qnm-sm-y3s">
                                 <rect key="frame" x="139" y="457" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -68,28 +65,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbO-io-fqN">
+                                <rect key="frame" x="163" y="549" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitMatchButtonTapped:" destination="uKw-JF-nEd" eventType="touchUpInside" id="1Bq-go-Gd6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Wdf-Ss-KJO" firstAttribute="top" secondItem="bcG-bW-OOj" secondAttribute="bottom" constant="54" id="4A8-lx-6K1"/>
-                            <constraint firstItem="Qnm-sm-y3s" firstAttribute="top" secondItem="Wdf-Ss-KJO" secondAttribute="bottom" constant="8" symbolic="YES" id="8b1-Zt-rVN"/>
-                            <constraint firstItem="kWv-UQ-rWs" firstAttribute="leading" secondItem="fmP-qb-GEU" secondAttribute="leadingMargin" constant="96" id="8bK-lU-p4T"/>
-                            <constraint firstItem="kWv-UQ-rWs" firstAttribute="centerX" secondItem="bcG-bW-OOj" secondAttribute="centerX" id="Amc-bR-kdP"/>
-                            <constraint firstItem="bcG-bW-OOj" firstAttribute="top" secondItem="kWv-UQ-rWs" secondAttribute="bottom" constant="8" symbolic="YES" id="Dee-z0-Cbl"/>
-                            <constraint firstItem="bcG-bW-OOj" firstAttribute="trailing" secondItem="Qnm-sm-y3s" secondAttribute="trailing" id="FTO-Q5-oNq"/>
-                            <constraint firstItem="kWv-UQ-rWs" firstAttribute="leading" secondItem="Wdf-Ss-KJO" secondAttribute="leading" id="LOB-RO-4qq"/>
-                            <constraint firstItem="bcG-bW-OOj" firstAttribute="leading" secondItem="Qnm-sm-y3s" secondAttribute="leading" id="NTY-qq-lhY"/>
-                            <constraint firstItem="kWv-UQ-rWs" firstAttribute="trailing" secondItem="Wdf-Ss-KJO" secondAttribute="trailing" id="Oyv-7y-bo6"/>
-                            <constraint firstItem="ydM-MU-CVG" firstAttribute="top" secondItem="Qnm-sm-y3s" secondAttribute="bottom" constant="180" id="TVG-lZ-5ZQ"/>
-                            <constraint firstItem="kWv-UQ-rWs" firstAttribute="top" secondItem="iJb-m6-l63" secondAttribute="bottom" constant="87" id="dGv-av-K8x"/>
-                            <constraint firstItem="kWv-UQ-rWs" firstAttribute="centerX" secondItem="fmP-qb-GEU" secondAttribute="centerX" id="hSp-fR-MfG"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="currentPlayerImageView" destination="kWv-UQ-rWs" id="b3A-Zl-pgT"/>
                         <outlet property="currentPlayerNameLabel" destination="GR5-F7-Swu" id="S0X-si-dGL"/>
+                        <outlet property="currentPlayerScoreTextField" destination="bcG-bW-OOj" id="cu1-yD-kKW"/>
                         <outlet property="opponentImageView" destination="Wdf-Ss-KJO" id="mgI-gT-JQ4"/>
                         <outlet property="opponentNameLabel" destination="h2e-Ri-ORQ" id="wMl-pY-wac"/>
+                        <outlet property="opponentScoreTextField" destination="Qnm-sm-y3s" id="A01-bd-CGW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSD-W9-rqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
