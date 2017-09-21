@@ -28,6 +28,8 @@ class PlayerController {
         }
     }
     
+    var opponents = [Player]()
+    
     func createPlayerWith(username: String, photo: UIImage?, completion: @escaping (_ success: Bool) -> Void) {
         CKContainer.default().fetchUserRecordID { (appleUsersRecordID, error) in
             guard let appleUsersRecordID = appleUsersRecordID else { completion(false); return }

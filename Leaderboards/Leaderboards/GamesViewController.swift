@@ -74,4 +74,8 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
+    }
+    
 }
