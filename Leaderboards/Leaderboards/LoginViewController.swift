@@ -12,25 +12,13 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var createUsernameLabel: UILabel!
-    @IBOutlet weak var createUsernameLabelCenterY: NSLayoutConstraint!
     
-    //    var createUsernameLabel = UILabel()
     var labelHasMoved = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(segueToPlayspacesViewController), name: PlayerController.shared.currentPlayerWasSetNotification, object: nil)
         createUsernameLabel.alpha = 0.0
-        createUsernameLabel.isHidden = true
-    }
-
-    
-    func segueToPlayspacesViewController() {
-        DispatchQueue.main.async {
-            let welcomeVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
-            self.navigationController?.pushViewController(welcomeVC, animated: true)
-        }
     }
     
     func presentSimpleAlert(title: String, message: String) {
@@ -56,14 +44,19 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if labelHasMoved == false {
-            labelHasMoved = true
-            createUsernameLabelCenterY.constant = createUsernameLabelCenterY.constant - usernameTextField.frame.height
-            createUsernameLabel.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                self.createUsernameLabel.frame = CGRect(x: self.usernameTextField.frame.origin.x, y: self.usernameTextField.frame.origin.y  - self.usernameTextField.frame.height, width: self.usernameTextField.frame.width, height: self.usernameTextField.frame.height)
-                self.createUsernameLabel.alpha = 1.0
+        if let text = textField.text, text.isEmpty {
+            if labelHasMoved == false {
+                labelHasMoved = true
+                UIView.animate(withDuration: 0.3) {
+                    self.createUsernameLabel.frame = CGRect(x: self.usernameTextField.frame.origin.x, y: self.usernameTextField.frame.origin.y  - self.usernameTextField.frame.height, width: self.usernameTextField.frame.width, height: self.usernameTextField.frame.height)
+                    self.createUsernameLabel.alpha = 1.0
+                }
+            }
+        } else if let text = textField.text, text.characters.count == 1, string == "" {
+            labelHasMoved = false
+            UIView.animate(withDuration: 0.3) {
+                self.createUsernameLabel.frame = CGRect(x: self.usernameTextField.frame.origin.x, y: self.usernameTextField.frame.origin.y, width: self.usernameTextField.frame.width, height: self.usernameTextField.frame.height)
+                self.createUsernameLabel.alpha = 0.0
             }
         }
         

@@ -13,20 +13,7 @@ class PlayerController {
     
     static let shared = PlayerController()
     
-    let currentPlayerWasSetNotification = Notification.Name("currentPlayerWasSet")
-    
-    var isFirstTime: Bool = false
-    
-    var currentPlayer: Player? {
-        didSet {
-            if !isFirstTime {
-                DispatchQueue.main.async {
-                    self.isFirstTime = true
-                    NotificationCenter.default.post(name: self.currentPlayerWasSetNotification, object: nil)
-                }
-            }
-        }
-    }
+    var currentPlayer: Player?
     
     var opponents = [Player]()
     
