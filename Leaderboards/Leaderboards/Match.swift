@@ -20,6 +20,7 @@ struct Match {
     var verified: Bool
     let timestamp: Date
     let creator: CKReference
+    let participants: [CKReference]
     
 }
 
@@ -35,6 +36,7 @@ extension Match {
     static let loserKey = "loser"
     static let loserScoreKey = "loserScore"
     static let creatorKey = "creator"
+    static let participantsKey = "participants"
     static let recordType = "Match"
     
     init?(record: CKRecord) {
@@ -45,7 +47,8 @@ extension Match {
             let winnerScore = record[Match.winnerScoreKey] as? Int,
             let loser = record[Match.loserKey] as? CKReference,
             let loserScore = record[Match.loserScoreKey] as? Int,
-            let creator = record[Match.creatorKey] as? CKReference else { return nil }
+            let creator = record[Match.creatorKey] as? CKReference,
+            let participants = record[Match.participantsKey] as? [CKReference] else { return nil }
         
         self.recordID = record.recordID
         self.verified = verified
@@ -56,6 +59,7 @@ extension Match {
         self.loser = loser
         self.loserScore = loserScore
         self.creator = creator
+        self.participants = participants
     }
     
     var CKRepresentation: CKRecord {
@@ -69,6 +73,7 @@ extension Match {
         record.setValue(verified, forKey: Match.verifiedKey)
         record.setValue(timestamp, forKey: Match.timestampKey)
         record.setValue(creator, forKey: Match.creatorKey)
+        record.setValue(participants, forKey: Match.participantsKey)
         
         return record
     }

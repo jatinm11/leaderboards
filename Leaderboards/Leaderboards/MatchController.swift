@@ -18,7 +18,7 @@ class MatchController {
     func createMatch(game: Game, winner: Player, winnerScore: Int, loser: Player, loserScore: Int, completion: @escaping (_ success: Bool) -> Void) {
         guard let creator = PlayerController.shared.currentPlayer else { completion(false); return }
         
-        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none))
+        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none), participants: [CKReference(record: winner.CKRepresentation, action: .none), CKReference(record: loser.CKRepresentation, action: .none)])
         
         CloudKitManager.shared.saveRecord(match.CKRepresentation) { (_, error) in
             if let error = error {
@@ -34,12 +34,13 @@ class MatchController {
     func fetchPendingMatchesForCurrentPlayer(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(false); return }
         
-        let currentPlayerIsWinnerPredicate = NSPredicate(format: "winner == %@", currentPlayer.CKRepresentation)
-        let currentPlayerIsLoserPredicate = NSPredicate(format: "loser == %@", currentPlayer.CKRepresentation)
+        //let currentPlayerIsWinnerPredicate = NSPredicate(format: "winner == %@", currentPlayer.CKRepresentation)
+        //let currentPlayerIsLoserPredicate = NSPredicate(format: "loser == %@", currentPlayer.CKRepresentation)
+        let currentPlayerIsParticipantPredicate = NSPredicate(format: "participants CONTAINS %@", currentPlayer.CKRepresentation)
         let matchIsNotVerifiedPredicate = NSPredicate(format: "verified == false")
         let currentPlayerIsNotCreatorPredicate = NSPredicate(format: "creator != %@", currentPlayer.CKRepresentation)
         
-        let pendingMatchesForCurrentPlayerCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentPlayerIsWinnerPredicate, matchIsNotVerifiedPredicate, currentPlayerIsNotCreatorPredicate])
+        let pendingMatchesForCurrentPlayerCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentPlayerIsParticipantPredicate, matchIsNotVerifiedPredicate, currentPlayerIsNotCreatorPredicate])
         
         CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: pendingMatchesForCurrentPlayerCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
             if let error = error {
