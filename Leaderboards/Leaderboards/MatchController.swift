@@ -14,6 +14,9 @@ class MatchController {
     static let shared = MatchController()
     
     var pendingMatches = [Match]()
+    var matchesInCurrentGame = [Match]()
+    
+    
     
     func createMatch(game: Game, winner: Player, winnerScore: Int, loser: Player, loserScore: Int, completion: @escaping (_ success: Bool) -> Void) {
         guard let creator = PlayerController.shared.currentPlayer else { completion(false); return }
@@ -112,6 +115,30 @@ class MatchController {
                 return
             }
             
+            completion(true)
+        }
+    }
+    
+    
+    func fetchMathesForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        
+        guard let currentGame = GameController.shared.currentGame else { completion(false); return }
+        
+        let currentGameRef = CKReference(recordID: currentGame.recordID, action: .deleteSelf)
+        
+        let predicate = NSPredicate(format: "game == %@", currentGameRef)
+        
+        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            guard let records = records else { completion(false); return }
+            
+            let matches = records.flatMap( { Match(record: $0) })
+            self.matchesInCurrentGame = matches
             completion(true)
         }
     }
