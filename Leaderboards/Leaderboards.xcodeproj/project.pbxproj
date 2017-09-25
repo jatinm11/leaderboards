@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		619BC9331F71AED7009EAD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE511F717A1A00D509E6 /* AppDelegate.swift */; };
 		619BC9351F71E22F009EAD70 /* MatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619BC9341F71E22F009EAD70 /* MatchController.swift */; };
+		61DAB9671F75BB7A008B6E82 /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAB9661F75BB7A008B6E82 /* ColorController.swift */; };
+		61E18C1E1F787EE600583249 /* AddPlayspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E18C1D1F787EE600583249 /* AddPlayspaceViewController.swift */; };
 		61EA7AF11F71ADF0009D780A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAEE631F717AB200D509E6 /* Player.swift */; };
 		61FAEE571F717A1A00D509E6 /* Players.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE551F717A1A00D509E6 /* Players.storyboard */; };
 		61FAEE591F717A1A00D509E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61FAEE581F717A1A00D509E6 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		619BC9341F71E22F009EAD70 /* MatchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchController.swift; sourceTree = "<group>"; };
+		61DAB9661F75BB7A008B6E82 /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
+		61E18C1D1F787EE600583249 /* AddPlayspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayspaceViewController.swift; sourceTree = "<group>"; };
 		61FAEE4E1F717A1A00D509E6 /* Leaderboards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leaderboards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FAEE511F717A1A00D509E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61FAEE561F717A1A00D509E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Players.storyboard; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				AB3DF1711F71845F00498B8B /* PlayspaceController.swift */,
 				619BC9341F71E22F009EAD70 /* MatchController.swift */,
 				748E61F31F72DD2E00759243 /* GameController.swift */,
+				61DAB9661F75BB7A008B6E82 /* ColorController.swift */,
 			);
 			name = "Model Controller";
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				74F65DD61F74282B00265D0B /* PlayerProfileViewController.swift */,
 				74F65DD81F74488A00265D0B /* PendingMatchTableViewCell.swift */,
 				747FDB221F7585F700210005 /* SplashViewController.swift */,
+				61E18C1D1F787EE600583249 /* AddPlayspaceViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -299,7 +305,9 @@
 				748E61FA1F73316700759243 /* SelectOpponentViewController.swift in Sources */,
 				61FAEE7B1F718C0000D509E6 /* LeaderboardTableViewCell.swift in Sources */,
 				61FAEE7D1F718C2800D509E6 /* LeaderboardViewController.swift in Sources */,
+				61E18C1E1F787EE600583249 /* AddPlayspaceViewController.swift in Sources */,
 				61FAEE681F717AB200D509E6 /* Match.swift in Sources */,
+				61DAB9671F75BB7A008B6E82 /* ColorController.swift in Sources */,
 				74F65DD71F74282B00265D0B /* PlayerProfileViewController.swift in Sources */,
 				74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */,
 				619BC9351F71E22F009EAD70 /* MatchController.swift in Sources */,

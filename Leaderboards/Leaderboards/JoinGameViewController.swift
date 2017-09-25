@@ -1,16 +1,12 @@
-//
-//  JoinGameViewController.swift
-//  Leaderboards
-//
-//  Created by Mithun Reddy on 9/20/17.
-//  Copyright © 2017 Jatin Menghani. All rights reserved.
-//
-
 import UIKit
 
 class JoinGameViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var cancelButton: UIBarButtonItem!
+    @IBOutlet var navigationBar: UINavigationBar!
+    
+    let colorProvider = BackgroundColorProvider()
     
     @IBAction func cancelBarButtonItemTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -40,24 +36,20 @@ class JoinGameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let randomColor = colorProvider.randomColor()
+        self.view.backgroundColor = randomColor
+        self.cancelButton.tintColor = randomColor
+        self.navigationBar.layer.cornerRadius = 5
+        self.navigationBar.clipsToBounds = true
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = randomColor
+        tableView.tableFooterView = UIView()
     }
 
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
-    */
-
 }
 
 extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
@@ -68,7 +60,8 @@ extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
-        cell.textLabel?.text = GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row].name
+        cell.textLabel?.text = ("\(indexPath.row + 1)  \(GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row].name)")
+        cell.textLabel?.textColor = UIColor.white
         return cell
     }
     
@@ -81,4 +74,7 @@ extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
 }
