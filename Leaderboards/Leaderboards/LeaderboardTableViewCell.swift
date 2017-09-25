@@ -16,21 +16,17 @@ class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet var matchesPlayedLabel: UILabel!
     @IBOutlet var matchesWonLabel: UILabel!
     @IBOutlet var matchesLossLabel: UILabel!
-    @IBOutlet var totalPointsLabel: UILabel!
-    
-    // MARK :- Properties
-    
-    var player: Player? {
-        didSet {
-            updateName()
-        }
-    }
+    @IBOutlet var winPercentageLabel: UILabel!
     
     // MARK :- Functions
     
-    func updateName() {
-        if let player = player {
-            playerImage.image = player.photo
+    func updateViewsWith(playerDictionary: [String: Any]?) {
+        playerImage.image = (playerDictionary?["player"] as? Player)?.photo
+        matchesPlayedLabel.text = "\(playerDictionary?["played"] ?? 0)"
+        matchesWonLabel.text = "\(playerDictionary?["wins"] ?? 0)"
+        matchesLossLabel.text = "\(playerDictionary?["losses"] ?? 0)"
+        if let winPercentage = playerDictionary?["winPercentage"] as? Double {
+            winPercentageLabel.text = "\(winPercentage * 100)"
         }
     }
 }
