@@ -10,18 +10,26 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
 
         PlayerController.shared.fetchCurrentPlayer { (success) in
             DispatchQueue.main.async {
                 if success {
                     self.performSegue(withIdentifier: "toPlayspacesVC", sender: nil)
+                    self.activityIndicator.stopAnimating()
                 } else {
                     self.performSegue(withIdentifier: "toLoginVC", sender: nil)
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
 
 }

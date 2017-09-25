@@ -99,9 +99,20 @@ class PlayerController {
             PlayspaceController.shared.playspaces = playspaces
             completion(true)
         }
-        
+    }
     
+    func fetchPlayer(_ playerRecordID: CKRecordID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _ in }) {
         
+        CloudKitManager.shared.fetchRecord(withID: playerRecordID) { (record, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let record = record else { completion(nil, false); return }
+            completion(Player(record: record), true)
+        }
     }
     
 }

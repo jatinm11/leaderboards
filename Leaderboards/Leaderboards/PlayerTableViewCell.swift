@@ -29,6 +29,9 @@ class PlayerTableViewCell: UITableViewCell {
         if let player = player {
             playerNameLabel.text = player.username
             playerImageView.image = player.photo
+            playerImageView.layer.cornerRadius = playerImageView.frame.size.width / 2
+            playerImageView.clipsToBounds = true
+            playerNameLabel.textColor = UIColor.white
         }
     }
 }

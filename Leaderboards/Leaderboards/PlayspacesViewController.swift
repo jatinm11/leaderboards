@@ -1,16 +1,17 @@
-//
-//  PlayspacesViewController.swift
-//  Leaderboards
-//
-//  Created by Mithun Reddy on 9/19/17.
-//  Copyright © 2017 Jatin Menghani. All rights reserved.
-//
 
 import UIKit
 
 class PlayspacesViewController: UIViewController {
     
+    let colorProvider = BackgroundColorProvider()
+    
+    var player: Player?
+
+    @IBOutlet var joinPlayspaceButton: UIBarButtonItem!
+    @IBOutlet var addPlayspaceButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var navigationBar: UINavigationBar!
+    @IBOutlet var playerImage: UIImageView!
     
     @IBAction func addPlayspaceBarButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Playspace", message: nil, preferredStyle: .alert)
@@ -23,6 +24,9 @@ class PlayspacesViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
             guard let name = alert.textFields?.first?.text, !name.isEmpty else { return }
             PlayspaceController.shared.createPlayspaceWith(name: name)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }))
         
         present(alert, animated: true, completion: nil)
@@ -49,7 +53,16 @@ class PlayspacesViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        let randomColor = colorProvider.randomColor()
+        self.view.backgroundColor = randomColor
+        self.tableView.backgroundColor = randomColor
+        self.joinPlayspaceButton.tintColor = randomColor
+        self.addPlayspaceButton.tintColor = randomColor
+        self.navigationBar.layer.cornerRadius = 5
+        self.navigationBar.clipsToBounds = true
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,6 +70,9 @@ class PlayspacesViewController: UIViewController {
             PlayerController.shared.fetchPlayspacesFor(currentPlayer, completion: { (success) in
                 if success {
                     DispatchQueue.main.async {
+//                        self.playerImage.image = currentPlayer.photo
+//                        self.playerImage.layer.cornerRadius = self.playerImage.frame.height / 2
+//                        self.playerImage.clipsToBounds = true
                         self.tableView.reloadData()
                     }
                 }
@@ -64,7 +80,9 @@ class PlayspacesViewController: UIViewController {
         }
     }
     
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
     
 }
 
@@ -78,7 +96,11 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playspaceCell", for: indexPath)
-        cell.textLabel?.text = PlayspaceController.shared.playspaces[indexPath.row].name
+        cell.textLabel?.text = ("\(indexPath.row + 1))  \(PlayspaceController.shared.playspaces[indexPath.row].name)")
+        cell.detailTextLabel?.text = ">"
+        cell.detailTextLabel?.textColor = UIColor.white
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell
     }
     
@@ -86,4 +108,7 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
         PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
 }
