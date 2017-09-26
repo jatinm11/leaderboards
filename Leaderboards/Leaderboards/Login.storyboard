@@ -343,9 +343,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="l1Q-QG-KAJ" kind="show" id="Z0K-hM-UXG"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -494,14 +491,6 @@
             </objects>
             <point key="canvasLocation" x="2820" y="908.9955022488756"/>
         </scene>
-        <!--Tournament-->
-        <scene sceneID="lD2-nZ-59R">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Tournament" id="l1Q-QG-KAJ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8pF-o4-sFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3585" y="555"/>
-        </scene>
         <!--Join Game View Controller-->
         <scene sceneID="o2M-NP-p0O">
             <objects>
@@ -615,7 +604,7 @@
     <resources>
         <image name="Logo" width="202" height="110"/>
         <image name="LogoWhite" width="202" height="110"/>
-        <image name="image_placeholder" width="400" height="400"/>
+        <image name="image_placeholder" width="191" height="191"/>
         <image name="table_tennis_2 copy" width="512" height="331"/>
     </resources>
 </document>

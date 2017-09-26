@@ -94,6 +94,8 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
+        let tournamentsListVC = UIStoryboard(name: "Tournament", bundle: nil).instantiateViewController(withIdentifier: "tournamentsListVC")
+        present(tournamentsListVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
