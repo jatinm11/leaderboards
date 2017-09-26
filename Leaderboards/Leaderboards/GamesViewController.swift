@@ -9,7 +9,7 @@
 import UIKit
 
 class GamesViewController: UIViewController {
-
+    
     let colorProvider = BackgroundColorProvider()
     
     @IBOutlet var joinGameButton: UIBarButtonItem!
@@ -27,10 +27,14 @@ class GamesViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
             guard let name = alert.textFields?.first?.text, !name.isEmpty else { return }
-            OperationQueue.main.addOperation {
-                GameController.shared.createGameWith(name: name)
-                self.tableView.reloadData()
-            }
+            
+            GameController.shared.createGameWith(name: name, completion: { (success) in
+                if success {
+                    //dismiss here
+                }
+            })
+            self.tableView.reloadData()
+            
         }))
         present(alert, animated: true, completion: nil)
     }
