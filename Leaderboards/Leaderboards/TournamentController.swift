@@ -57,7 +57,7 @@ class TournamentController {
     func startCurrentTournament(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard var currentTournament = currentTournament else { completion(false); return }
         
-        if currentTournament.players.count >= 3 {
+        if currentTournament.players.count >= 2 {
             currentTournament.inProgress = true
             
             let matchPartners = createMatchPartnersFor(currentTournament)
