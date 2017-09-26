@@ -32,6 +32,10 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    @IBAction func leaderboardsButtonTapped(_ sender: Any) {
+        let leaderboardsVC = UIStoryboard(name: "Leaderboards", bundle: nil).instantiateViewController(withIdentifier: "leaderboardsVC")
+        self.present(leaderboardsVC, animated: true, completion: nil)
+    }
     
     @IBAction func backButtonTapped(_ sender: Any) {
         GameController.shared.playersBelongingToCurrentGame = []

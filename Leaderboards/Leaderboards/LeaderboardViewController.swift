@@ -12,6 +12,12 @@ import CloudKit
 class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var leaderboardTableView: UITableView!
+    @IBOutlet var navigationBar: UINavigationBar!
+    @IBOutlet var playersBarButton: UIBarButtonItem!
+    @IBOutlet var backBarButton: UIBarButtonItem!
+    
+    
+    let colorProvider = BackgroundColorProvider()
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
     
@@ -20,6 +26,14 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         leaderboardTableView.delegate = self
         leaderboardTableView.dataSource = self
         
+        let randomColor = colorProvider.randomColor()
+        self.view.backgroundColor = randomColor
+        leaderboardTableView.backgroundColor = randomColor
+        playersBarButton.tintColor = randomColor
+        backBarButton.tintColor = randomColor
+        
+        navigationBar.layer.cornerRadius = 5
+        navigationBar.clipsToBounds = true
         
         GameController.shared.fetchAllPlayersForCurrentGame { (success) in
             if success {
@@ -35,9 +49,19 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
                 })
             }
         }
-        
-        
-        
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func playersButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toLeaderboardsVC", sender: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     func createPlayerStatsDictionaries() {
@@ -115,6 +139,33 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaderboardCell", for: indexPath) as! LeaderboardTableViewCell
         cell.updateViewsWith(playerDictionary: playerStatsArrayOfDictionaries[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        cell.backgroundColor = UIColor.clear
+        UIView.animate(withDuration: 1.0) {
+            cell.alpha = 1.0
+        }
+    }
+    
+    func animateTable() {
+        leaderboardTableView.reloadData()
+        let cells = leaderboardTableView.visibleCells
+        
+        let tableViewHeight = leaderboardTableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 1.0, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
     }
     
     // MARK: - Navigation
