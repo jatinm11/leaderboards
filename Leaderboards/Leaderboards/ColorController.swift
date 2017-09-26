@@ -17,6 +17,7 @@ struct BackgroundColorProvider {
         UIColor(red: 77/255.0, green: 75/255.0, blue: 82/255.0, alpha: 1.0), // dark color
         UIColor(red: 105/255.0, green: 94/255.0, blue: 133/255.0, alpha: 1.0), // purple color
         UIColor(red: 85/255.0, green: 176/255.0, blue: 112/255.0, alpha: 1.0), // green color
+        UIColor(red: 208/255.0, green: 2/255.0, blue: 27/255.0, alpha: 1.0) // Theme color (red)
     ]
     
     func randomColor() -> UIColor {
