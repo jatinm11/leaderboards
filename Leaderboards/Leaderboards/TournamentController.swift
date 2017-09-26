@@ -14,6 +14,9 @@ class TournamentController {
     
     static let shared = TournamentController()
     
+    var tournamentsBelongingToCurrentPlayer = [Tournament]()
+    var tournamentsNotBelongingToCurrentPlayer = [Tournament]()
+    
     var currentTournament: Tournament?
     
     func createTournamentWith(name: String, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
@@ -100,6 +103,66 @@ class TournamentController {
             }
         }
         return 0
+    }
+    
+    func fetchTournamentsForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        guard let currentGame = GameController.shared.currentGame else { completion(false); return }
+        
+        let tournamentsForCurrentGamePredicate = NSPredicate(format: "game == %@", currentGame.recordID)
+        
+        CloudKitManager.shared.fetchRecordsWithType(Tournament.recordType, predicate: tournamentsForCurrentGamePredicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            guard let tournamentRecords = records else { completion(false); return }
+            let tournamentsForCurrentGame = tournamentRecords.flatMap { Tournament(record: $0) }
+            self.sortTournamentsForCurrentGame(tournamentsForCurrentGame)
+            completion(true)
+        }
+    }
+
+    func sortTournamentsForCurrentGame(_ tournamentsForCurrentGame: [Tournament]) {
+        guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
+        
+        var tournamentsBelongingToCurrentPlayer = [Tournament]()
+        var tournamentsNotBelongingToCurrentPlayer = [Tournament]()
+        
+        for tournament in tournamentsForCurrentGame {
+            if tournament.players.contains(CKReference(recordID: currentPlayer.recordID, action: .none)) {
+                tournamentsBelongingToCurrentPlayer.append(tournament)
+            } else {
+                tournamentsNotBelongingToCurrentPlayer.append(tournament)
+            }
+        }
+        
+        self.tournamentsBelongingToCurrentPlayer = tournamentsBelongingToCurrentPlayer
+        self.tournamentsNotBelongingToCurrentPlayer = tournamentsNotBelongingToCurrentPlayer
+    }
+    
+    func joinTournamentForCurrentPlayer(_ tournament: Tournament, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
+        var tournament = tournament
+        
+        tournament.players.append(CKReference(recordID: currentPlayer.recordID, action: .none))
+        
+        CloudKitManager.shared.updateRecords([tournament.CKRepresentation], perRecordCompletion: nil) { (records, error) in
+            if let error = error as? CKError {
+                if error.code == CKError.Code.serverRecordChanged {
+                    CloudKitManager.shared.fetchRecord(withID: <#T##CKRecordID#>, completion: <#T##((CKRecord?, Error?) -> Void)?##((CKRecord?, Error?) -> Void)?##(CKRecord?, Error?) -> Void#>)
+                }
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            guard let tournamentRecord = records?.first else { completion(false); return }
+            let tournament = Tournament(record: tournamentRecord)
+            self.currentTournament = tournament
+            completion(true)
+        }
     }
     
 }

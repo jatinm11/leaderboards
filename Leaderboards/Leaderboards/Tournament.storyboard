@@ -97,6 +97,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="A30-Ah-7j8"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="XBL-AM-UAO" id="hQY-yy-67k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYS-Mn-hJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -129,6 +132,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="vi9-He-C5h" kind="show" identifier="toWaitingForTournamentStart" id="zTh-jI-YSb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -145,10 +151,37 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gnT-6R-IjM"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="bUY-uN-yej" id="lZP-hD-UJw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8J-sb-vmR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-162" y="676"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="OPl-mK-BjF">
+            <objects>
+                <viewController id="vi9-He-C5h" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zNp-Cy-T6x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waiting for players..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzv-1U-5aJ">
+                                <rect key="frame" x="109" y="323" width="156" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="9hK-zw-sgU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxX-jv-hee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="577" y="675"/>
         </scene>
         <!--Start Tournament View Controller-->
         <scene sceneID="hys-0e-R21">
