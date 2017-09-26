@@ -70,9 +70,11 @@ class PlayspacesViewController: UIViewController {
             PlayerController.shared.fetchPlayspacesFor(currentPlayer, completion: { (success) in
                 if success {
                     DispatchQueue.main.async {
-//                        self.playerImage.image = currentPlayer.photo
-//                        self.playerImage.layer.cornerRadius = self.playerImage.frame.height / 2
-//                        self.playerImage.clipsToBounds = true
+                        self.playerImage.image = currentPlayer.photo
+                        self.playerImage.layer.cornerRadius = self.playerImage.frame.height / 2
+                        self.playerImage.clipsToBounds = true
+                        self.playerImage.layer.borderColor = UIColor.white.cgColor
+                        self.playerImage.layer.borderWidth = 3.0
                         self.tableView.reloadData()
                     }
                 }

@@ -40,8 +40,8 @@ class PlayerProfileViewController: UIViewController {
         PlayerController.shared.fetchCurrentPlayer { (success) in
             if success {
                 DispatchQueue.main.async {
-                    self.playerImageView.image = PlayerController.shared.currentPlayer?.photo
-                    self.usernameLabel.text = PlayerController.shared.currentPlayer?.username
+//                    self.playerImageView.image = PlayerController.shared.currentPlayer?.photo
+//                    self.usernameLabel.text = PlayerController.shared.currentPlayer?.username
                     MatchController.shared.fetchPendingMatchesForCurrentPlayer { (success) in
                         if success {
                             DispatchQueue.main.async {
