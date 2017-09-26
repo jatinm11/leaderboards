@@ -81,6 +81,23 @@ class MatchController {
         }
     }
     
+    
+    func fetchOpponentImageFor(_ match: Match, completion: @escaping (_ opponent: Player?, _ success: Bool) -> Void = { _ in }) {
+        let opponentRecordID = match.creator.recordID
+        
+        CloudKitManager.shared.fetchRecord(withID: opponentRecordID) { (record, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let record = record else { completion(nil, false); return }
+            completion(Player(record: record), true)
+            
+        }
+    }
+    
     func verifyMatch(_ match: Match) -> Match {
         var match = match
         match.verified = true
