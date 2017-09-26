@@ -170,7 +170,7 @@
                 <viewControllerPlaceholder storyboardName="PlayerProfile" id="mTY-SK-HEe" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Cm-X3-lsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3373" y="-243"/>
+            <point key="canvasLocation" x="3373" y="-246"/>
         </scene>
         <!--Playspaces View Controller-->
         <scene sceneID="XBh-Ig-tdr">
@@ -282,7 +282,7 @@
         <!--Games View Controller-->
         <scene sceneID="jas-BI-SI9">
             <objects>
-                <viewController id="pYk-H8-mmj" customClass="GamesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gamesVC" id="pYk-H8-mmj" customClass="GamesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Yc-HV-L96"/>
                         <viewControllerLayoutGuide type="bottom" id="FWa-Fw-CA5"/>

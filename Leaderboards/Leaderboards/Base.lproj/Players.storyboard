@@ -68,7 +68,7 @@
                                     <navigationItem id="kxD-wg-jL7">
                                         <barButtonItem key="leftBarButtonItem" title="Leaderboards" id="ZfE-my-25F">
                                             <connections>
-                                                <segue destination="Bfg-zv-Nd7" kind="show" id="GCz-it-38e"/>
+                                                <action selector="leaderboardsButtonTapped:" destination="Jud-JW-8a3" id="rYy-c1-c83"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Back" id="ied-rM-J8W">
@@ -99,14 +99,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDu-15-egz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-63.200000000000003" y="231.63418290854574"/>
-        </scene>
-        <!--Leaderboards-->
-        <scene sceneID="fPV-t7-fsl">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Leaderboards" id="Bfg-zv-Nd7" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dh2-d8-EH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-269" y="658"/>
         </scene>
     </scenes>
 </document>
