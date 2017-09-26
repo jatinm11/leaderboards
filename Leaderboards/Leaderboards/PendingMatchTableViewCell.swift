@@ -25,7 +25,16 @@ class PendingMatchTableViewCell: UITableViewCell {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = .full
                     self.dateLabel.text = dateFormatter.string(from: pendingMatch.timestamp)
-                    self.scoreLabel.text = "\(pendingMatch.winnerScore) - \(pendingMatch.loserScore)"
+                    
+                    if let currentPlayer = PlayerController.shared.currentPlayer {
+                        if pendingMatch.winner.recordID == currentPlayer.recordID {
+                            // current player won
+                            self.scoreLabel.text = "\(pendingMatch.winnerScore) - \(pendingMatch.loserScore)"
+                        } else {
+                            // current player lost
+                            self.scoreLabel.text = "\(pendingMatch.loserScore) - \(pendingMatch.winnerScore)"
+                        }
+                    }
                 }
             }
         }
