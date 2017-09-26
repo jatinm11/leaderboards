@@ -18,12 +18,6 @@ class JoinTournamentViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toWaitingForTournamentStart" {
-            
-        }
-    }
 
 }
 
@@ -37,6 +31,17 @@ extension JoinTournamentViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "tournamentCell", for: indexPath)
         cell.textLabel?.text = TournamentController.shared.tournamentsNotBelongingToCurrentPlayer[indexPath.count].name
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        TournamentController.shared.joinTournamentForCurrentPlayer(TournamentController.shared.tournamentsNotBelongingToCurrentPlayer[indexPath.row]) { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    let waitingForTournamentStartVC = UIStoryboard(name: "Tournament", bundle: nil).instantiateViewController(withIdentifier: "waitingForTournamentStartVC")
+                    self.present(waitingForTournamentStartVC, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
 }

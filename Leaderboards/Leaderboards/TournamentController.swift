@@ -57,7 +57,7 @@ class TournamentController {
     func startCurrentTournament(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard var currentTournament = currentTournament else { completion(false); return }
         
-        if currentTournament.players.count >= 1 {
+        if currentTournament.players.count >= 3 {
             currentTournament.inProgress = true
             
             let matchPartners = createMatchPartnersFor(currentTournament)
@@ -151,11 +151,29 @@ class TournamentController {
         CloudKitManager.shared.updateRecords([tournament.CKRepresentation], perRecordCompletion: nil) { (records, error) in
             if let error = error as? CKError {
                 if error.code == CKError.Code.serverRecordChanged {
-                    CloudKitManager.shared.fetchRecord(withID: <#T##CKRecordID#>, completion: <#T##((CKRecord?, Error?) -> Void)?##((CKRecord?, Error?) -> Void)?##(CKRecord?, Error?) -> Void#>)
+                    if let serverRecord = error.serverRecord {
+                        var players = serverRecord.value(forKey: "players") as? [CKReference]
+                        players?.append(CKReference(recordID: currentPlayer.recordID, action: .none))
+                        serverRecord.setValue(players, forKey: "players")
+                        CloudKitManager.shared.publicDB.save(serverRecord, completionHandler: { (record, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                                completion(false)
+                                return
+                            }
+                            
+                            guard let tournamentRecord = record else { completion(false); return }
+                            let tournament = Tournament(record: tournamentRecord)
+                            self.currentTournament = tournament
+                            completion(true)
+                            return
+                        })
+                    }
+                } else {
+                    print(error.localizedDescription)
+                    completion(false)
+                    return
                 }
-                print(error.localizedDescription)
-                completion(false)
-                return
             }
             
             guard let tournamentRecord = records?.first else { completion(false); return }

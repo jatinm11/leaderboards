@@ -16,8 +16,10 @@ class AddTournamentViewController: UIViewController {
         guard let name = tournamentNameTextField.text, !name.isEmpty else { return }
         TournamentController.shared.createTournamentWith(name: name) { (success) in
             if success {
-                let startTournamentVC = UIStoryboard(name: "Tournament", bundle: nil).instantiateViewController(withIdentifier: "startTournamentVC") as? StartTournamentViewController
-                self.present(startTournamentVC!, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    let startTournamentVC = UIStoryboard(name: "Tournament", bundle: nil).instantiateViewController(withIdentifier: "startTournamentVC") as? StartTournamentViewController
+                    self.present(startTournamentVC!, animated: true, completion: nil)
+                }
             }
         }
     }

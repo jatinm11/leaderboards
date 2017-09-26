@@ -162,7 +162,7 @@
         <!--View Controller-->
         <scene sceneID="OPl-mK-BjF">
             <objects>
-                <viewController id="vi9-He-C5h" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="waitingForTournamentStartVC" id="vi9-He-C5h" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zNp-Cy-T6x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -20,7 +20,9 @@ class TournamentsListViewController: UIViewController {
 
         TournamentController.shared.fetchTournamentsForCurrentGame { (success) in
             if success {
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
