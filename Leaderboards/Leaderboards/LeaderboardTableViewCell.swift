@@ -28,7 +28,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         matchesWonLabel.text = "\(playerDictionary?["wins"] ?? 0)"
         matchesLossLabel.text = "\(playerDictionary?["losses"] ?? 0)"
         if let winPercentage = playerDictionary?["winPercentage"] as? Double {
-            winPercentageLabel.text = "\(winPercentage * 100)"
+            winPercentageLabel.text = "\(Int(winPercentage * 100))"
         }
         playerImage.layer.cornerRadius = playerImage.frame.width / 2
         playerImage.clipsToBounds = true

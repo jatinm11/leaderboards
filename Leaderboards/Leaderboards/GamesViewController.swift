@@ -93,7 +93,7 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
         cell.textLabel?.text = ("\(indexPath.row + 1)) \(GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row].name)")
-        cell.detailTextLabel?.text = ">"
+        //cell.detailTextLabel?.text = ">"
         cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.textColor = UIColor.white
         return cell
