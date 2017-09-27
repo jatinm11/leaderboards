@@ -16,6 +16,7 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var addGameButton: UIBarButtonItem!
     @IBOutlet var navigationBar: UINavigationBar!
+    @IBOutlet var playerImageView: UIImageView!
     
     @IBAction func addGameBarButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Game", message: nil, preferredStyle: .alert)
@@ -56,11 +57,17 @@ class GamesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        GameController.shared.fetchGamesForCurrentPlayspace { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        if let currentPlayer = PlayerController.shared.currentPlayer {
+            GameController.shared.fetchGamesForCurrentPlayspace { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        self.playerImageView.image = currentPlayer.photo
+                        self.playerImageView.layer.cornerRadius = self.playerImageView.frame.width / 2
+                        self.playerImageView.layer.borderColor = UIColor.white.cgColor
+                        self.playerImageView.layer.borderWidth = 3.0
+                        self.playerImageView.clipsToBounds = true
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }

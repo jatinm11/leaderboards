@@ -9,7 +9,7 @@
 import UIKit
 
 class PendingMatchesViewController: UIViewController {
-
+    
     let colorProvider = BackgroundColorProvider()
     
     @IBOutlet var tableView: UITableView!
@@ -40,49 +40,44 @@ class PendingMatchesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        PlayerController.shared.fetchCurrentPlayer { (success) in
+        
+        MatchController.shared.fetchPendingMatchesForCurrentPlayer { (success) in
             if success {
                 DispatchQueue.main.async {
-                    MatchController.shared.fetchPendingMatchesForCurrentPlayer { (sucess) in
-                        if sucess {
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
+                    self.tableView.reloadData()
                 }
             }
         }
-        tableView.reloadData()
+        
     }
-
+    
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toApprovalVC" {
-            if let indexPath = tableView.indexPathForSelectedRow, let cell = tableView.cellForRow(at: indexPath) as? PendingMatchTableViewCell, let destination = segue.destination as? ApprovalViewController {
-                destination.game = cell.gameLabel.text!
-                destination.date = cell.dateLabel.text!
-                destination.opponent = cell.opponentLabel.text!
-                destination.score = cell.scoreLabel.text!
-                
-                let match = MatchController.shared.pendingMatches[indexPath.row]
-                MatchController.shared.fetchOpponentImageFor(match, completion: { (opponent, success) in
-                    if success {
-                        DispatchQueue.main.async {
-                            destination.playerImageView.image = opponent?.photo
-                            destination.playerImageView.layer.cornerRadius = destination.playerImageView.frame.width / 2
-                            destination.playerImageView.clipsToBounds = true
-                            destination.playerImageView.layer.borderColor = UIColor.white.cgColor
-                            destination.playerImageView.layer.borderWidth = 3.0
-                        }
-                    }
-                })
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toApprovalVC" {
+//            if let indexPath = tableView.indexPathForSelectedRow, let cell = tableView.cellForRow(at: indexPath) as? PendingMatchTableViewCell, let destination = segue.destination as? ApprovalViewController {
+//                destination.game = cell.gameLabel.text!
+//                destination.date = cell.dateLabel.text!
+//                destination.opponent = cell.opponentLabel.text!
+//                destination.score = cell.scoreLabel.text!
+//                destination.matchIndex = indexPath.row
+//                let match = MatchController.shared.pendingMatches[indexPath.row]
+//                MatchController.shared.fetchOpponentImageFor(match, completion: { (opponent, success) in
+//                    if success {
+//                        DispatchQueue.main.async {
+//                            destination.playerImageView.image = opponent?.photo
+//                            destination.playerImageView.layer.cornerRadius = destination.playerImageView.frame.width / 2
+//                            destination.playerImageView.clipsToBounds = true
+//                            destination.playerImageView.layer.borderColor = UIColor.white.cgColor
+//                            destination.playerImageView.layer.borderWidth = 3.0
+//                        }
+//                    }
+//                })
+//            }
+//        }
+//    }
 }
 
 
@@ -93,21 +88,47 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
         return MatchController.shared.pendingMatches.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchesCell", for: indexPath) as! PendingMatchTableViewCell
-        cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row])
-        return cell
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 125
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        return cell.backgroundColor = UIColor.clear
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchCell", for: indexPath) as? PendingMatchTableViewCell else { return PendingMatchTableViewCell() }
+        cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row])
+        return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
+        let confirmTableViewRowAction = UITableViewRowAction(style: .normal, title: "Approve") { (_, indexPath) in
+            let verifiedMatch = MatchController.shared.verifyMatch(MatchController.shared.pendingMatches[indexPath.row])
+            MatchController.shared.updateMatch(verifiedMatch, completion: { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        MatchController.shared.clearPendingMatch(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+        }
+        
+        let denyTableViewRowAction = UITableViewRowAction(style: .destructive, title: "Decline") { (_, indexPath) in
+            MatchController.shared.deletePendingMatch(at: indexPath.row, completion: { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        MatchController.shared.clearPendingMatch(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+        }
+        
+        confirmTableViewRowAction.backgroundColor = .green
+        denyTableViewRowAction.backgroundColor = .red
+        
+        return [confirmTableViewRowAction, denyTableViewRowAction]
+    }
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------

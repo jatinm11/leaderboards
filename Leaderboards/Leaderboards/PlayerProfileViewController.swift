@@ -71,6 +71,8 @@ extension PlayerProfileViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
         let confirmTableViewRowAction = UITableViewRowAction(style: .normal, title: "Confirm") { (_, indexPath) in
             let verifiedMatch = MatchController.shared.verifyMatch(MatchController.shared.pendingMatches[indexPath.row])
             MatchController.shared.updateMatch(verifiedMatch, completion: { (success) in
@@ -93,6 +95,9 @@ extension PlayerProfileViewController: UITableViewDataSource, UITableViewDelegat
                 }
             })
         }
+        
+        confirmTableViewRowAction.backgroundColor = .green
+        denyTableViewRowAction.backgroundColor = .red
         
         return [confirmTableViewRowAction, denyTableViewRowAction]
     }

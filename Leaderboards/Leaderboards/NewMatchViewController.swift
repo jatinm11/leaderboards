@@ -11,17 +11,30 @@ import CloudKit
 
 class NewMatchViewController: UIViewController {
     
+    let colorProvider = BackgroundColorProvider()
+    
     @IBOutlet weak var currentPlayerImageView: UIImageView!
+    @IBOutlet var tapOnimageLabel: UILabel!
     @IBOutlet weak var currentPlayerNameLabel: UILabel!
     @IBOutlet weak var opponentImageView: UIImageView!
     @IBOutlet weak var opponentNameLabel: UILabel!
     @IBOutlet weak var currentPlayerScoreTextField: UITextField!
     @IBOutlet weak var opponentScoreTextField: UITextField!
+    @IBOutlet var buttonViewContainer: UIView!
+    @IBOutlet var submitButtonOutlet: UIButton!
+    @IBOutlet var currentPlayerTextFieldViewContainer: UIView!
+    @IBOutlet var opponentPlayerTextFieldViewContainer: UIView!
     
     @IBAction func opponentImageOrLabelTapped(_ sender: Any) {
         let selectOpponentVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "selectOpponentVC") as? SelectOpponentViewController
         selectOpponentVC?.newMatchVC = self
+        tapOnimageLabel.isHidden = true
         present(selectOpponentVC!, animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        currentPlayerScoreTextField.resignFirstResponder()
+        opponentScoreTextField.resignFirstResponder()
     }
     
     @IBAction func submitMatchButtonTapped(_ sender: Any) {
@@ -50,7 +63,6 @@ class NewMatchViewController: UIViewController {
                 }
             })
         }
-        
     }
     
     
@@ -59,9 +71,25 @@ class NewMatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        self.currentPlayerNameLabel.text = PlayerController.shared.currentPlayer?.username
+        let randomColor = colorProvider.randomColor()
+        self.view.backgroundColor = randomColor
+        self.submitButtonOutlet.setTitleColor(randomColor, for: .normal)
+        self.currentPlayerImageView.layer.cornerRadius = currentPlayerImageView.frame.width / 2
+        self.currentPlayerImageView.clipsToBounds = true
+        self.currentPlayerImageView.layer.borderColor = UIColor.white.cgColor
+        self.currentPlayerImageView.layer.borderWidth = 3.0
+        self.opponentImageView.layer.cornerRadius = opponentImageView.frame.width / 2
+        self.opponentImageView.clipsToBounds = true
+        self.currentPlayerNameLabel.text = "You"
         self.currentPlayerImageView.image = PlayerController.shared.currentPlayer?.photo
+        self.currentPlayerTextFieldViewContainer.layer.cornerRadius = 5
+        self.opponentPlayerTextFieldViewContainer.layer.cornerRadius = 5
+        self.buttonViewContainer.layer.cornerRadius = 5
+        
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,17 +97,11 @@ class NewMatchViewController: UIViewController {
         
         opponentNameLabel.text = opponent?.username
         opponentImageView.image = opponent?.photo
+        opponentImageView.layer.borderWidth = 3.0
+        opponentImageView.layer.borderColor = UIColor.white.cgColor
     }
     
-    
-    
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
-    
-    
 }
