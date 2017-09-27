@@ -11,15 +11,24 @@ import UIKit
 class SelectOpponentViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet var cancelBarButton: UIBarButtonItem!
+    
     
     weak var newMatchVC: NewMatchViewController?
     
+    let colorProvider = BackgroundColorProvider()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.delegate = self
         tableView.dataSource = self
+        let randomColor = colorProvider.randomColor()
+        tableView.backgroundColor = randomColor
+        tableView.tableFooterView = UIView()
+        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,8 +40,11 @@ class SelectOpponentViewController: UIViewController {
                 }
             }
         }
+        
     }
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
 }
 
 extension SelectOpponentViewController: UITableViewDataSource, UITableViewDelegate {
@@ -44,6 +56,8 @@ extension SelectOpponentViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "opponentCell", for: indexPath)
         cell.textLabel?.text = PlayerController.shared.opponents[indexPath.row].username
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.textAlignment = .center
         return cell
     }
     
@@ -52,4 +66,11 @@ extension SelectOpponentViewController: UITableViewDataSource, UITableViewDelega
         dismiss(animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
 }

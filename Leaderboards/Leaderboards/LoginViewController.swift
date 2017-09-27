@@ -10,8 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    let colorProvider = BackgroundColorProvider()
+    
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var createUsernameLabel: UILabel!
+    @IBOutlet var navigationBar: UINavigationBar!
+    @IBOutlet var NextBarButton: UIBarButtonItem!
     
     var labelHasMoved = false
     
@@ -19,6 +24,23 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         super.viewDidLoad()
         usernameTextField.delegate = self
         createUsernameLabel.alpha = 0.0
+        let randomColor = colorProvider.randomColor()
+        self.view.backgroundColor = randomColor
+        self.NextBarButton.tintColor = randomColor
+        
+        self.navigationBar.layer.cornerRadius = 5
+        self.navigationBar.clipsToBounds = true
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        usernameTextField.resignFirstResponder()
+    }
+    
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     func presentSimpleAlert(title: String, message: String) {
@@ -60,6 +82,11 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
             }
         }
         
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.usernameTextField.resignFirstResponder()
         return true
     }
     

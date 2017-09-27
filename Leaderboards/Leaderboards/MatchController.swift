@@ -137,24 +137,25 @@ class MatchController {
     }
     
     
-    func fetchMathesForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+    func fetchMatchesForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         
         guard let currentGame = GameController.shared.currentGame else { completion(false); return }
         
-        let currentGameRef = CKReference(recordID: currentGame.recordID, action: .deleteSelf)
+        let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", currentGame.recordID)
+        let matchIsVerifiedPredicate = NSPredicate(format: "verified == true")
         
-        let predicate = NSPredicate(format: "game == %@", currentGameRef)
+        let matchCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [matchIsForCurrentGamePredicate, matchIsVerifiedPredicate])
         
-        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
+        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(false)
                 return
             }
             
-            guard let records = records else { completion(false); return }
+            guard let matchRecords = records else { completion(false); return }
             
-            let matches = records.flatMap( { Match(record: $0) })
+            let matches = matchRecords.flatMap( { Match(record: $0) })
             self.matchesInCurrentGame = matches
             completion(true)
         }

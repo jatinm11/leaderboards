@@ -20,9 +20,9 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var leaderboardsView: UIView!
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
-    var playersViewAnimated = false
-    var leaderboardsViewAnimated = false
-    var leaderboardsViewShouldAnimate = false
+//    var playersViewAnimated = false
+//    var leaderboardsViewAnimated = false
+//    var leaderboardsViewShouldAnimate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
             leaderboardsView.alpha = 1
             playersView.alpha = 0
             leaderboardsButton.title = "Players"
-            leaderboardsViewShouldAnimate = true
+            //leaderboardsViewShouldAnimate = true
             leaderboardTableView.reloadData()
             randomColor()
         } else {
@@ -68,13 +68,15 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        playerStatsArrayOfDictionaries = []
+        
         GameController.shared.fetchAllPlayersForCurrentGame { (success) in
             if success {
                 DispatchQueue.main.async {
                     self.playerTableView.reloadData()
                     self.createPlayerStatsDictionaries()
                 }
-                MatchController.shared.fetchMathesForCurrentGame(completion: { (success) in
+                MatchController.shared.fetchMatchesForCurrentGame(completion: { (success) in
                     if success {
                         DispatchQueue.main.async {
                             self.updatePlayerStatsDictionaries()
@@ -184,49 +186,54 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.tag == 0 && playersViewAnimated == false {
-            cell.alpha = 0
-            cell.backgroundColor = UIColor.clear
-            UIView.animate(withDuration: 1.0) {
-                cell.alpha = 1.0
-            }
-        }
-        if tableView.tag == 0 && playersViewAnimated == false  && indexPath.row == GameController.shared.playersBelongingToCurrentGame.count - 1{
-            playersViewAnimated = true
-        }
-        
-        if tableView.tag == 1 && leaderboardsViewAnimated == false && leaderboardsViewShouldAnimate == true {
-            cell.alpha = 0
-            cell.backgroundColor = UIColor.clear
-            UIView.animate(withDuration: 1.0) {
-                cell.alpha = 1.0
-            }
-        }
-        if tableView.tag == 1 && leaderboardsViewAnimated == false && leaderboardsViewShouldAnimate == true && indexPath.row == playerStatsArrayOfDictionaries.count - 1{
-            leaderboardsViewAnimated = true
-            leaderboardsViewShouldAnimate = false
-        }
+        cell.backgroundColor = UIColor.clear
     }
     
-    func animateTable() {
-        playerTableView.reloadData()
-        let cells = playerTableView.visibleCells
-        
-        let tableViewHeight = playerTableView.bounds.size.height
-        
-        for cell in cells {
-            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
-        }
-        
-        var delayCounter = 0
-        for cell in cells {
-            UIView.animate(withDuration: 1.0, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                cell.transform = CGAffineTransform.identity
-                }, completion: nil)
-            delayCounter += 1
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if tableView.tag == 0 && playersViewAnimated == false {
+//            cell.alpha = 0
+//            cell.backgroundColor = UIColor.clear
+//            UIView.animate(withDuration: 1.0) {
+//                cell.alpha = 1.0
+//            }
+//        }
+//        if tableView.tag == 0 && playersViewAnimated == false  && indexPath.row == GameController.shared.playersBelongingToCurrentGame.count - 1{
+//            playersViewAnimated = true
+//        }
+//
+//        if tableView.tag == 1 && leaderboardsViewAnimated == false && leaderboardsViewShouldAnimate == true {
+//            cell.alpha = 0
+//            cell.backgroundColor = UIColor.clear
+//            UIView.animate(withDuration: 1.0) {
+//                cell.alpha = 1.0
+//            }
+//        }
+//        if tableView.tag == 1 && leaderboardsViewAnimated == false && leaderboardsViewShouldAnimate == true && indexPath.row == playerStatsArrayOfDictionaries.count - 1{
+//            leaderboardsViewAnimated = true
+//            leaderboardsViewShouldAnimate = false
+//        }
+//    }
+    
+//    func animateTable() {
+//        playerTableView.reloadData()
+//        let cells = playerTableView.visibleCells
+//
+//        let tableViewHeight = playerTableView.bounds.size.height
+//
+//        for cell in cells {
+//            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+//        }
+//
+//        var delayCounter = 0
+//        for cell in cells {
+//            UIView.animate(withDuration: 1.0, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+//                cell.transform = CGAffineTransform.identity
+//                }, completion: nil)
+//            delayCounter += 1
+//        }
+//    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

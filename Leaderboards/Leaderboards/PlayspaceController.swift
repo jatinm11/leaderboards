@@ -47,7 +47,7 @@ class PlayspaceController {
                 return
             }
             
-            guard let currentPlayer = PlayerController.shared.currentPlayer, let records = records else { completion(false); return }
+            guard let currentPlayer = PlayerController.shared.currentPlayer, let records = records, records.count > 0 else { completion(false); return }
             self.addPlayer(currentPlayer, toPlayspaceRecord: records[0])
             completion(true)
         }

@@ -40,7 +40,7 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
                 DispatchQueue.main.async {
                     self.createPlayerStatsDictionaries()
                 }
-                MatchController.shared.fetchMathesForCurrentGame(completion: { (success) in
+                MatchController.shared.fetchMatchesForCurrentGame(completion: { (success) in
                     if success {
                         DispatchQueue.main.async {
                             self.updatePlayerStatsDictionaries()
