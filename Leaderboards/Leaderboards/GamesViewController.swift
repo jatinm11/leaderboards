@@ -18,6 +18,10 @@ class GamesViewController: UIViewController {
     @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var playerImageView: UIImageView!
     
+    @IBAction func swipeGestureSwiped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func addGameBarButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Game", message: nil, preferredStyle: .alert)
         
@@ -42,6 +46,7 @@ class GamesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -76,10 +81,6 @@ class GamesViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
-    @IBAction func goBackSwipeAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate

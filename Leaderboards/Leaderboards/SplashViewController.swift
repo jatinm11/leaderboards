@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
-
+        
         PlayerController.shared.fetchCurrentPlayer { (success) in
             DispatchQueue.main.async {
                 if success {

@@ -60,6 +60,10 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func swipeGestureSwiped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }

@@ -19,6 +19,11 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var playersView: UIView!
     @IBOutlet weak var leaderboardsView: UIView!
     
+    @IBAction func swipeGestureSwiped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     var playerStatsArrayOfDictionaries = [[String: Any]]()
 //    var playersViewAnimated = false
 //    var leaderboardsViewAnimated = false

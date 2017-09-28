@@ -121,7 +121,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="eJa-b4-2yT" kind="show" id="5ot-a9-Cje"/>
+                                            <segue destination="eJa-b4-2yT" kind="presentation" id="5ot-a9-Cje"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hG-RU-IH5">
@@ -267,6 +267,7 @@
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="1hG-RU-IH5" firstAttribute="leading" secondItem="Rpe-ok-YQY" secondAttribute="leading" id="1Pt-Ws-qUT"/>
                                     <constraint firstAttribute="trailing" secondItem="O8j-dM-vp5" secondAttribute="trailing" constant="16" id="1VM-Ro-ym5"/>
@@ -314,6 +315,9 @@
                             <constraint firstItem="Rpe-ok-YQY" firstAttribute="leading" secondItem="iqp-7H-q6o" secondAttribute="leading" id="wqm-hn-5e6"/>
                             <constraint firstItem="eRC-KP-YhH" firstAttribute="top" secondItem="oZK-xj-oFk" secondAttribute="bottom" id="xOI-R0-hUn"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Iko-rw-59N" appends="YES" id="NM4-tP-ckQ"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="ied-rM-J8W" id="hwe-Zd-lh3"/>
@@ -326,6 +330,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDu-15-egz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Iko-rw-59N">
+                    <connections>
+                        <action selector="swipeGestureSwiped:" destination="Jud-JW-8a3" id="IHi-gi-q50"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-63.200000000000003" y="231.63418290854574"/>
         </scene>
