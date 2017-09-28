@@ -178,9 +178,6 @@
                             <constraint firstItem="pkx-Ec-nWW" firstAttribute="centerY" secondItem="Wdf-Ss-KJO" secondAttribute="centerY" id="wlH-im-8Gj"/>
                             <constraint firstItem="Wdf-Ss-KJO" firstAttribute="centerY" secondItem="fmP-qb-GEU" secondAttribute="centerY" id="zm7-fj-wL3"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Z2f-1B-6ZZ" appends="YES" id="Bf9-ea-eTv"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="buttonViewContainer" destination="dAC-QU-v1d" id="3ZE-XQ-bR3"/>
@@ -207,7 +204,6 @@
                         <action selector="opponentImageOrLabelTapped:" destination="uKw-JF-nEd" id="xrb-HP-WVc"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="Z2f-1B-6ZZ"/>
             </objects>
             <point key="canvasLocation" x="-159.19999999999999" y="158.77061469265368"/>
         </scene>
