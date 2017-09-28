@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -193,6 +194,7 @@
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="56" id="7Zd-Bw-hzh"/>
                                                                                 <constraint firstAttribute="height" constant="56" id="8VC-2R-aFo"/>
+                                                                                <constraint firstAttribute="width" secondItem="Vbd-U9-psv" secondAttribute="height" multiplier="1:1" id="JXl-AA-Ywf"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iji-Zp-feP">

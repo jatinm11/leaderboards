@@ -11,9 +11,9 @@ import UIKit
 class SelectOpponentViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
-    @IBOutlet var cancelBarButton: UIBarButtonItem!
-    
+    @IBAction func viewButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     weak var newMatchVC: NewMatchViewController?
     

@@ -25,6 +25,10 @@ class NewMatchViewController: UIViewController {
     @IBOutlet var currentPlayerTextFieldViewContainer: UIView!
     @IBOutlet var opponentPlayerTextFieldViewContainer: UIView!
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func opponentImageOrLabelTapped(_ sender: Any) {
         let selectOpponentVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "selectOpponentVC") as? SelectOpponentViewController
         selectOpponentVC?.newMatchVC = self
