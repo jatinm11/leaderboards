@@ -30,6 +30,10 @@ class NewGameViewController: UIViewController {
         navigationBar.isTranslucent = true
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.resignFirstResponder()
     }

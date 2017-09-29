@@ -44,4 +44,8 @@ class JoinPlayspaceViewController: UIViewController {
         }
     }
     
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
 }
