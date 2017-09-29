@@ -128,7 +128,7 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             }))
             
-            alert.addAction(UIAlertAction(title: "Create Playspace", style: .default, handler: { (_) -> Void in
+            alert.addAction(UIAlertAction(title: "New Playspace", style: .default, handler: { (_) -> Void in
                 let addPlayspaceVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "addPlayspaceVC")
                 self.present(addPlayspaceVC, animated: true, completion: nil)
             }))

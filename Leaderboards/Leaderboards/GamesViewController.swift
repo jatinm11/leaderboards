@@ -12,10 +12,7 @@ class GamesViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
-    @IBOutlet var joinGameButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var addGameButton: UIBarButtonItem!
-    @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var playerImageView: UIImageView!
     
     @IBAction func swipeGestureSwiped(_ sender: Any) {
@@ -53,11 +50,6 @@ class GamesViewController: UIViewController {
         let randomColor = colorProvider.randomColor()
         self.tableView.backgroundColor = randomColor
         self.view.backgroundColor = randomColor
-        self.joinGameButton.tintColor = randomColor
-        self.addGameButton.tintColor = randomColor
-        self.navigationBar.layer.cornerRadius = 5
-        self.navigationBar.clipsToBounds = true
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,25 +80,44 @@ class GamesViewController: UIViewController {
 extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GameController.shared.gamesBelongingToCurrentPlayer.count
+        return GameController.shared.gamesBelongingToCurrentPlayer.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == GameController.shared.gamesBelongingToCurrentPlayer.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addGameCell", for: indexPath)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
-        cell.textLabel?.text = ("\(indexPath.row + 1)) \(GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row].name)")
-        //cell.detailTextLabel?.text = ">"
+        cell.textLabel?.text = ("\(GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row].name)")
         cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.textColor = UIColor.white
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
+        if indexPath.row == GameController.shared.gamesBelongingToCurrentPlayer.count {
+            let alert = UIAlertController(title: "Add Game", message: nil, preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Join Game", style: .default , handler: { (_) -> Void in
+                let joinGameVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "joinGameVC")
+                self.present(joinGameVC, animated: true, completion: nil)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) -> Void in
+                // New Game VC here
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+        } else {
+            GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
     }
-    
     
 }

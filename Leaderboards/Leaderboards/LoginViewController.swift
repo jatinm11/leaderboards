@@ -12,24 +12,28 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     let colorProvider = BackgroundColorProvider()
     
-    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var createUsernameLabel: UILabel!
-    @IBOutlet var navigationBar: UINavigationBar!
-    @IBOutlet var NextBarButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var createUserNameCenterYConstraint: NSLayoutConstraint!
     
     var labelHasMoved = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameTextField.delegate = self
-        createUsernameLabel.alpha = 0.0
-        let randomColor = colorProvider.randomColor()
-        self.view.backgroundColor = randomColor
-        self.NextBarButton.tintColor = randomColor
         
-        self.navigationBar.layer.cornerRadius = 5
-        self.navigationBar.clipsToBounds = true
+        usernameTextField.delegate = self
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Enter Username",
+                                                                     attributes: [NSForegroundColorAttributeName: UIColor.white])
+        
+        createUsernameLabel.alpha = 0.0
+        
+        let randomColor = colorProvider.randomColor()
+        view.backgroundColor = randomColor
+
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
     }
     
     
@@ -56,6 +60,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 self.presentSimpleAlert(title: "Unable to create an account", message: "Be sure you entered a valid username and try again.")
                 return
             }
+            
             let newUserSelectImageVC = segue.destination as? NewUserSelectImageViewController
             newUserSelectImageVC?.username = username
         }
@@ -70,7 +75,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
             if labelHasMoved == false {
                 labelHasMoved = true
                 UIView.animate(withDuration: 0.3) {
-                    self.createUsernameLabel.frame = CGRect(x: self.usernameTextField.frame.origin.x, y: self.usernameTextField.frame.origin.y  - self.usernameTextField.frame.height, width: self.usernameTextField.frame.width, height: self.usernameTextField.frame.height)
+                    self.createUserNameCenterYConstraint.constant = -30
                     self.createUsernameLabel.alpha = 1.0
                 }
             }

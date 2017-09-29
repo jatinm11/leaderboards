@@ -13,27 +13,41 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
     let colorProvider = BackgroundColorProvider()
     
     var username: String?
-    @IBOutlet weak var skipButton: UIBarButtonItem!
-    @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet weak var playerImageView: UIImageView!
     @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var backBarButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBAction func registerButtonTapped(_ sender: Any) {
+        guard let username = username else { return }
+        PlayerController.shared.createPlayerWith(username: username, photo: playerImageView.image) { (success) in
+            DispatchQueue.main.async {
+                if !success {
+                    self.presentSimpleAlert(title: "Unable to create an account", message: "Make sure you have a network connection, and please try again.")
+                } else {
+                    let playspacesViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
+                    self.present(playspacesViewController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.playerImageView.layer.cornerRadius = playerImageView.frame.width / 2
-        self.playerImageView.layer.borderWidth = 3.0
-        self.playerImageView.layer.borderColor = UIColor.white.cgColor
-        self.playerImageView.clipsToBounds = true
-        self.navigationBar.clipsToBounds = true
-        self.usernameLabel.text = username
-        self.navigationBar.layer.cornerRadius = 5
+        playerImageView.layer.cornerRadius = playerImageView.frame.width / 2
+        playerImageView.layer.borderWidth = 3.0
+        playerImageView.layer.borderColor = UIColor.white.cgColor
+        playerImageView.clipsToBounds = true
+        
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
+
+        usernameLabel.text = username
+
         let randomColor = colorProvider.randomColor()
-        self.skipButton.tintColor = randomColor
-        self.view.backgroundColor = randomColor
-        self.backBarButton.tintColor = randomColor
+        view.backgroundColor = randomColor
+
     }
     
     @IBAction func backBarButtonTapped(_ sender: Any) {
@@ -100,6 +114,5 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             playerImageView.image = image.resizeWithWidth(width: 700)!
         }
-        skipButton = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(skipRegisterBarButtonTapped))
     }
 }
