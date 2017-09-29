@@ -19,6 +19,7 @@ class GameController {
     
     var gamesNotBelongingToCurrentPlayer = [Game]()
     var gamesBelongingToCurrentPlayer = [Game]()
+    
     var playersBelongingToCurrentGame = [Player]()
     
     func createGameWith(name: String, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
@@ -34,6 +35,7 @@ class GameController {
                 return
             }
             
+            self.gamesBelongingToCurrentPlayer.append(game)
             completion(true)
         }
     }
@@ -53,13 +55,18 @@ class GameController {
             guard let gamesRecords = records else { completion(false); return }
             let games = gamesRecords.flatMap { Game(record: $0) }
             self.games = games
-            self.sortGamesForCurrentPlayer()
-            completion(true)
+            self.sortGamesForCurrentPlayer(completion: { (success) in
+                if success {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            })
         }
     }
     
     
-    func sortGamesForCurrentPlayer() {
+    func sortGamesForCurrentPlayer(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         var gamesNotBelongingToCurrentPlayer = [Game]()
         let gamesBelongingToCurrentPlayer = games.filter { (game) -> Bool in
             for player in game.players {
@@ -72,6 +79,7 @@ class GameController {
         }
         self.gamesNotBelongingToCurrentPlayer = gamesNotBelongingToCurrentPlayer
         self.gamesBelongingToCurrentPlayer = gamesBelongingToCurrentPlayer
+        completion(true)
     }
     
     func addCurrentPlayerToGame(_ game: Game, completion: @escaping (_ success: Bool) -> Void = { _ in }) {

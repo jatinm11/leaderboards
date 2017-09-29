@@ -9,7 +9,7 @@
 import UIKit
 
 class NewGameViewController: UIViewController {
-
+    
     let colorProvider = BackgroundColorProvider()
     
     @IBOutlet var nameTextField: UITextField!

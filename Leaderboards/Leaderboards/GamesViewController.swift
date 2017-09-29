@@ -19,28 +19,6 @@ class GamesViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func addGameBarButtonItemTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Add New Game", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Enter Name"
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
-            guard let name = alert.textFields?.first?.text, !name.isEmpty else { return }
-            
-            GameController.shared.createGameWith(name: name, completion: { (success) in
-                if success {
-                    //dismiss here
-                }
-            })
-            self.tableView.reloadData()
-            
-        }))
-        present(alert, animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,10 +28,18 @@ class GamesViewController: UIViewController {
         let randomColor = colorProvider.randomColor()
         self.tableView.backgroundColor = randomColor
         self.view.backgroundColor = randomColor
+        
+        GameController.shared.fetchGamesForCurrentPlayspace { (success) in
+            if success {
+                self.reloadTableView()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.reloadTableView()
         
         if let currentPlayer = PlayerController.shared.currentPlayer {
             playerImageView.image = currentPlayer.photo
@@ -61,13 +47,6 @@ class GamesViewController: UIViewController {
             playerImageView.layer.borderColor = UIColor.white.cgColor
             playerImageView.layer.borderWidth = 3.0
             playerImageView.clipsToBounds = true
-            GameController.shared.fetchGamesForCurrentPlayspace { (success) in
-                if success {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
         }
     }
     
@@ -120,6 +99,12 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 }
