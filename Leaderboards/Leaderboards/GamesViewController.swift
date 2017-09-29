@@ -16,6 +16,8 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var playerImageView: UIImageView!
     @IBOutlet var notificationViewBadge: UIView!
+    @IBOutlet var addgameButtonViewContainer: UIView!
+    @IBOutlet var addGameButton: UIButton!
     
     @IBAction func swipeGestureSwiped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -32,6 +34,9 @@ class GamesViewController: UIViewController {
         self.view.backgroundColor = randomColor
         self.notificationCountLabel.textColor = randomColor
         self.notificationCountLabel.tintColor = randomColor
+        self.addGameButton.tintColor = randomColor
+        self.addgameButtonViewContainer.layer.cornerRadius = 5
+        self.addgameButtonViewContainer.clipsToBounds = true
         
         GameController.shared.fetchGamesForCurrentPlayspace { (success) in
             if success {
@@ -71,9 +76,29 @@ class GamesViewController: UIViewController {
         }
     }
     
+    @IBAction func addGameButtonTapped(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Add Game", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Join Game", style: .default , handler: { (_) -> Void in
+            let joinGameVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "joinGameVC")
+            self.present(joinGameVC, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) -> Void in
+            let newGameVC = UIStoryboard(name: "NewGame", bundle: nil).instantiateViewController(withIdentifier: "newGameVC")
+            self.present(newGameVC, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -81,14 +106,10 @@ class GamesViewController: UIViewController {
 extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GameController.shared.gamesBelongingToCurrentPlayer.count + 1
+        return GameController.shared.gamesBelongingToCurrentPlayer.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == GameController.shared.gamesBelongingToCurrentPlayer.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addGameCell", for: indexPath)
-            return cell
-        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
         cell.textLabel?.text = ("\(GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row].name)")
         cell.detailTextLabel?.textColor = UIColor.white
@@ -97,25 +118,7 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == GameController.shared.gamesBelongingToCurrentPlayer.count {
-            let alert = UIAlertController(title: "Add Game", message: nil, preferredStyle: .actionSheet)
-            
-            alert.addAction(UIAlertAction(title: "Join Game", style: .default , handler: { (_) -> Void in
-                let joinGameVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "joinGameVC")
-                self.present(joinGameVC, animated: true, completion: nil)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) -> Void in
-                let newGameVC = UIStoryboard(name: "NewGame", bundle: nil).instantiateViewController(withIdentifier: "newGameVC")
-                self.present(newGameVC, animated: true, completion: nil)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            present(alert, animated: true, completion: nil)
-        } else {
-            GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
-        }
+        GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

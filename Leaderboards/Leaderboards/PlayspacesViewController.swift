@@ -7,10 +7,12 @@ class PlayspacesViewController: UIViewController {
     
     var player: Player?
     
+    @IBOutlet var playspaceButtonViewContainer: UIView!
     @IBOutlet var notificationbadgeView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var playerImage: UIImageView!
     @IBOutlet var notificationCountLabel: UILabel!
+    @IBOutlet var addplayspaceButton: UIButton!
     
     @IBAction func addPlayspaceBarButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Playspace", message: nil, preferredStyle: .alert)
@@ -58,6 +60,9 @@ class PlayspacesViewController: UIViewController {
         self.tableView.backgroundColor = randomColor
         notificationCountLabel.tintColor = randomColor
         notificationCountLabel.textColor = randomColor
+        addplayspaceButton.tintColor = randomColor
+        playspaceButtonViewContainer.layer.cornerRadius = 5
+        playspaceButtonViewContainer.clipsToBounds = true
     }
     
     
@@ -94,6 +99,25 @@ class PlayspacesViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func addplayspaceButtonTapped(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Add Playspace", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Join Playspace", style: .default , handler: { (_) -> Void in
+            let joinPlayspaceVC = UIStoryboard(name: "JoinPlayspace", bundle: nil).instantiateViewController(withIdentifier: "joinPlayspaceVC")
+            self.present(joinPlayspaceVC, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "New Playspace", style: .default, handler: { (_) -> Void in
+            let addPlayspaceVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "addPlayspaceVC")
+            self.present(addPlayspaceVC, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -105,14 +129,10 @@ class PlayspacesViewController: UIViewController {
 extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PlayspaceController.shared.playspaces.count + 1
+        return PlayspaceController.shared.playspaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == PlayspaceController.shared.playspaces.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "addPlayspaceCell", for: indexPath)
-            return cell
-        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "playspaceCell", for: indexPath)
         cell.textLabel?.text = "\(PlayspaceController.shared.playspaces[indexPath.row].name)"
         cell.textLabel?.textColor = UIColor.white
@@ -121,25 +141,7 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == PlayspaceController.shared.playspaces.count {
-            let alert = UIAlertController(title: "Add Playspace", message: nil, preferredStyle: .actionSheet)
-            
-            alert.addAction(UIAlertAction(title: "Join Playspace", style: .default , handler: { (_) -> Void in
-                let joinPlayspaceVC = UIStoryboard(name: "JoinPlayspace", bundle: nil).instantiateViewController(withIdentifier: "joinPlayspaceVC")
-                self.present(joinPlayspaceVC, animated: true, completion: nil)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "New Playspace", style: .default, handler: { (_) -> Void in
-                let addPlayspaceVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "addPlayspaceVC")
-                self.present(addPlayspaceVC, animated: true, completion: nil)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            present(alert, animated: true, completion: nil)
-        } else {
-            PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
-        }
+        PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -222,7 +222,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mor-Zg-lKW">
-                                <rect key="frame" x="0.0" y="97.5" width="375" height="569.5"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -230,11 +230,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E2z-Mu-pXn" id="QPp-Jq-H43">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YrH-0N-f2F">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -245,41 +245,6 @@
                                         <connections>
                                             <segue destination="pYk-H8-mmj" kind="show" identifier="toGamesViewController" id="ZaT-y2-i9i"/>
                                         </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addPlayspaceCell" id="HKb-nE-ZJc">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HKb-nE-ZJc" id="2bN-6Q-DBJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hlj-h4-DVf">
-                                                    <rect key="frame" x="110" y="7" width="155" height="30"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Plus Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Z4F-xW-zPt">
-                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="QHr-g5-Xqv"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Playspace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GV-BA-HU0">
-                                                            <rect key="frame" x="42" y="5" width="113" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="FIF-no-ief"/>
-                                                    </constraints>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Hlj-h4-DVf" secondAttribute="trailing" constant="110" id="0JQ-Hd-WIf"/>
-                                                <constraint firstItem="Hlj-h4-DVf" firstAttribute="centerY" secondItem="2bN-6Q-DBJ" secondAttribute="centerY" id="SAz-z6-itw"/>
-                                                <constraint firstItem="Hlj-h4-DVf" firstAttribute="leading" secondItem="2bN-6Q-DBJ" secondAttribute="leading" constant="110" id="wIv-1E-r3K"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -322,6 +287,22 @@
                                     <constraint firstItem="WEh-yf-H6a" firstAttribute="centerX" secondItem="xg7-I9-TWu" secondAttribute="centerX" id="haf-yw-RgH"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lje-4K-IBT">
+                                <rect key="frame" x="136" y="623" width="103" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydC-nw-Fgr">
+                                        <rect key="frame" x="1" y="3" width="101" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Add Playspace"/>
+                                        <connections>
+                                            <action selector="addplayspaceButtonTapped:" destination="dUO-SC-5ba" eventType="touchUpInside" id="sq6-fZ-RF3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -330,7 +311,7 @@
                             <constraint firstItem="mor-Zg-lKW" firstAttribute="top" secondItem="Gne-Ot-HPs" secondAttribute="bottom" constant="25.5" id="DBa-nD-05Z"/>
                             <constraint firstItem="Gne-Ot-HPs" firstAttribute="leading" secondItem="gll-DY-3Zg" secondAttribute="leading" constant="24" id="Hd6-aB-SQH"/>
                             <constraint firstAttribute="trailing" secondItem="NLC-t1-96B" secondAttribute="trailing" constant="16" id="N5t-z4-ZPh"/>
-                            <constraint firstItem="mR6-ZB-dJt" firstAttribute="top" secondItem="mor-Zg-lKW" secondAttribute="bottom" id="QPl-Ad-WTY"/>
+                            <constraint firstItem="mR6-ZB-dJt" firstAttribute="top" secondItem="mor-Zg-lKW" secondAttribute="bottom" constant="52" id="QPl-Ad-WTY"/>
                             <constraint firstAttribute="trailing" secondItem="xg7-I9-TWu" secondAttribute="trailing" constant="8" id="mZe-8r-wbI"/>
                             <constraint firstItem="NLC-t1-96B" firstAttribute="centerY" secondItem="Gne-Ot-HPs" secondAttribute="centerY" id="maN-3A-HcH"/>
                             <constraint firstAttribute="trailing" secondItem="mor-Zg-lKW" secondAttribute="trailing" id="sAk-4u-pov"/>
@@ -338,9 +319,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addplayspaceButton" destination="ydC-nw-Fgr" id="Hci-HK-Cnr"/>
                         <outlet property="notificationCountLabel" destination="WEh-yf-H6a" id="0xR-40-sxj"/>
                         <outlet property="notificationbadgeView" destination="xg7-I9-TWu" id="Q0K-wu-vkX"/>
                         <outlet property="playerImage" destination="NLC-t1-96B" id="0me-uc-Uov"/>
+                        <outlet property="playspaceButtonViewContainer" destination="lje-4K-IBT" id="Kr5-j4-jzj"/>
                         <outlet property="tableView" destination="mor-Zg-lKW" id="ERS-Tk-krf"/>
                     </connections>
                 </viewController>
@@ -372,7 +355,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RXh-Ez-mrs">
-                                <rect key="frame" x="0.0" y="98.5" width="375" height="568.5"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -466,6 +449,21 @@
                                     <constraint firstItem="hf0-ra-wog" firstAttribute="centerY" secondItem="2wr-dj-mGp" secondAttribute="centerY" id="dXm-HX-GSD"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdc-69-dDD">
+                                <rect key="frame" x="136" y="624" width="103" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDf-n1-PG5">
+                                        <rect key="frame" x="15" y="3" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Add Game"/>
+                                        <connections>
+                                            <action selector="addGameButtonTapped:" destination="pYk-H8-mmj" eventType="touchUpInside" id="KCA-vE-7v9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -479,13 +477,15 @@
                             <constraint firstAttribute="trailing" secondItem="2wr-dj-mGp" secondAttribute="trailing" constant="8" id="bFG-5Q-Y8y"/>
                             <constraint firstItem="2wr-dj-mGp" firstAttribute="centerY" secondItem="ucm-bG-yAR" secondAttribute="top" id="mHI-D2-EUS"/>
                             <constraint firstItem="ZYe-GN-2E8" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" constant="24" id="qKs-uq-TBP"/>
-                            <constraint firstItem="FWa-Fw-CA5" firstAttribute="top" secondItem="RXh-Ez-mrs" secondAttribute="bottom" id="rG8-9s-fGb"/>
+                            <constraint firstItem="FWa-Fw-CA5" firstAttribute="top" secondItem="RXh-Ez-mrs" secondAttribute="bottom" constant="51" id="rG8-9s-fGb"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Kv7-AQ-hGE" appends="YES" id="JS7-Aj-NmJ"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="addGameButton" destination="jDf-n1-PG5" id="2tl-Db-N0w"/>
+                        <outlet property="addgameButtonViewContainer" destination="Tdc-69-dDD" id="0rL-h9-HHp"/>
                         <outlet property="notificationCountLabel" destination="hf0-ra-wog" id="xwx-Io-r93"/>
                         <outlet property="notificationViewBadge" destination="2wr-dj-mGp" id="gQi-Tv-u4G"/>
                         <outlet property="playerImageView" destination="ucm-bG-yAR" id="9ht-Jj-wJU"/>
