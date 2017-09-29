@@ -99,6 +99,13 @@ class GamesViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGameDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -115,10 +122,6 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.textColor = UIColor.white
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

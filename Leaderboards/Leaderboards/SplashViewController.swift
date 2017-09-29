@@ -15,6 +15,8 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         
+        navigationController?.isNavigationBarHidden = true
+        
         PlayerController.shared.fetchCurrentPlayer { (success) in
             DispatchQueue.main.async {
                 if success {

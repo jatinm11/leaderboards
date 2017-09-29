@@ -75,7 +75,11 @@ extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
         let game = GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row]
         GameController.shared.addCurrentPlayerToGame(game) { (success) in
             if success {
-                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    GameController.shared.gamesNotBelongingToCurrentPlayer.remove(at: indexPath.row)
+                    GameController.shared.gamesBelongingToCurrentPlayer.append(game)
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

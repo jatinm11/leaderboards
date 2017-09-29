@@ -118,6 +118,13 @@ class PlayspacesViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGamesVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
+        }
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -138,10 +145,6 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayspaceController.shared.currentPlayspace = PlayspaceController.shared.playspaces[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
