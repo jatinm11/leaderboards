@@ -33,6 +33,8 @@ class CloudKitManager {
         
         let query = CKQuery(recordType: type, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
+        queryOperation.queuePriority = .veryHigh
+        queryOperation.qualityOfService = .userInteractive
         
         let perRecordBlock = { (fetchedRecord: CKRecord) -> Void in
             fetchedRecords.append(fetchedRecord)
@@ -48,6 +50,8 @@ class CloudKitManager {
                 let continuedQueryOperation = CKQueryOperation(cursor: queryCursor)
                 continuedQueryOperation.recordFetchedBlock = perRecordBlock
                 continuedQueryOperation.queryCompletionBlock = queryCompletionBlock
+                continuedQueryOperation.queuePriority = .veryHigh
+                continuedQueryOperation.qualityOfService = .userInteractive
                 
                 self.publicDB.add(continuedQueryOperation)
             } else {
@@ -61,10 +65,28 @@ class CloudKitManager {
     
     func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
         
-        publicDB.save(record, completionHandler: { (record, error) in
-            
-            completion?(record, error)
-        })
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.queuePriority = .veryHigh
+        operation.qualityOfService = .userInteractive
+        
+        operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
+            if let records = records, !records.isEmpty, let record = records.first {
+                (completion?(record, error))
+            }
+        }
+        
+        publicDB.add(operation)
+        
+        
+        
+        
+        
+        
+//        publicDB.save(record, completionHandler: { (record, error) in
+//            
+//            completion?(record, error)
+//        })
     }
     
     func updateRecords(_ records: [CKRecord], perRecordCompletion: ((_ record: CKRecord?, _ error: Error?) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {

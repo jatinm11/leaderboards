@@ -12,16 +12,22 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
     // MARK :- OUTLETS
     @IBOutlet var playspaceTextField: UITextField!
-    
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     let colorProvider = BackgroundColorProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.playspaceTextField.delegate = self
+        
+        playspaceTextField.delegate = self
+        
         let randomColor = colorProvider.randomColor()
-        self.view.backgroundColor = randomColor
-
+        view.backgroundColor = randomColor
+        
+        
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

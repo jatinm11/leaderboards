@@ -532,6 +532,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navigationBar" destination="UCj-5H-7cm" id="Zkl-8n-FQW"/>
                         <outlet property="playspaceTextField" destination="Vi0-BF-Bgk" id="sLl-Te-vfp"/>
                     </connections>
                 </viewController>
