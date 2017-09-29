@@ -20,28 +20,16 @@ class NewMatchViewController: UIViewController {
     @IBOutlet weak var opponentNameLabel: UILabel!
     @IBOutlet weak var currentPlayerScoreTextField: UITextField!
     @IBOutlet weak var opponentScoreTextField: UITextField!
-    @IBOutlet var buttonViewContainer: UIView!
-    @IBOutlet var submitButtonOutlet: UIButton!
     @IBOutlet var currentPlayerTextFieldViewContainer: UIView!
     @IBOutlet var opponentPlayerTextFieldViewContainer: UIView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func opponentImageOrLabelTapped(_ sender: Any) {
-        let selectOpponentVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "selectOpponentVC") as? SelectOpponentViewController
-        selectOpponentVC?.newMatchVC = self
-        tapOnimageLabel.isHidden = true
-        present(selectOpponentVC!, animated: true, completion: nil)
-    }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        currentPlayerScoreTextField.resignFirstResponder()
-        opponentScoreTextField.resignFirstResponder()
-    }
-    
-    @IBAction func submitMatchButtonTapped(_ sender: Any) {
+    @IBAction func submitButtonTapped(_ sender: Any) {
         guard let currentPlayerScoreString = currentPlayerScoreTextField.text,
             !currentPlayerScoreString.isEmpty,
             let currentPlayerScore = Int(currentPlayerScoreString),
@@ -69,6 +57,17 @@ class NewMatchViewController: UIViewController {
         }
     }
     
+    @IBAction func opponentImageOrLabelTapped(_ sender: Any) {
+        let selectOpponentVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "selectOpponentVC") as? SelectOpponentViewController
+        selectOpponentVC?.newMatchVC = self
+        tapOnimageLabel.isHidden = true
+        present(selectOpponentVC!, animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        currentPlayerScoreTextField.resignFirstResponder()
+        opponentScoreTextField.resignFirstResponder()
+    }
     
     var opponent: Player?
     
@@ -77,7 +76,6 @@ class NewMatchViewController: UIViewController {
         
         let randomColor = colorProvider.randomColor()
         self.view.backgroundColor = randomColor
-        self.submitButtonOutlet.setTitleColor(randomColor, for: .normal)
         self.currentPlayerImageView.layer.cornerRadius = currentPlayerImageView.frame.width / 2
         self.currentPlayerImageView.clipsToBounds = true
         self.currentPlayerImageView.layer.borderColor = UIColor.white.cgColor
@@ -88,8 +86,10 @@ class NewMatchViewController: UIViewController {
         self.currentPlayerImageView.image = PlayerController.shared.currentPlayer?.photo
         self.currentPlayerTextFieldViewContainer.layer.cornerRadius = 5
         self.opponentPlayerTextFieldViewContainer.layer.cornerRadius = 5
-        self.buttonViewContainer.layer.cornerRadius = 5
         
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -105,7 +105,4 @@ class NewMatchViewController: UIViewController {
         opponentImageView.layer.borderColor = UIColor.white.cgColor
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
 }

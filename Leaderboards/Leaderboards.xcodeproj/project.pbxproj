@@ -44,7 +44,6 @@
 		AB36E4A51F731D9A00B93655 /* NewUserSelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */; };
 		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
 		AB86E01E1F72BDF1001A0A4E /* Match.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB86E01D1F72BDF1001A0A4E /* Match.storyboard */; };
-		AB8DE6191F7DAED300F57753 /* AddPlayspaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8DE6181F7DAED300F57753 /* AddPlayspaceTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,7 +87,6 @@
 		AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSelectImageViewController.swift; sourceTree = "<group>"; };
 		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
 		AB86E01D1F72BDF1001A0A4E /* Match.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Match.storyboard; sourceTree = "<group>"; };
-		AB8DE6181F7DAED300F57753 /* AddPlayspaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayspaceTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +196,6 @@
 				61FAEE7A1F718C0000D509E6 /* LeaderboardTableViewCell.swift */,
 				61FAEE7C1F718C2800D509E6 /* LeaderboardViewController.swift */,
 				74DEFFA51F71DD8B00030ED9 /* PlayspacesViewController.swift */,
-				AB8DE6181F7DAED300F57753 /* AddPlayspaceTableViewCell.swift */,
 				748E61F11F72DB0000759243 /* GamesViewController.swift */,
 				610D3F8E1F79AC2B000D953F /* ApprovalViewController.swift */,
 				748E61F51F72F9A800759243 /* JoinGameViewController.swift */,
@@ -307,7 +304,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB8DE6191F7DAED300F57753 /* AddPlayspaceTableViewCell.swift in Sources */,
 				619BC9331F71AED7009EAD70 /* AppDelegate.swift in Sources */,
 				748E61F81F731C9B00759243 /* NewMatchViewController.swift in Sources */,
 				AB36E4A51F731D9A00B93655 /* NewUserSelectImageViewController.swift in Sources */,
