@@ -7,8 +7,10 @@ class PlayspacesViewController: UIViewController {
     
     var player: Player?
     
+    @IBOutlet var notificationbadgeView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var playerImage: UIImageView!
+    @IBOutlet var notificationCountLabel: UILabel!
     
     @IBAction func addPlayspaceBarButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Playspace", message: nil, preferredStyle: .alert)
@@ -54,22 +56,38 @@ class PlayspacesViewController: UIViewController {
         let randomColor = colorProvider.randomColor()
         self.view.backgroundColor = randomColor
         self.tableView.backgroundColor = randomColor
+        notificationCountLabel.tintColor = randomColor
+        notificationCountLabel.textColor = randomColor
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if let currentPlayer = PlayerController.shared.currentPlayer {
             PlayerController.shared.fetchPlayspacesFor(currentPlayer, completion: { (success) in
                 if success {
                     DispatchQueue.main.async {
-                        self.playerImage.image = currentPlayer.photo
-                        self.playerImage.layer.cornerRadius = self.playerImage.frame.height / 2
-                        self.playerImage.clipsToBounds = true
-                        self.playerImage.layer.borderColor = UIColor.white.cgColor
-                        self.playerImage.layer.borderWidth = 3.0
                         self.tableView.reloadData()
+                        MatchController.shared.fetchPendingMatchesForCurrentPlayer(completion: { (success) in
+                            if success {
+                                DispatchQueue.main.async {
+                                    self.notificationbadgeView.isHidden = true
+                                    self.playerImage.image = currentPlayer.photo
+                                    self.playerImage.layer.cornerRadius = self.playerImage.frame.height / 2
+                                    self.playerImage.clipsToBounds = true
+                                    self.playerImage.layer.borderColor = UIColor.white.cgColor
+                                    self.playerImage.layer.borderWidth = 3.0
+                                    if MatchController.shared.pendingMatches.count > 0 {
+                                        self.notificationbadgeView.isHidden = false
+                                        self.notificationCountLabel.text = "\(MatchController.shared.pendingMatches.count)"
+                                        self.notificationbadgeView.layer.cornerRadius = self.notificationbadgeView.frame.width / 2
+                                        self.notificationbadgeView.layer.borderColor = UIColor.white.cgColor
+                                        self.notificationbadgeView.layer.borderWidth = 3.0
+                                        self.notificationbadgeView.clipsToBounds = true
+                                    }
+                                }
+                            }
+                        })
                     }
                 }
             })

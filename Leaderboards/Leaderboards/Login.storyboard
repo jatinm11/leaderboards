@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -299,20 +300,46 @@
                                     <outletCollection property="gestureRecognizers" destination="f8n-db-XAm" appends="YES" id="lfc-dL-TQC"/>
                                 </connections>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xg7-I9-TWu">
+                                <rect key="frame" x="347" y="25.5" width="20" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEh-yf-H6a">
+                                        <rect key="frame" x="5" y="4.5" width="10" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="kGL-Du-Res"/>
+                                            <constraint firstAttribute="width" constant="10" id="ptc-TS-ks1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="0.32002565890000001" blue="0.35870357650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="5m1-jT-5Uq"/>
+                                    <constraint firstAttribute="width" constant="20" id="Dzb-GQ-f6r"/>
+                                    <constraint firstItem="WEh-yf-H6a" firstAttribute="centerY" secondItem="xg7-I9-TWu" secondAttribute="centerY" id="GpR-fD-8EP"/>
+                                    <constraint firstItem="WEh-yf-H6a" firstAttribute="centerX" secondItem="xg7-I9-TWu" secondAttribute="centerX" id="haf-yw-RgH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Gne-Ot-HPs" firstAttribute="top" secondItem="cvR-4b-h5b" secondAttribute="bottom" constant="16" id="0Qz-PI-0Ql"/>
+                            <constraint firstItem="xg7-I9-TWu" firstAttribute="centerY" secondItem="NLC-t1-96B" secondAttribute="top" id="4R5-oT-PKF"/>
                             <constraint firstItem="mor-Zg-lKW" firstAttribute="top" secondItem="Gne-Ot-HPs" secondAttribute="bottom" constant="25.5" id="DBa-nD-05Z"/>
                             <constraint firstItem="Gne-Ot-HPs" firstAttribute="leading" secondItem="gll-DY-3Zg" secondAttribute="leading" constant="24" id="Hd6-aB-SQH"/>
                             <constraint firstAttribute="trailing" secondItem="NLC-t1-96B" secondAttribute="trailing" constant="16" id="N5t-z4-ZPh"/>
                             <constraint firstItem="mR6-ZB-dJt" firstAttribute="top" secondItem="mor-Zg-lKW" secondAttribute="bottom" id="QPl-Ad-WTY"/>
+                            <constraint firstAttribute="trailing" secondItem="xg7-I9-TWu" secondAttribute="trailing" constant="8" id="mZe-8r-wbI"/>
                             <constraint firstItem="NLC-t1-96B" firstAttribute="centerY" secondItem="Gne-Ot-HPs" secondAttribute="centerY" id="maN-3A-HcH"/>
                             <constraint firstAttribute="trailing" secondItem="mor-Zg-lKW" secondAttribute="trailing" id="sAk-4u-pov"/>
                             <constraint firstItem="mor-Zg-lKW" firstAttribute="leading" secondItem="gll-DY-3Zg" secondAttribute="leading" id="yef-Pe-rsT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="notificationCountLabel" destination="WEh-yf-H6a" id="0xR-40-sxj"/>
+                        <outlet property="notificationbadgeView" destination="xg7-I9-TWu" id="Q0K-wu-vkX"/>
                         <outlet property="playerImage" destination="NLC-t1-96B" id="0me-uc-Uov"/>
                         <outlet property="tableView" destination="mor-Zg-lKW" id="ERS-Tk-krf"/>
                     </connections>
@@ -417,6 +444,28 @@
                                     <outletCollection property="gestureRecognizers" destination="hti-kv-h05" appends="YES" id="EgN-ph-rbD"/>
                                 </connections>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wr-dj-mGp">
+                                <rect key="frame" x="347" y="25" width="20" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf0-ra-wog">
+                                        <rect key="frame" x="5" y="5" width="10" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="Jfk-wo-0AF"/>
+                                            <constraint firstAttribute="height" constant="10" id="Snl-qW-JYb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="0.32002565890000001" blue="0.35870357650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Fdb-s4-ieq"/>
+                                    <constraint firstItem="hf0-ra-wog" firstAttribute="centerX" secondItem="2wr-dj-mGp" secondAttribute="centerX" id="GHo-Bn-ql6"/>
+                                    <constraint firstAttribute="height" constant="20" id="N5I-It-RMk"/>
+                                    <constraint firstItem="hf0-ra-wog" firstAttribute="centerY" secondItem="2wr-dj-mGp" secondAttribute="centerY" id="dXm-HX-GSD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -427,6 +476,8 @@
                             <constraint firstItem="RXh-Ez-mrs" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" id="ST6-4s-nCt"/>
                             <constraint firstItem="ucm-bG-yAR" firstAttribute="trailing" secondItem="jpL-qF-NYc" secondAttribute="trailingMargin" id="VJR-2N-btx"/>
                             <constraint firstItem="RXh-Ez-mrs" firstAttribute="top" secondItem="ucm-bG-yAR" secondAttribute="bottom" constant="25.5" id="X4p-uY-Irn"/>
+                            <constraint firstAttribute="trailing" secondItem="2wr-dj-mGp" secondAttribute="trailing" constant="8" id="bFG-5Q-Y8y"/>
+                            <constraint firstItem="2wr-dj-mGp" firstAttribute="centerY" secondItem="ucm-bG-yAR" secondAttribute="top" id="mHI-D2-EUS"/>
                             <constraint firstItem="ZYe-GN-2E8" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" constant="24" id="qKs-uq-TBP"/>
                             <constraint firstItem="FWa-Fw-CA5" firstAttribute="top" secondItem="RXh-Ez-mrs" secondAttribute="bottom" id="rG8-9s-fGb"/>
                         </constraints>
@@ -435,6 +486,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="notificationCountLabel" destination="hf0-ra-wog" id="xwx-Io-r93"/>
+                        <outlet property="notificationViewBadge" destination="2wr-dj-mGp" id="gQi-Tv-u4G"/>
                         <outlet property="playerImageView" destination="ucm-bG-yAR" id="9ht-Jj-wJU"/>
                         <outlet property="tableView" destination="RXh-Ez-mrs" id="GRP-gQ-6rv"/>
                     </connections>
@@ -451,7 +504,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3599" y="171"/>
+            <point key="canvasLocation" x="3597.5999999999999" y="170.46476761619192"/>
         </scene>
         <!--Add Playspace View Controller-->
         <scene sceneID="HVD-0h-C70">
