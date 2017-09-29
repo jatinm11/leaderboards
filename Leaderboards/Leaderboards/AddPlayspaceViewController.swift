@@ -12,14 +12,6 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
     // MARK :- OUTLETS
     @IBOutlet var playspaceTextField: UITextField!
-    @IBOutlet var playspaceCreatedLabel: UILabel!
-    @IBOutlet var navigationBar: UINavigationBar!
-    @IBOutlet var passwordMessageLabel: UILabel!
-    @IBOutlet var passwordLabel: UILabel!
-    @IBOutlet var addPlacespaceBarButton: UIBarButtonItem!
-    @IBOutlet var backBarButton: UIBarButtonItem!
-    @IBOutlet var savePasswordButton: UIButton!
-    @IBOutlet var buttonViewContainer: UIView!
     
     
     let colorProvider = BackgroundColorProvider()
@@ -29,18 +21,7 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
         self.playspaceTextField.delegate = self
         let randomColor = colorProvider.randomColor()
         self.view.backgroundColor = randomColor
-        self.backBarButton.tintColor = randomColor
-        self.addPlacespaceBarButton.tintColor = randomColor
-        self.savePasswordButton.setTitleColor(randomColor, for: .normal)
-        navigationBar.layer.cornerRadius = 5
-        navigationBar.clipsToBounds = true
-        buttonViewContainer.layer.cornerRadius = 5
-        buttonViewContainer.clipsToBounds = true
-        playspaceCreatedLabel.isHidden = true
-        savePasswordButton.isHidden = true
-        buttonViewContainer.isHidden = true
-        passwordMessageLabel.isHidden = true
-        passwordLabel.isHidden = true
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -59,34 +40,24 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
     // MARK :- Functions
     
-    @IBAction func addPlayspaceButtonTapped(_ sender: Any) {
+    @IBAction func createButtonTapped(_ sender: Any) {
        
-        guard let name = playspaceTextField.text, name != "" else { return }
+        guard let name = playspaceTextField.text, !name.isEmpty else { return }
         PlayspaceController.shared.createPlayspaceWith(name: name) { (password, success) in
             if success {
                 DispatchQueue.main.async {
-                    self.passwordLabel.text = password
+                    let alert = UIAlertController(title: "Password For Your New Playspace", message: password, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
-            self.playspaceTextField.text = ""
         }
-        playspaceCreatedLabel.isHidden = false
-        savePasswordButton.isHidden = false
-        passwordMessageLabel.isHidden = false
-        passwordLabel.isHidden = false
-        buttonViewContainer.isHidden = false
     }
     
-    @IBAction func savePasswordButtonTapped(_ sender: Any) {
-        
-        let saveMessage = "My playspace password is \(self.passwordLabel.text!)"
-        let ojectToSave = [saveMessage]
-        let acitivityVC = UIActivityViewController(activityItems: ojectToSave, applicationActivities: nil)
-        self.present(acitivityVC, animated: true, completion: nil)
-        
-    }
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

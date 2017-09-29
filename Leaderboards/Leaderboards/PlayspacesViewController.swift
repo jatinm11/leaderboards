@@ -107,25 +107,8 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
             let alert = UIAlertController(title: "Add Playspace", message: nil, preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Join Playspace", style: .default , handler: { (_) -> Void in
-                let alert = UIAlertController(title: "Join Playspace", message: nil, preferredStyle: .alert)
-                
-                alert.addTextField { (textField) in
-                    textField.placeholder = "Enter Password"
-                }
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "Join", style: .default, handler: { (_) in
-                    guard let password = alert.textFields?.first?.text, !password.isEmpty else { return }
-                    PlayspaceController.shared.joinPlayspaceWith(password: password, completion: { (success) in
-                        if success {
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
-                    })
-                }))
-                
-                self.present(alert, animated: true, completion: nil)
+                let joinPlayspaceVC = UIStoryboard(name: "JoinPlayspace", bundle: nil).instantiateViewController(withIdentifier: "joinPlayspaceVC")
+                self.present(joinPlayspaceVC, animated: true, completion: nil)
             }))
             
             alert.addAction(UIAlertAction(title: "New Playspace", style: .default, handler: { (_) -> Void in

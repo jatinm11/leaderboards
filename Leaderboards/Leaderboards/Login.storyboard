@@ -466,11 +466,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgy-z7-JYp">
-                                <rect key="frame" x="16" y="310" width="343" height="47"/>
+                                <rect key="frame" x="16" y="313.5" width="343" height="40"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Playspace Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vi0-BF-Bgk">
-                                        <rect key="frame" x="8" y="8" width="327" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Playspace Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vi0-BF-Bgk">
+                                        <rect key="frame" x="8" y="0.0" width="327" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -478,118 +477,62 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="6dA-gc-aTz"/>
+                                    <constraint firstAttribute="height" constant="40" id="Xs1-MD-RNB"/>
+                                    <constraint firstItem="Vi0-BF-Bgk" firstAttribute="leading" secondItem="jgy-z7-JYp" secondAttribute="leading" constant="8" id="dSI-hW-rMU"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vi0-BF-Bgk" secondAttribute="bottom" id="j0X-t0-Zrb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vi0-BF-Bgk" secondAttribute="trailing" constant="8" id="km7-2l-kk7"/>
+                                    <constraint firstItem="Vi0-BF-Bgk" firstAttribute="top" secondItem="jgy-z7-JYp" secondAttribute="top" id="tsl-Li-5iB"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your playspace password is - " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Yr-3T-meM">
-                                <rect key="frame" x="16" y="408.5" width="215.5" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PLAYSPACE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf7-Qp-JkX">
+                                <rect key="frame" x="16" y="64" width="255" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
+                                <color key="textColor" red="0.9999127984046936" green="1" blue="0.99988144636154175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvi-F3-k3J">
-                                <rect key="frame" x="16" y="615" width="343" height="44"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table_tennis_2 copy" translatesAutoresizingMaskIntoConstraints="NO" id="LHa-X0-5mC">
+                                <rect key="frame" x="-69" y="136" width="512" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="512" id="Eby-dX-nx5"/>
+                                    <constraint firstAttribute="height" constant="115" id="Yn7-nF-Szi"/>
+                                </constraints>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCj-5H-7cm">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem id="w02-St-KAr">
-                                        <barButtonItem key="leftBarButtonItem" title="Add Playspace" id="ROj-Ut-1tl">
-                                            <color key="tintColor" red="1" green="0.45557384000000001" blue="0.43406469060000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <navigationItem id="CtK-BY-gwo">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="cwU-2y-uoh">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
-                                                <action selector="addPlayspaceButtonTapped:" destination="PEP-lu-52F" id="YE7-LR-La5"/>
+                                                <action selector="cancelButtonTapped:" destination="PEP-lu-52F" id="8bz-j0-HvH"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Back" id="CSU-9u-Vv8">
-                                            <color key="tintColor" red="1" green="0.45557384000000001" blue="0.43406469060000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Create" id="ifX-p3-UOe">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
-                                                <action selector="backButtonTapped:" destination="PEP-lu-52F" id="06w-rg-H9y"/>
+                                                <action selector="createButtonTapped:" destination="PEP-lu-52F" id="D6r-9g-eIQ"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD PLAYSPACE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf7-Qp-JkX">
-                                <rect key="frame" x="24" y="36" width="327" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
-                                <color key="textColor" red="0.9999127984046936" green="1" blue="0.99988144636154175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your playspace has been successfully created." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdz-jb-YYd">
-                                <rect key="frame" x="16" y="373" width="343" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.9999127984046936" green="1" blue="0.99988144636154175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQH-cq-1EJ">
-                                <rect key="frame" x="118.5" y="441.5" width="138" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RL-l6-tjf">
-                                        <rect key="frame" x="8" y="8" width="122" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Save Password"/>
-                                        <connections>
-                                            <action selector="savePasswordButtonTapped:" destination="PEP-lu-52F" eventType="touchUpInside" id="9wQ-s1-Ebg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="7RL-l6-tjf" secondAttribute="bottom" constant="8" id="7oa-St-j15"/>
-                                    <constraint firstAttribute="trailing" secondItem="7RL-l6-tjf" secondAttribute="trailing" constant="8" id="RRz-OX-5kd"/>
-                                    <constraint firstItem="7RL-l6-tjf" firstAttribute="leading" secondItem="GQH-cq-1EJ" secondAttribute="leading" constant="8" id="esQ-g8-qer"/>
-                                    <constraint firstItem="7RL-l6-tjf" firstAttribute="top" secondItem="GQH-cq-1EJ" secondAttribute="top" constant="8" id="gD2-iC-hem"/>
-                                </constraints>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table_tennis_2 copy" translatesAutoresizingMaskIntoConstraints="NO" id="LHa-X0-5mC">
-                                <rect key="frame" x="-69" y="136" width="512" height="115"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="512" id="eIe-uk-cqk"/>
-                                    <constraint firstAttribute="height" constant="115" id="yJc-gM-DK2"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3In-dn-pKq">
-                                <rect key="frame" x="231.5" y="408.5" width="127.5" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="uF8-X7-sca"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                <color key="textColor" red="0.9999127984046936" green="1" blue="0.99988144636154175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.45557383995473055" blue="0.4340646906222001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jgy-z7-JYp" firstAttribute="trailing" secondItem="osn-PV-Yxp" secondAttribute="trailingMargin" id="8cx-MO-fp0"/>
-                            <constraint firstItem="sf7-Qp-JkX" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leading" constant="24" id="9hU-PC-68P"/>
-                            <constraint firstAttribute="trailing" secondItem="sf7-Qp-JkX" secondAttribute="trailing" constant="24" id="D0P-1B-jbD"/>
-                            <constraint firstItem="9Yr-3T-meM" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leadingMargin" id="FPK-au-Cnx"/>
-                            <constraint firstItem="Zvi-F3-k3J" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leading" constant="16" id="JLj-3e-Dfi"/>
-                            <constraint firstItem="9Yr-3T-meM" firstAttribute="top" secondItem="fdz-jb-YYd" secondAttribute="bottom" constant="16" id="MHx-zv-k9y"/>
-                            <constraint firstItem="jgy-z7-JYp" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leadingMargin" id="Oda-09-bAP"/>
-                            <constraint firstItem="GQH-cq-1EJ" firstAttribute="centerX" secondItem="osn-PV-Yxp" secondAttribute="centerX" id="Oit-gu-ioj"/>
-                            <constraint firstItem="fdz-jb-YYd" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leadingMargin" id="Pfe-gI-Wrx"/>
-                            <constraint firstItem="3In-dn-pKq" firstAttribute="leading" secondItem="9Yr-3T-meM" secondAttribute="trailing" id="ZS7-vJ-fXx"/>
-                            <constraint firstItem="LHa-X0-5mC" firstAttribute="top" secondItem="sf7-Qp-JkX" secondAttribute="bottom" constant="64" id="biI-xG-kgG"/>
-                            <constraint firstItem="fdz-jb-YYd" firstAttribute="top" secondItem="jgy-z7-JYp" secondAttribute="bottom" constant="16" id="dR4-HQ-bjE"/>
-                            <constraint firstItem="fdz-jb-YYd" firstAttribute="trailing" secondItem="osn-PV-Yxp" secondAttribute="trailingMargin" id="ePF-Nk-XH4"/>
-                            <constraint firstItem="3In-dn-pKq" firstAttribute="top" secondItem="fdz-jb-YYd" secondAttribute="bottom" constant="16" id="fvH-x9-12g"/>
-                            <constraint firstAttribute="trailing" secondItem="Zvi-F3-k3J" secondAttribute="trailing" constant="16" id="jFc-aA-N5P"/>
-                            <constraint firstItem="jgy-z7-JYp" firstAttribute="top" secondItem="LHa-X0-5mC" secondAttribute="bottom" constant="59" id="jSE-Lo-mFm"/>
-                            <constraint firstItem="LHa-X0-5mC" firstAttribute="centerX" secondItem="osn-PV-Yxp" secondAttribute="centerX" id="nTj-6J-0pv"/>
-                            <constraint firstItem="sf7-Qp-JkX" firstAttribute="top" secondItem="QXa-mz-ej4" secondAttribute="bottom" constant="16" id="p2g-lv-jBw"/>
-                            <constraint firstItem="bJG-5e-mNW" firstAttribute="top" secondItem="Zvi-F3-k3J" secondAttribute="bottom" constant="8" id="uPd-KA-VTo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3In-dn-pKq" secondAttribute="trailing" id="xEC-XZ-ATm"/>
-                            <constraint firstItem="GQH-cq-1EJ" firstAttribute="top" secondItem="3In-dn-pKq" secondAttribute="bottom" constant="8" id="xFd-92-owd"/>
+                            <constraint firstAttribute="trailing" secondItem="UCj-5H-7cm" secondAttribute="trailing" id="DdF-RU-nLU"/>
+                            <constraint firstItem="LHa-X0-5mC" firstAttribute="top" secondItem="sf7-Qp-JkX" secondAttribute="bottom" constant="36" id="Oc9-hq-nY5"/>
+                            <constraint firstItem="sf7-Qp-JkX" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leading" constant="16" id="S54-Te-4uS"/>
+                            <constraint firstItem="sf7-Qp-JkX" firstAttribute="top" secondItem="UCj-5H-7cm" secondAttribute="bottom" id="VVd-ar-0oE"/>
+                            <constraint firstAttribute="trailing" secondItem="jgy-z7-JYp" secondAttribute="trailing" constant="16" id="ZEw-71-hN4"/>
+                            <constraint firstItem="jgy-z7-JYp" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leading" constant="16" id="eTN-GR-5Ff"/>
+                            <constraint firstItem="UCj-5H-7cm" firstAttribute="leading" secondItem="osn-PV-Yxp" secondAttribute="leading" id="j55-9I-cFO"/>
+                            <constraint firstItem="UCj-5H-7cm" firstAttribute="top" secondItem="QXa-mz-ej4" secondAttribute="bottom" id="meB-ld-iMB"/>
+                            <constraint firstItem="LHa-X0-5mC" firstAttribute="centerX" secondItem="osn-PV-Yxp" secondAttribute="centerX" id="vFP-Qm-DDG"/>
+                            <constraint firstItem="jgy-z7-JYp" firstAttribute="centerY" secondItem="osn-PV-Yxp" secondAttribute="centerY" id="wwo-NH-TTQ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addPlacespaceBarButton" destination="ROj-Ut-1tl" id="wbv-cy-kgE"/>
-                        <outlet property="backBarButton" destination="CSU-9u-Vv8" id="VRQ-iM-pap"/>
-                        <outlet property="buttonViewContainer" destination="GQH-cq-1EJ" id="hh7-mI-fJn"/>
-                        <outlet property="navigationBar" destination="Zvi-F3-k3J" id="Ru6-1Z-RbB"/>
-                        <outlet property="passwordLabel" destination="3In-dn-pKq" id="KSb-6N-svR"/>
-                        <outlet property="passwordMessageLabel" destination="9Yr-3T-meM" id="via-Qk-s0F"/>
-                        <outlet property="playspaceCreatedLabel" destination="fdz-jb-YYd" id="mQM-lA-gwL"/>
                         <outlet property="playspaceTextField" destination="Vi0-BF-Bgk" id="sLl-Te-vfp"/>
-                        <outlet property="savePasswordButton" destination="7RL-l6-tjf" id="RGX-sq-Rcj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wnB-uq-mxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
