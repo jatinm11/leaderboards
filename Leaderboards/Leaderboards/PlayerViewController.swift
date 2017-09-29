@@ -12,17 +12,15 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
 
     let colorProvider = BackgroundColorProvider()
     @IBOutlet var playerTableView: UITableView!
-    @IBOutlet var leaderboardsButton: UIBarButtonItem!
-    @IBOutlet var backButton: UIBarButtonItem!
-    @IBOutlet var navigationBar: UINavigationBar!
+    @IBOutlet weak var leaderboardsButton: UIButton!
     @IBOutlet weak var leaderboardTableView: UITableView!
     @IBOutlet weak var playersView: UIView!
     @IBOutlet weak var leaderboardsView: UIView!
+    @IBOutlet weak var leaderboardsButtonViewContainer: UIView!
     
     @IBAction func swipeGestureSwiped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
 //    var playersViewAnimated = false
@@ -38,13 +36,11 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         leaderboardTableView.dataSource = self
         playerTableView.tag = 0
         leaderboardTableView.tag = 1
-        
         leaderboardsView.alpha = 0
         
+        leaderboardsButtonViewContainer.layer.cornerRadius = 5
+        leaderboardsButtonViewContainer.clipsToBounds = true
         randomColor()
-        
-        self.navigationBar.layer.cornerRadius = 5
-        self.navigationBar.clipsToBounds = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,20 +50,16 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         if leaderboardsView.alpha == 0 {
             leaderboardsView.alpha = 1
             playersView.alpha = 0
-            leaderboardsButton.title = "Players"
+            leaderboardsButton.setTitle("Players", for: .normal)
             //leaderboardsViewShouldAnimate = true
             leaderboardTableView.reloadData()
             randomColor()
         } else {
             leaderboardsView.alpha = 0
             playersView.alpha = 1
-            leaderboardsButton.title = "Leaderboards"
+            leaderboardsButton.setTitle("Leaderboards", for: .normal)
             randomColor()
         }
-    }
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,11 +89,9 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         view.backgroundColor = randomColor
         playersView.backgroundColor = randomColor
         leaderboardsView.backgroundColor = randomColor
-        
+        self.leaderboardsButton.tintColor = randomColor
         self.playerTableView.backgroundColor = randomColor
         self.leaderboardTableView.backgroundColor = randomColor
-        self.backButton.tintColor = randomColor
-        self.leaderboardsButton.tintColor = randomColor
     }
     
     func createPlayerStatsDictionaries() {
