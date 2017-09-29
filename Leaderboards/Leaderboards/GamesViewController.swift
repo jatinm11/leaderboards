@@ -31,7 +31,9 @@ class GamesViewController: UIViewController {
         
         GameController.shared.fetchGamesForCurrentPlayspace { (success) in
             if success {
-                self.reloadTableView()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -39,7 +41,7 @@ class GamesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.reloadTableView()
+        tableView.reloadData()
         
         if let currentPlayer = PlayerController.shared.currentPlayer {
             playerImageView.image = currentPlayer.photo
@@ -99,12 +101,6 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
-    }
-    
-    func reloadTableView() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
     
 }
