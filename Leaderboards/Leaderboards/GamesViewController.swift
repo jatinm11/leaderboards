@@ -54,15 +54,16 @@ class GamesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if let currentPlayer = PlayerController.shared.currentPlayer {
+            playerImageView.image = currentPlayer.photo
+            playerImageView.layer.cornerRadius = self.playerImageView.frame.width / 2
+            playerImageView.layer.borderColor = UIColor.white.cgColor
+            playerImageView.layer.borderWidth = 3.0
+            playerImageView.clipsToBounds = true
             GameController.shared.fetchGamesForCurrentPlayspace { (success) in
                 if success {
                     DispatchQueue.main.async {
-                        self.playerImageView.image = currentPlayer.photo
-                        self.playerImageView.layer.cornerRadius = self.playerImageView.frame.width / 2
-                        self.playerImageView.layer.borderColor = UIColor.white.cgColor
-                        self.playerImageView.layer.borderWidth = 3.0
-                        self.playerImageView.clipsToBounds = true
                         self.tableView.reloadData()
                     }
                 }
@@ -105,7 +106,8 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
             }))
             
             alert.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) -> Void in
-                // New Game VC here
+                let newGameVC = UIStoryboard(name: "NewGame", bundle: nil).instantiateViewController(withIdentifier: "newGameVC")
+                self.present(newGameVC, animated: true, completion: nil)
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
