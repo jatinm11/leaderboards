@@ -48,17 +48,24 @@ class PlayspaceController {
             }
             
             guard let currentPlayer = PlayerController.shared.currentPlayer, let records = records, records.count > 0 else { completion(false); return }
-            self.addPlayer(currentPlayer, toPlayspaceRecord: records[0])
-            completion(true)
+            self.addPlayer(currentPlayer, toPlayspaceRecord: records[0], completion: { (success) in
+                if success {
+                    completion(true)
+                }
+            })
         }
     }
     
-    func addPlayer(_ player: Player, toPlayspaceRecord playspaceRecord: CKRecord) {
+    func addPlayer(_ player: Player, toPlayspaceRecord playspaceRecord: CKRecord, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         var player = player
         player.playspaces.append(CKReference(record: playspaceRecord, action: .none))
         PlayerController.shared.updatePlayer(player) { (success) in
             if success {
-                PlayerController.shared.fetchCurrentPlayer()
+                PlayerController.shared.fetchCurrentPlayer(completion: { (success) in
+                    if success {
+                        completion(true)
+                    }
+                })
             }
         }
     }

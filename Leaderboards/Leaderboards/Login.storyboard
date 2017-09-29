@@ -450,7 +450,7 @@
         <!--Add Playspace View Controller-->
         <scene sceneID="HVD-0h-C70">
             <objects>
-                <viewController id="PEP-lu-52F" customClass="AddPlayspaceViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addPlayspaceVC" id="PEP-lu-52F" customClass="AddPlayspaceViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QXa-mz-ej4"/>
                         <viewControllerLayoutGuide type="bottom" id="bJG-5e-mNW"/>
@@ -714,7 +714,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Nd9-Pp-nyN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PfM-qQ-8aR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="HcY-Mx-qjF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uld-fA-qDh">
@@ -725,6 +724,7 @@
                         <segue destination="IfC-w1-mHb" kind="relationship" relationship="rootViewController" id="KQh-dZ-TrO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PfM-qQ-8aR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="-751"/>
         </scene>
