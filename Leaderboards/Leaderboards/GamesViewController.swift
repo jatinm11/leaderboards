@@ -12,31 +12,24 @@ class GamesViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
-    @IBOutlet var notificationCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var playerImageView: UIImageView!
-    @IBOutlet var notificationViewBadge: UIView!
     @IBOutlet var addgameButtonViewContainer: UIView!
     @IBOutlet var addGameButton: UIButton!
-    
-    @IBAction func swipeGestureSwiped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         tableView.tableFooterView = UIView()
+        
         let randomColor = colorProvider.randomColor()
-        self.tableView.backgroundColor = randomColor
-        self.view.backgroundColor = randomColor
-        self.notificationCountLabel.textColor = randomColor
-        self.notificationCountLabel.tintColor = randomColor
-        self.addGameButton.tintColor = randomColor
-        self.addgameButtonViewContainer.layer.cornerRadius = 5
-        self.addgameButtonViewContainer.clipsToBounds = true
+        tableView.backgroundColor = randomColor
+        view.backgroundColor = randomColor
+        addGameButton.tintColor = randomColor
+        addgameButtonViewContainer.layer.cornerRadius = 5
+        addgameButtonViewContainer.clipsToBounds = true
         
         GameController.shared.fetchGamesForCurrentPlayspace { (success) in
             if success {
@@ -52,23 +45,36 @@ class GamesViewController: UIViewController {
         
         tableView.reloadData()
         
-        MatchController.shared.fetchPendingMatchesForCurrentPlayer { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    if let currentPlayer = PlayerController.shared.currentPlayer {
-                        self.notificationViewBadge.isHidden = true
-                        self.playerImageView.image = currentPlayer.photo
-                        self.playerImageView.layer.cornerRadius = self.playerImageView.frame.width / 2
-                        self.playerImageView.layer.borderColor = UIColor.white.cgColor
-                        self.playerImageView.layer.borderWidth = 3.0
-                        self.playerImageView.clipsToBounds = true
+        if let currentPlayer = PlayerController.shared.currentPlayer {
+            let playerImageButton = UIButton(type: .custom)
+            playerImageButton.addTarget(self, action: #selector(playerImageButtonTapped), for: .touchUpInside)
+            playerImageButton.setImage(currentPlayer.photo, for: .normal)
+            playerImageButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+            playerImageButton.layer.cornerRadius = playerImageButton.frame.height / 2
+            playerImageButton.clipsToBounds = true
+            playerImageButton.layer.borderColor = UIColor.white.cgColor
+            playerImageButton.layer.borderWidth = 2.0
+            playerImageButton.addConstraint(NSLayoutConstraint(item: playerImageButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32))
+            playerImageButton.addConstraint(NSLayoutConstraint(item: playerImageButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32))
+            
+            let pendingMatchesNotificationBadgeButton = UIButton(type: .system)
+            pendingMatchesNotificationBadgeButton.addTarget(self, action: #selector(pendingMatchesNotificationBadgeButtonTapped), for: .touchUpInside)
+            pendingMatchesNotificationBadgeButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+            pendingMatchesNotificationBadgeButton.backgroundColor = .white
+            pendingMatchesNotificationBadgeButton.tintColor = view.backgroundColor
+            pendingMatchesNotificationBadgeButton.layer.cornerRadius = pendingMatchesNotificationBadgeButton.frame.height / 2
+            pendingMatchesNotificationBadgeButton.clipsToBounds = true
+            pendingMatchesNotificationBadgeButton.layer.borderColor = UIColor.white.cgColor
+            pendingMatchesNotificationBadgeButton.layer.borderWidth = 1.0
+            
+            MatchController.shared.fetchPendingMatchesForCurrentPlayer { (success) in
+                if success {
+                    DispatchQueue.main.async {
                         if MatchController.shared.pendingMatches.count > 0 {
-                            self.notificationViewBadge.isHidden = false
-                            self.notificationCountLabel.text = "\(MatchController.shared.pendingMatches.count)"
-                            self.notificationViewBadge.layer.cornerRadius = self.notificationViewBadge.frame.width / 2
-                            self.notificationViewBadge.layer.borderColor = UIColor.white.cgColor
-                            self.notificationViewBadge.layer.borderWidth = 3.0
-                            self.notificationViewBadge.clipsToBounds = true
+                            pendingMatchesNotificationBadgeButton.setTitle("\(MatchController.shared.pendingMatches.count)", for: .normal)
+                            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton), UIBarButtonItem(customView: pendingMatchesNotificationBadgeButton)]
+                        } else {
+                            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton)]
                         }
                     }
                 }
@@ -95,14 +101,19 @@ class GamesViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
+    func playerImageButtonTapped() {
+        // present player profile
+    }
+    
+    func pendingMatchesNotificationBadgeButtonTapped() {
+        let pendingMatchesVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "pendingMatchesVC")
+        present(pendingMatchesVC, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toGameDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row]
+            GameController.shared.currentGame = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row - 1]
         }
     }
     
@@ -113,19 +124,32 @@ class GamesViewController: UIViewController {
 extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GameController.shared.gamesBelongingToCurrentPlayer.count
+        return GameController.shared.gamesBelongingToCurrentPlayer.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "gamesTitleCell", for: indexPath)
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
-        cell.textLabel?.text = ("\(GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row].name)")
+        cell.textLabel?.text = ("\(GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row - 1].name)")
         cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.textColor = UIColor.white
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor.clear
+        if indexPath.row == 0 {
+            navigationItem.title = PlayspaceController.shared.currentPlayspace?.name
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            navigationItem.title = "Games"
+        }
     }
     
 }

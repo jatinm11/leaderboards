@@ -13,7 +13,7 @@
         <!--Player Profile View Controller-->
         <scene sceneID="DWX-Rs-mm3">
             <objects>
-                <viewController id="g6s-8c-OmK" customClass="PlayerProfileViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="oldPlayerProfileVC" id="g6s-8c-OmK" customClass="PlayerProfileViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xKp-Oj-zhe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,7 +129,7 @@
         <!--Player Details View Controller-->
         <scene sceneID="Rw4-sF-JIS">
             <objects>
-                <viewController id="Lwe-p6-yep" customClass="PlayerDetailsViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerDetailsVC" id="Lwe-p6-yep" customClass="PlayerDetailsViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QZf-P2-MTp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,7 +161,7 @@
         <!--Pending Matches View Controller-->
         <scene sceneID="q81-2O-GYu">
             <objects>
-                <viewController id="RuP-zV-krD" customClass="PendingMatchesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pendingMatchesVC" id="RuP-zV-krD" customClass="PendingMatchesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gj4-X9-ICJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,7 +297,7 @@
         <!--Approval View Controller-->
         <scene sceneID="4qj-j1-8YO">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="TD1-Np-iHF" customClass="ApprovalViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="oldApprovalVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="TD1-Np-iHF" customClass="ApprovalViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HXC-Wf-3wk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

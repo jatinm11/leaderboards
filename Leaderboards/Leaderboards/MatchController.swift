@@ -138,7 +138,6 @@ class MatchController {
     
     
     func fetchMatchesForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-        
         guard let currentGame = GameController.shared.currentGame else { completion(false); return }
         
         let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", currentGame.recordID)

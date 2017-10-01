@@ -40,8 +40,6 @@ class NewMatchViewController: UIViewController {
             let currentPlayer = PlayerController.shared.currentPlayer,
             let opponent = opponent else { return }
         
-        
-        
         if currentPlayerScore > opponentScore {
             MatchController.shared.createMatch(game: game, winner: currentPlayer, winnerScore: currentPlayerScore, loser: opponent, loserScore: opponentScore, completion: { (success) in
                 if success {
@@ -75,34 +73,37 @@ class NewMatchViewController: UIViewController {
         super.viewDidLoad()
         
         let randomColor = colorProvider.randomColor()
-        self.view.backgroundColor = randomColor
-        self.currentPlayerImageView.layer.cornerRadius = currentPlayerImageView.frame.width / 2
-        self.currentPlayerImageView.clipsToBounds = true
-        self.currentPlayerImageView.layer.borderColor = UIColor.white.cgColor
-        self.currentPlayerImageView.layer.borderWidth = 3.0
-        self.opponentImageView.layer.cornerRadius = opponentImageView.frame.width / 2
-        self.opponentImageView.clipsToBounds = true
-        self.currentPlayerNameLabel.text = "You"
-        self.currentPlayerImageView.image = PlayerController.shared.currentPlayer?.photo
-        self.currentPlayerTextFieldViewContainer.layer.cornerRadius = 5
-        self.opponentPlayerTextFieldViewContainer.layer.cornerRadius = 5
+        view.backgroundColor = randomColor
+        
+        currentPlayerImageView.layer.cornerRadius = currentPlayerImageView.frame.width / 2
+        currentPlayerImageView.clipsToBounds = true
+        currentPlayerImageView.layer.borderColor = UIColor.white.cgColor
+        currentPlayerImageView.layer.borderWidth = 3.0
+        opponentImageView.layer.cornerRadius = opponentImageView.frame.width / 2
+        opponentImageView.clipsToBounds = true
+        currentPlayerNameLabel.text = "You"
+        currentPlayerImageView.image = PlayerController.shared.currentPlayer?.photo
+        currentPlayerTextFieldViewContainer.layer.cornerRadius = 5
+        opponentPlayerTextFieldViewContainer.layer.cornerRadius = 5
         
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        opponentNameLabel.text = opponent?.username
-        opponentImageView.image = opponent?.photo
+        if let opponent = opponent {
+            opponentNameLabel.text = opponent.username
+            opponentImageView.image = opponent.photo
+        }
         opponentImageView.layer.borderWidth = 3.0
         opponentImageView.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 }

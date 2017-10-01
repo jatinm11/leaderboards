@@ -52,7 +52,7 @@ class PendingMatchesViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
