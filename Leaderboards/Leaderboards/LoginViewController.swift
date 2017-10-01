@@ -23,7 +23,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         usernameTextField.delegate = self
         usernameTextField.attributedPlaceholder = NSAttributedString(string: "Enter Username",
-                                                                     attributes: [NSForegroundColorAttributeName: UIColor.white])
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         createUsernameLabel.alpha = 0.0
         

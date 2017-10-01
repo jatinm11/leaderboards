@@ -101,7 +101,7 @@ class PlayerController {
         }
     }
     
-    func fetchPlayer(_ playerRecordID: CKRecordID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _ in }) {
+    func fetchPlayer(_ playerRecordID: CKRecordID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _,_  in }) {
         
         CloudKitManager.shared.fetchRecord(withID: playerRecordID) { (record, error) in
             if let error = error {

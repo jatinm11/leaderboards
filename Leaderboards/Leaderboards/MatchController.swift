@@ -60,7 +60,7 @@ class MatchController {
         }
     }
     
-    func fetchGameAndOpponentFor(_ match: Match, completion: @escaping (_ game: Game?, _ opponent: Player?, _ success: Bool) -> Void = { _ in }) {
+    func fetchGameAndOpponentFor(_ match: Match, completion: @escaping (_ game: Game?, _ opponent: Player?, _ success: Bool) -> Void = { _,_,_  in }) {
         let gameRecordID = match.game.recordID
         let opponentRecordID = match.creator.recordID
         
@@ -82,7 +82,7 @@ class MatchController {
     }
     
     
-    func fetchOpponentImageFor(_ match: Match, completion: @escaping (_ opponent: Player?, _ success: Bool) -> Void = { _ in }) {
+    func fetchOpponentImageFor(_ match: Match, completion: @escaping (_ opponent: Player?, _ success: Bool) -> Void = { _,_  in }) {
         let opponentRecordID = match.creator.recordID
         
         CloudKitManager.shared.fetchRecord(withID: opponentRecordID) { (record, error) in

@@ -101,11 +101,11 @@ class GamesViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func playerImageButtonTapped() {
+    @objc func playerImageButtonTapped() {
         // present player profile
     }
     
-    func pendingMatchesNotificationBadgeButtonTapped() {
+    @objc func pendingMatchesNotificationBadgeButtonTapped() {
         let pendingMatchesVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "pendingMatchesVC")
         present(pendingMatchesVC, animated: true, completion: nil)
     }

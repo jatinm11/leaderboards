@@ -153,7 +153,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func addMatchBarButtonItemTapped() {
+    @objc func addMatchBarButtonItemTapped() {
         let newMatchVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "newMatchVC")
         present(newMatchVC, animated: true, completion: nil)
     }
