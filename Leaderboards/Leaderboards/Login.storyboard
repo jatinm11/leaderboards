@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -454,11 +455,20 @@
                     <connections>
                         <outlet property="navigationBar" destination="UCj-5H-7cm" id="Zkl-8n-FQW"/>
                         <outlet property="playspaceTextField" destination="Vi0-BF-Bgk" id="sLl-Te-vfp"/>
+                        <segue destination="5uy-xP-T3u" kind="show" identifier="toPlayspaceCreatedVC" id="fKh-Rd-aZY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wnB-uq-mxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2820" y="908.9955022488756"/>
+        </scene>
+        <!--playspaceCreated-->
+        <scene sceneID="hXv-46-3Bu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="playspaceCreated" id="5uy-xP-T3u" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d8F-WZ-ahA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3411" y="909"/>
         </scene>
         <!--Players-->
         <scene sceneID="lD2-nZ-59R">

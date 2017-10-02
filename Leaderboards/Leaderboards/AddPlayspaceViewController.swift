@@ -12,6 +12,8 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBOutlets
     
+    var playspacePassword: String = ""
+    
     @IBOutlet weak var playspaceTextField: UITextField!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
@@ -44,6 +46,13 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
         playspaceTextField.resignFirstResponder()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPlayspaceCreatedVC" {
+            if let destination = segue.destination as? PlayspaceCreatedAlertViewController {
+                destination.password = playspacePassword
+            }
+        }
+    }
     
     // MARK :- Functions
     
@@ -53,12 +62,9 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
         PlayspaceController.shared.createPlayspaceWith(name: name) { (password, success) in
             if success {
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Password For Your New Playspace", message: password, preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true, completion: nil)
+                    guard let password = password else { return }
+                    self.playspacePassword = password
+                    self.performSegue(withIdentifier: "toPlayspaceCreatedVC", sender: nil)
                 }
             }
         }
@@ -67,4 +73,5 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
 }
