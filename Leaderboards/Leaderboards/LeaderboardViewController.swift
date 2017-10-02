@@ -11,10 +11,10 @@ import CloudKit
 
 class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var leaderboardTableView: UITableView!
-    @IBOutlet var navigationBar: UINavigationBar!
-    @IBOutlet var playersBarButton: UIBarButtonItem!
-    @IBOutlet var backBarButton: UIBarButtonItem!
+    @IBOutlet weak var leaderboardTableView: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var playersBarButton: UIBarButtonItem!
+    @IBOutlet weak var backBarButton: UIBarButtonItem!
     
     
     let colorProvider = BackgroundColorProvider()

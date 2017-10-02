@@ -14,7 +14,6 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var createUsernameLabel: UILabel!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var createUserNameCenterYConstraint: NSLayoutConstraint!
     
     var labelHasMoved = false
@@ -24,27 +23,19 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         usernameTextField.delegate = self
         usernameTextField.attributedPlaceholder = NSAttributedString(string: "Enter Username",
-                                                                     attributes: [NSForegroundColorAttributeName: UIColor.white])
+                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         createUsernameLabel.alpha = 0.0
         
         let randomColor = colorProvider.randomColor()
         view.backgroundColor = randomColor
-
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
+        
+        navigationItem.setHidesBackButton(true, animated: false)
     }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         usernameTextField.resignFirstResponder()
-    }
-    
-    
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
     }
     
     func presentSimpleAlert(title: String, message: String) {
@@ -95,33 +86,4 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         return true
     }
     
-}
-
-
-
-extension UIImage {
-    
-    func resizeWithPercentage(percentage: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: size.width, height: size.height * percentage)))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-    
-    func resizeWithWidth(width: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
 }

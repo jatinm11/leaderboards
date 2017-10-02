@@ -9,49 +9,43 @@
 import UIKit
 
 class PlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    let colorProvider = BackgroundColorProvider()
-    @IBOutlet var playerTableView: UITableView!
+    
+    @IBOutlet weak var playerTableView: UITableView!
     @IBOutlet weak var leaderboardsButton: UIButton!
     @IBOutlet weak var leaderboardTableView: UITableView!
     @IBOutlet weak var playersView: UIView!
     @IBOutlet weak var leaderboardsView: UIView!
     @IBOutlet weak var leaderboardsButtonViewContainer: UIView!
     
-    @IBAction func swipeGestureSwiped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     var playerStatsArrayOfDictionaries = [[String: Any]]()
-//    var playersViewAnimated = false
-//    var leaderboardsViewAnimated = false
-//    var leaderboardsViewShouldAnimate = false
+    let colorProvider = BackgroundColorProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         playerTableView.delegate = self
         playerTableView.dataSource = self
+        playerTableView.tag = 0
+        
         leaderboardTableView.delegate = self
         leaderboardTableView.dataSource = self
-        playerTableView.tag = 0
         leaderboardTableView.tag = 1
         leaderboardsView.alpha = 0
         
         leaderboardsButtonViewContainer.layer.cornerRadius = 5
         leaderboardsButtonViewContainer.clipsToBounds = true
+        
         randomColor()
+        
+        let addMatchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMatchBarButtonItemTapped))
+        navigationItem.rightBarButtonItem = addMatchBarButtonItem
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
     @IBAction func leaderboardsButtonTapped(_ sender: Any) {
         if leaderboardsView.alpha == 0 {
             leaderboardsView.alpha = 1
             playersView.alpha = 0
             leaderboardsButton.setTitle("Players", for: .normal)
-            //leaderboardsViewShouldAnimate = true
             leaderboardTableView.reloadData()
             randomColor()
         } else {
@@ -65,7 +59,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        playerStatsArrayOfDictionaries = []
+        playerStatsArrayOfDictionaries.removeAll()
         
         GameController.shared.fetchAllPlayersForCurrentGame { (success) in
             if success {
@@ -89,9 +83,9 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         view.backgroundColor = randomColor
         playersView.backgroundColor = randomColor
         leaderboardsView.backgroundColor = randomColor
-        self.leaderboardsButton.tintColor = randomColor
-        self.playerTableView.backgroundColor = randomColor
-        self.leaderboardTableView.backgroundColor = randomColor
+        leaderboardsButton.tintColor = randomColor
+        playerTableView.backgroundColor = randomColor
+        leaderboardTableView.backgroundColor = randomColor
     }
     
     func createPlayerStatsDictionaries() {
@@ -159,80 +153,150 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    // MARK:- TableView data source.
+    @objc func addMatchBarButtonItemTapped() {
+        let newMatchVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "newMatchVC")
+        present(newMatchVC, animated: true, completion: nil)
+    }
+    
+    // MARK:- TableView data source
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if tableView.tag == 1 {
+            return 2
+        }
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 {
-            return GameController.shared.playersBelongingToCurrentGame.count
+            return GameController.shared.playersBelongingToCurrentGame.count + 1
+        }
+        
+        if section == 0 {
+            return 1
         }
         return playerStatsArrayOfDictionaries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as! PlayerTableViewCell
-            let player = GameController.shared.playersBelongingToCurrentGame[indexPath.row]
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "playersTitleCell", for: indexPath)
+                return cell
+            }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as? PlayerTableViewCell else { return PlayerTableViewCell() }
+            let player = GameController.shared.playersBelongingToCurrentGame[indexPath.row - 1]
             cell.player = player
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "leaderboardCell", for: indexPath) as! LeaderboardTableViewCell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "leaderboardsTitleCell", for: indexPath)
+            return cell
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "leaderboardsCell", for: indexPath) as? LeaderboardTableViewCell else { return LeaderboardTableViewCell() }
         cell.updateViewsWith(playerDictionary: playerStatsArrayOfDictionaries[indexPath.row])
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView.tag == 1 && section == 1 {
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.sectionHeaderHeight))
+            headerView.backgroundColor = view.backgroundColor
+            
+            let playerLabel = UILabel()
+            playerLabel.text = "Player"
+            playerLabel.textColor = .white
+            playerLabel.font = UIFont(name: "Avenir Next", size: 20.0)
+            
+            let playedLabel = UILabel()
+            playedLabel.text = "Played"
+            playedLabel.textColor = .white
+            playedLabel.font = UIFont(name: "Avenir Next", size: 20.0)
+            
+            let wonLabel = UILabel()
+            wonLabel.text = "Won"
+            wonLabel.textColor = .white
+            wonLabel.font = UIFont(name: "Avenir Next", size: 20.0)
+            
+            let lossLabel = UILabel()
+            lossLabel.text = "Loss"
+            lossLabel.textColor = .white
+            lossLabel.font = UIFont(name: "Avenir Next", size: 20.0)
+            
+            let winPerLabel = UILabel()
+            winPerLabel.text = "Win %"
+            winPerLabel.textColor = .white
+            winPerLabel.font = UIFont(name: "Avenir Next", size: 20.0)
+            
+            let labelStackView = UIStackView(arrangedSubviews: [playerLabel, playedLabel, wonLabel, lossLabel, winPerLabel])
+            labelStackView.axis = .horizontal
+            labelStackView.alignment = .fill
+            labelStackView.distribution = .equalSpacing
+            labelStackView.spacing = 0
+            labelStackView.contentMode = .scaleToFill
+            labelStackView.autoresizesSubviews = true
+            labelStackView.clearsContextBeforeDrawing = true
+            headerView.addSubview(labelStackView)
+            
+            let views: [String: Any] = ["labelStackView": labelStackView, "headerView": headerView]
+            let headerViewHorizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "|-(8)-[labelStackView]-(8)-|", options: [], metrics: nil, views: views)
+            let headerViewVerticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|[labelStackView]|", options: [], metrics: nil, views: views)
+            
+            labelStackView.translatesAutoresizingMaskIntoConstraints = false
+            
+            headerView.addConstraints(headerViewHorizontalConstraint)
+            headerView.addConstraints(headerViewVerticalConstraint)
+            
+            return headerView
+        }
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView.tag == 0 {
+            if indexPath.row == 0 {
+                return 44
+            }
+            return 87
+        }
+        
+        if indexPath.section == 0 {
+            return 44
+        }
+        return 87
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView.tag == 0 {
+            return 0
+        }
+        
+        if section == 0 {
+            return 0
+        }
+        return 28
+    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor.clear
+        if tableView.tag == 0 && indexPath.row == 0 {
+            title = GameController.shared.currentGame?.name
+        }
+        if tableView.tag == 1 && indexPath.section == 0 && indexPath.row == 0 {
+            title = GameController.shared.currentGame?.name
+        }
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if tableView.tag == 0 && playersViewAnimated == false {
-//            cell.alpha = 0
-//            cell.backgroundColor = UIColor.clear
-//            UIView.animate(withDuration: 1.0) {
-//                cell.alpha = 1.0
-//            }
-//        }
-//        if tableView.tag == 0 && playersViewAnimated == false  && indexPath.row == GameController.shared.playersBelongingToCurrentGame.count - 1{
-//            playersViewAnimated = true
-//        }
-//
-//        if tableView.tag == 1 && leaderboardsViewAnimated == false && leaderboardsViewShouldAnimate == true {
-//            cell.alpha = 0
-//            cell.backgroundColor = UIColor.clear
-//            UIView.animate(withDuration: 1.0) {
-//                cell.alpha = 1.0
-//            }
-//        }
-//        if tableView.tag == 1 && leaderboardsViewAnimated == false && leaderboardsViewShouldAnimate == true && indexPath.row == playerStatsArrayOfDictionaries.count - 1{
-//            leaderboardsViewAnimated = true
-//            leaderboardsViewShouldAnimate = false
-//        }
-//    }
-    
-//    func animateTable() {
-//        playerTableView.reloadData()
-//        let cells = playerTableView.visibleCells
-//
-//        let tableViewHeight = playerTableView.bounds.size.height
-//
-//        for cell in cells {
-//            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
-//        }
-//
-//        var delayCounter = 0
-//        for cell in cells {
-//            UIView.animate(withDuration: 1.0, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-//                cell.transform = CGAffineTransform.identity
-//                }, completion: nil)
-//            delayCounter += 1
-//        }
-//    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView.tag == 0 && indexPath.row == 0 {
+            title = "Players"
+        }
+        if tableView.tag == 1 && indexPath.section == 0 && indexPath.row == 0 {
+            title = "Leaderboards"
+        }
     }
+    
 }
 
 

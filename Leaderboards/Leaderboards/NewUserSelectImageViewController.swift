@@ -14,8 +14,7 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
     
     var username: String?
     @IBOutlet weak var playerImageView: UIImageView!
-    @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     @IBAction func registerButtonTapped(_ sender: Any) {
         guard let username = username else { return }
@@ -25,7 +24,7 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
                     self.presentSimpleAlert(title: "Unable to create an account", message: "Make sure you have a network connection, and please try again.")
                 } else {
                     let playspacesViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
-                    self.present(playspacesViewController, animated: true, completion: nil)
+                    self.navigationController?.pushViewController(playspacesViewController, animated: true)
                 }
             }
         }
@@ -38,10 +37,6 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
         playerImageView.layer.borderWidth = 3.0
         playerImageView.layer.borderColor = UIColor.white.cgColor
         playerImageView.clipsToBounds = true
-        
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
 
         usernameLabel.text = username
 
@@ -112,7 +107,48 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
         picker.dismiss(animated: true, completion: nil)
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            playerImageView.image = image.resizeWithWidth(width: 700)!
+            playerImageView.image = image.resizeImage(image: image)
         }
+    }
+}
+
+extension UIImage {
+    
+    func resizeImage(image: UIImage) -> UIImage {
+        var actualHeight: Float = Float(image.size.height)
+        var actualWidth: Float = Float(image.size.width)
+        let maxHeight: Float = 200.0
+        let maxWidth: Float = 200.0
+        var imgRatio: Float = actualWidth / actualHeight
+        let maxRatio: Float = maxWidth / maxHeight
+        let compressionQuality: Float = 0.5
+        //50 percent compression
+        
+        if actualHeight > maxHeight || actualWidth > maxWidth {
+            if imgRatio < maxRatio {
+                //adjust width according to maxHeight
+                imgRatio = maxHeight / actualHeight
+                actualWidth = imgRatio * actualWidth
+                actualHeight = maxHeight
+            }
+            else if imgRatio > maxRatio {
+                //adjust height according to maxWidth
+                imgRatio = maxWidth / actualWidth
+                actualHeight = imgRatio * actualHeight
+                actualWidth = maxWidth
+            }
+            else {
+                actualHeight = maxHeight
+                actualWidth = maxWidth
+            }
+        }
+        
+        let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(actualWidth), height: CGFloat(actualHeight))
+        UIGraphicsBeginImageContext(rect.size)
+        image.draw(in: rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        let imageData = UIImageJPEGRepresentation(img!,CGFloat(compressionQuality))
+        UIGraphicsEndImageContext()
+        return UIImage(data: imageData!)!
     }
 }

@@ -12,12 +12,12 @@ class LeaderboardTableViewCell: UITableViewCell {
     
     // MARK:- Outlets
     
-    @IBOutlet var playerImage: UIImageView!
-    @IBOutlet var matchesPlayedLabel: UILabel!
-    @IBOutlet var matchesWonLabel: UILabel!
-    @IBOutlet var matchesLossLabel: UILabel!
-    @IBOutlet var winPercentageLabel: UILabel!
-    @IBOutlet var playerName: UILabel!
+    @IBOutlet weak var playerImage: UIImageView!
+    @IBOutlet weak var matchesPlayedLabel: UILabel!
+    @IBOutlet weak var matchesWonLabel: UILabel!
+    @IBOutlet weak var matchesLossLabel: UILabel!
+    @IBOutlet weak var winPercentageLabel: UILabel!
+    @IBOutlet weak var playerName: UILabel!
     
     // MARK :- Functions
     

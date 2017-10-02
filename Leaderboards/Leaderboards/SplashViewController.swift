@@ -10,12 +10,14 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         
         PlayerController.shared.fetchCurrentPlayer { (success) in
             DispatchQueue.main.async {
@@ -28,10 +30,6 @@ class SplashViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
     }
 
 }

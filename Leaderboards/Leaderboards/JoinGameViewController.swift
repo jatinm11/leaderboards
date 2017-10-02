@@ -61,22 +61,26 @@ class JoinGameViewController: UIViewController {
 extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GameController.shared.gamesNotBelongingToCurrentPlayer.count
+        return GameController.shared.gamesNotBelongingToCurrentPlayer.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "gameTitleCell", for: indexPath)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
-        cell.textLabel?.text = ("\(GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row].name)")
+        cell.textLabel?.text = ("\(GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row - 1].name)")
         cell.textLabel?.textColor = UIColor.white
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let game = GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row]
+        let game = GameController.shared.gamesNotBelongingToCurrentPlayer[indexPath.row - 1]
         GameController.shared.addCurrentPlayerToGame(game) { (success) in
             if success {
                 DispatchQueue.main.async {
-                    GameController.shared.gamesNotBelongingToCurrentPlayer.remove(at: indexPath.row)
+                    GameController.shared.gamesNotBelongingToCurrentPlayer.remove(at: indexPath.row - 1)
                     GameController.shared.gamesBelongingToCurrentPlayer.append(game)
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -85,6 +89,14 @@ extension JoinGameViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor.clear
+        if indexPath.row == 0 {
+            navigationBar.topItem?.title = ""
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            navigationBar.topItem?.title = "Join Game"
+        }
     }
 }

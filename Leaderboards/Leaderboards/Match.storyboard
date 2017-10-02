@@ -12,7 +12,7 @@
         <!--New Match View Controller-->
         <scene sceneID="Bh9-LA-1vd">
             <objects>
-                <viewController id="uKw-JF-nEd" customClass="NewMatchViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newMatchVC" id="uKw-JF-nEd" customClass="NewMatchViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iJb-m6-l63"/>
                         <viewControllerLayoutGuide type="bottom" id="ydM-MU-CVG"/>
@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="width" constant="120" id="W4K-ck-5vo"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW MATCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgE-zs-kwq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgE-zs-kwq">
                                 <rect key="frame" x="16" y="64" width="343" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
                                 <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -11,6 +11,7 @@ import UIKit
 class SelectOpponentViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
     @IBAction func viewButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

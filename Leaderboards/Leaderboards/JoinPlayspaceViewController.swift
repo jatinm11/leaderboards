@@ -10,7 +10,7 @@ import UIKit
 
 class JoinPlayspaceViewController: UIViewController {
     
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     let colorProvider = BackgroundColorProvider()
@@ -43,7 +43,6 @@ class JoinPlayspaceViewController: UIViewController {
             }
         }
     }
-    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent

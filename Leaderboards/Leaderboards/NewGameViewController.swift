@@ -12,7 +12,7 @@ class NewGameViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
-    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBAction func cancelButtonTapped(_ sender: Any) {

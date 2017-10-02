@@ -19,7 +19,7 @@ class PlayspaceController {
     
     var currentPlayspace: Playspace?
     
-    func createPlayspaceWith(name: String, completion: @escaping (_ password: String?, _ success: Bool) -> Void = { _ in }) {
+    func createPlayspaceWith(name: String, completion: @escaping (_ password: String?, _ success: Bool) -> Void = { _,_  in }) {
         let playspace = Playspace(recordID: CKRecordID(recordName: UUID().uuidString), name: name, password: randomString(length: 4))
         
         CloudKitManager.shared.saveRecord(playspace.CKRepresentation) { (_, error) in

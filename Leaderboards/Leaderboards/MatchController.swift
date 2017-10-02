@@ -60,7 +60,7 @@ class MatchController {
         }
     }
     
-    func fetchGameAndOpponentFor(_ match: Match, completion: @escaping (_ game: Game?, _ opponent: Player?, _ success: Bool) -> Void = { _ in }) {
+    func fetchGameAndOpponentFor(_ match: Match, completion: @escaping (_ game: Game?, _ opponent: Player?, _ success: Bool) -> Void = { _,_,_  in }) {
         let gameRecordID = match.game.recordID
         let opponentRecordID = match.creator.recordID
         
@@ -82,7 +82,7 @@ class MatchController {
     }
     
     
-    func fetchOpponentImageFor(_ match: Match, completion: @escaping (_ opponent: Player?, _ success: Bool) -> Void = { _ in }) {
+    func fetchOpponentImageFor(_ match: Match, completion: @escaping (_ opponent: Player?, _ success: Bool) -> Void = { _,_  in }) {
         let opponentRecordID = match.creator.recordID
         
         CloudKitManager.shared.fetchRecord(withID: opponentRecordID) { (record, error) in
@@ -136,9 +136,7 @@ class MatchController {
         }
     }
     
-    
     func fetchMatchesForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-        
         guard let currentGame = GameController.shared.currentGame else { completion(false); return }
         
         let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", currentGame.recordID)
@@ -160,4 +158,26 @@ class MatchController {
             completion(true)
         }
     }
+    
+    func fetchMatchesForGame(_ game: Game, andPlayer player: Player, completion: @escaping (_ matches: [Match]?, _ success: Bool) -> Void = { _, _  in }) {
+        let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", game.recordID)
+        let matchIsVerifiedPredicate = NSPredicate(format: "verified == true")
+        let matchIncludesPlayerPredicate = NSPredicate(format: "participants CONTAINS %@", player.recordID)
+        
+        let matchCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [matchIsForCurrentGamePredicate, matchIsVerifiedPredicate, matchIncludesPlayerPredicate])
+        
+        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let matchRecords = records else { completion(nil, false); return }
+            
+            let matches = matchRecords.flatMap( { Match(record: $0) })
+            completion(matches, true)
+        }
+    }
+    
 }
