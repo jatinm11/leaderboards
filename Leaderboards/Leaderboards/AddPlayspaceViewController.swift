@@ -13,6 +13,7 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBOutlets
     
     var playspacePassword: String = ""
+    var playspaceName: String = ""
     
     @IBOutlet weak var playspaceTextField: UITextField!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -50,6 +51,7 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "toPlayspaceCreatedVC" {
             if let destination = segue.destination as? PlayspaceCreatedAlertViewController {
                 destination.password = playspacePassword
+                destination.playspaceName = playspaceName
             }
         }
     }
@@ -68,6 +70,7 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     guard let password = password else { return }
                     self.playspacePassword = password
+                    self.playspaceName = name
                     self.performSegue(withIdentifier: "toPlayspaceCreatedVC", sender: nil)
                 }
             }

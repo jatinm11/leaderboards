@@ -16,6 +16,7 @@ class PlayspaceCreatedAlertViewController: UIViewController {
     @IBOutlet var messageViewContainer: UIView!
     
     var password: String = ""
+    var playspaceName: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +32,7 @@ class PlayspaceCreatedAlertViewController: UIViewController {
 
     
     @IBAction func savePasswordButtonTapped(_ sender: Any) {
-        
-        let textToShare = "My playspace password is: \(self.password)"
+        let textToShare = "My playspace \(self.playspaceName)'s password is: \(self.password)"
         let share = [textToShare]
         let activityVC = UIActivityViewController(activityItems: share, applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
