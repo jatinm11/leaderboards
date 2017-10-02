@@ -58,7 +58,11 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func createButtonTapped(_ sender: Any) {
        
-        guard let name = playspaceTextField.text, !name.isEmpty else { return }
+        guard let name = playspaceTextField.text, !name.isEmpty else {
+            let failedScreen = UIStoryboard(name: "playspaceFailed", bundle: nil).instantiateViewController(withIdentifier: "playspaceFailed")
+            present(failedScreen, animated: true, completion: nil)
+            return
+        }
         PlayspaceController.shared.createPlayspaceWith(name: name) { (password, success) in
             if success {
                 DispatchQueue.main.async {

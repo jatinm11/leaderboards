@@ -85,7 +85,7 @@ class NewMatchViewController: UIViewController {
         currentPlayerImageView.image = PlayerController.shared.currentPlayer?.photo
         currentPlayerTextFieldViewContainer.layer.cornerRadius = 5
         opponentPlayerTextFieldViewContainer.layer.cornerRadius = 5
-        
+        tapOnimageLabel.isHidden = false
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
