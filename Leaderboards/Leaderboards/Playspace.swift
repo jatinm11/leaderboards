@@ -45,3 +45,13 @@ extension Playspace {
     }
     
 }
+
+// MARK: - Equatable
+
+extension Playspace: Equatable {
+    
+    static func ==(lhs: Playspace, rhs: Playspace) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+    
+}
