@@ -32,7 +32,10 @@ class PlayspaceCreatedAlertViewController: UIViewController {
     
     @IBAction func savePasswordButtonTapped(_ sender: Any) {
         
-        
+        let textToShare = "My playspace password is: \(self.password)"
+        let share = [textToShare]
+        let activityVC = UIActivityViewController(activityItems: share, applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
         
     }
     

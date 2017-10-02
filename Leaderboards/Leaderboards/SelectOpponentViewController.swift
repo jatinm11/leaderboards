@@ -27,7 +27,7 @@ class SelectOpponentViewController: UIViewController {
         let randomColor = colorProvider.randomColor()
         tableView.backgroundColor = randomColor
         tableView.tableFooterView = UIView()
-        
+        tableView.layer.cornerRadius = 5
     }
     
     
