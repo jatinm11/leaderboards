@@ -70,8 +70,6 @@ class PlayspaceController {
         }
     }
     
-    
-    
     func randomString(length:Int) -> String {
         let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var c = charSet.characters.map { String($0) }
@@ -81,4 +79,36 @@ class PlayspaceController {
         }
         return s
     }
+    
+    func removeCurrentPlayerFrom(_ playspace: Playspace, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        guard var currentPlayer = PlayerController.shared.currentPlayer,
+            let index = currentPlayer.playspaces.index(of: CKReference(recordID: playspace.recordID, action: .none)) else { completion(false); return }
+        
+        currentPlayer.playspaces.remove(at: index)
+        GameController.shared.fetchGamesFor(playspace) { (games, success) in
+            if success {
+                guard let games = games else { completion(false); return }
+                var updatedGameRecords = [CKRecord]()
+                for game in games {
+                    var game = game
+                    guard let index = game.players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(false); return }
+                    game.players.remove(at: index)
+                    updatedGameRecords.append(game.CKRepresentation)
+                }
+                
+                var updatedRecords = updatedGameRecords
+                updatedRecords.append(currentPlayer.CKRepresentation)
+                CloudKitManager.shared.updateRecords(updatedRecords, perRecordCompletion: nil, completion: { (_, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        completion(false)
+                        return
+                    }
+                    
+                    completion(true)
+                })
+            }
+        }
+    }
+    
 }

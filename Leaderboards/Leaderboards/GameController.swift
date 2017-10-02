@@ -192,4 +192,43 @@ class GameController {
         }
     }
     
+    func removeCurrentPlayerFrom(_ game: Game, completion: @escaping (_ game: Game?, _ success: Bool) -> Void = { _, _ in }) {
+        var game = game
+        guard let currentPlayer = PlayerController.shared.currentPlayer,
+            let index = game.players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
+        
+        game.players.remove(at: index)
+        
+        CloudKitManager.shared.updateRecords([game.CKRepresentation], perRecordCompletion: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let gameRecord = records?.first,
+                let game = Game(record: gameRecord) else { completion(nil, false); return }
+            
+            completion(game, true)
+        }
+    }
+    
+    func fetchGamesFor(_ playspace: Playspace, completion: @escaping (_ games: [Game]?, _ success: Bool) -> Void = { _, _ in }) {
+        
+        let predicate = NSPredicate(format: "playspace == %@", playspace.recordID)
+        
+        CloudKitManager.shared.fetchRecordsWithType(Game.recordType, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let gamesRecords = records else { completion(nil, false); return }
+            let games = gamesRecords.flatMap { Game(record: $0) }
+            
+            completion(games, true)
+        }
+    }
+    
 }

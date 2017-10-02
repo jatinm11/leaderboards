@@ -151,4 +151,31 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
             navigationItem.title = "Playspaces"
         }
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let leaveTableViewRowAction = UITableViewRowAction(style: .normal, title: "Leave") { (_, indexPath) in
+            let playspace = PlayspaceController.shared.playspaces[indexPath.row - 1]
+            
+            PlayspaceController.shared.removeCurrentPlayerFrom(playspace, completion: { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        PlayspaceController.shared.playspaces.remove(at: indexPath.row - 1)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+        }
+        
+        leaveTableViewRowAction.backgroundColor = .red
+        
+        return [leaveTableViewRowAction]
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 {
+            return false
+        }
+        return true
+    }
+    
 }
