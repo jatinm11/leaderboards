@@ -12,9 +12,9 @@ class PendingMatchesViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var navigationBar: UINavigationBar!
-    @IBOutlet var backButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()

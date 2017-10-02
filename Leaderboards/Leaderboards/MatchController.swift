@@ -136,7 +136,6 @@ class MatchController {
         }
     }
     
-    
     func fetchMatchesForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentGame = GameController.shared.currentGame else { completion(false); return }
         
@@ -159,4 +158,26 @@ class MatchController {
             completion(true)
         }
     }
+    
+    func fetchMatchesForGame(_ game: Game, andPlayer player: Player, completion: @escaping (_ matches: [Match]?, _ success: Bool) -> Void = { _, _  in }) {
+        let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", game.recordID)
+        let matchIsVerifiedPredicate = NSPredicate(format: "verified == true")
+        let matchIncludesPlayerPredicate = NSPredicate(format: "participants CONTAINS %@", player.recordID)
+        
+        let matchCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [matchIsForCurrentGamePredicate, matchIsVerifiedPredicate, matchIncludesPlayerPredicate])
+        
+        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let matchRecords = records else { completion(nil, false); return }
+            
+            let matches = matchRecords.flatMap( { Match(record: $0) })
+            completion(matches, true)
+        }
+    }
+    
 }

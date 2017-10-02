@@ -14,14 +14,14 @@ class NewMatchViewController: UIViewController {
     let colorProvider = BackgroundColorProvider()
     
     @IBOutlet weak var currentPlayerImageView: UIImageView!
-    @IBOutlet var tapOnimageLabel: UILabel!
+    @IBOutlet weak var tapOnimageLabel: UILabel!
     @IBOutlet weak var currentPlayerNameLabel: UILabel!
     @IBOutlet weak var opponentImageView: UIImageView!
     @IBOutlet weak var opponentNameLabel: UILabel!
     @IBOutlet weak var currentPlayerScoreTextField: UITextField!
     @IBOutlet weak var opponentScoreTextField: UITextField!
-    @IBOutlet var currentPlayerTextFieldViewContainer: UIView!
-    @IBOutlet var opponentPlayerTextFieldViewContainer: UIView!
+    @IBOutlet weak var currentPlayerTextFieldViewContainer: UIView!
+    @IBOutlet weak var opponentPlayerTextFieldViewContainer: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBAction func cancelButtonTapped(_ sender: Any) {

@@ -10,10 +10,10 @@ import UIKit
 
 class PendingMatchTableViewCell: UITableViewCell {
 
-    @IBOutlet var gameLabel: UILabel!
-    @IBOutlet var opponentLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel!
-    @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet weak var gameLabel: UILabel!
+    @IBOutlet weak var opponentLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     
     func updateViewsWith(_ pendingMatch: Match) {

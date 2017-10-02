@@ -10,8 +10,9 @@ import UIKit
 
 class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
-    // MARK :- OUTLETS
-    @IBOutlet var playspaceTextField: UITextField!
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var playspaceTextField: UITextField!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     let colorProvider = BackgroundColorProvider()

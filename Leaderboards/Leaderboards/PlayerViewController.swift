@@ -10,8 +10,7 @@ import UIKit
 
 class PlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let colorProvider = BackgroundColorProvider()
-    @IBOutlet var playerTableView: UITableView!
+    @IBOutlet weak var playerTableView: UITableView!
     @IBOutlet weak var leaderboardsButton: UIButton!
     @IBOutlet weak var leaderboardTableView: UITableView!
     @IBOutlet weak var playersView: UIView!
@@ -19,6 +18,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var leaderboardsButtonViewContainer: UIView!
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
+    let colorProvider = BackgroundColorProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()

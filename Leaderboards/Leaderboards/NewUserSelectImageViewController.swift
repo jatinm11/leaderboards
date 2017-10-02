@@ -14,7 +14,7 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
     
     var username: String?
     @IBOutlet weak var playerImageView: UIImageView!
-    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     @IBAction func registerButtonTapped(_ sender: Any) {
         guard let username = username else { return }

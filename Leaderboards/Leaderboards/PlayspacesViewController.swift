@@ -7,9 +7,9 @@ class PlayspacesViewController: UIViewController {
     
     var player: Player?
     
-    @IBOutlet var playspaceButtonViewContainer: UIView!
+    @IBOutlet weak var playspaceButtonViewContainer: UIView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var addplayspaceButton: UIButton!
+    @IBOutlet weak var addplayspaceButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +98,8 @@ class PlayspacesViewController: UIViewController {
     }
     
     @objc func playerImageButtonTapped() {
-        // present player profile
+        let currentPlayerProfileVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "currentPlayerProfileVC")
+        present(currentPlayerProfileVC, animated: true, completion: nil)
     }
     
     @objc func pendingMatchesNotificationBadgeButtonTapped() {

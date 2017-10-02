@@ -149,4 +149,47 @@ class GameController {
         }
     }
     
+    func fetchAllGamesForCurrentPlayer(completion: @escaping (_ games: [Game]?,_ success: Bool) -> Void = { _, _  in }) {
+        guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(nil, false); return }
+        
+        let currentPlayerIsInGamePredicate = NSPredicate(format: "players CONTAINS %@", currentPlayer.recordID)
+        
+        CloudKitManager.shared.fetchRecordsWithType(Game.recordType, predicate: currentPlayerIsInGamePredicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let gameRecords = records else { completion(nil, false); return }
+            let games = gameRecords.flatMap { Game(record: $0) }
+            completion(games, true)
+        }
+    }
+    
+    func fetchPlayspacesForGames(_ games: [Game], completion: @escaping (_ playspaces: [Playspace]?, _ success: Bool) -> Void = { _, _  in }) {
+        let playspaceRecordIDs = games.flatMap { $0.playspace.recordID }
+        
+        CloudKitManager.shared.fetchRecords(withIDs: playspaceRecordIDs) { (playspacesDictionary, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let playspacesDictonary = playspacesDictionary else { completion(nil, false); return }
+            
+            var playspaceRecords = [CKRecord]()
+            for playspaceRecordID in playspaceRecordIDs {
+                let playspaceRecord = playspacesDictonary[playspaceRecordID]
+                if let playspaceRecord = playspaceRecord {
+                    playspaceRecords.append(playspaceRecord)
+                }
+            }
+            
+            let playspaces = playspaceRecords.flatMap { Playspace(record: $0) }
+            completion(playspaces, true)
+        }
+    }
+    
 }

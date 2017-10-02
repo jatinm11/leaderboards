@@ -10,7 +10,8 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()

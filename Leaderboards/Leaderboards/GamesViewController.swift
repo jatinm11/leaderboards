@@ -13,8 +13,8 @@ class GamesViewController: UIViewController {
     let colorProvider = BackgroundColorProvider()
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var addgameButtonViewContainer: UIView!
-    @IBOutlet var addGameButton: UIButton!
+    @IBOutlet weak var addgameButtonViewContainer: UIView!
+    @IBOutlet weak var addGameButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +102,8 @@ class GamesViewController: UIViewController {
     }
     
     @objc func playerImageButtonTapped() {
-        // present player profile
+        let currentPlayerProfileVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "currentPlayerProfileVC")
+        present(currentPlayerProfileVC, animated: true, completion: nil)
     }
     
     @objc func pendingMatchesNotificationBadgeButtonTapped() {

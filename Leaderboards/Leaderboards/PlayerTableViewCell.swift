@@ -12,8 +12,8 @@ class PlayerTableViewCell: UITableViewCell {
 
     // MARK:- Outlets
     
-    @IBOutlet var playerImageView: UIImageView!
-    @IBOutlet var playerNameLabel: UILabel!
+    @IBOutlet weak var playerImageView: UIImageView!
+    @IBOutlet weak var playerNameLabel: UILabel!
     
     // MARK:- Properties
     
