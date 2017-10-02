@@ -56,6 +56,8 @@ class GamesViewController: UIViewController {
             playerImageButton.addConstraint(NSLayoutConstraint(item: playerImageButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32))
             playerImageButton.addConstraint(NSLayoutConstraint(item: playerImageButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32))
             
+            let shareShowPasswordButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareShowPasswordButtonTapped))
+            
             let pendingMatchesNotificationBadgeButton = UIButton(type: .system)
             pendingMatchesNotificationBadgeButton.addTarget(self, action: #selector(pendingMatchesNotificationBadgeButtonTapped), for: .touchUpInside)
             pendingMatchesNotificationBadgeButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
@@ -71,9 +73,9 @@ class GamesViewController: UIViewController {
                     DispatchQueue.main.async {
                         if MatchController.shared.pendingMatches.count > 0 {
                             pendingMatchesNotificationBadgeButton.setTitle("\(MatchController.shared.pendingMatches.count)", for: .normal)
-                            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton), UIBarButtonItem(customView: pendingMatchesNotificationBadgeButton)]
+                            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton), UIBarButtonItem(customView: pendingMatchesNotificationBadgeButton), shareShowPasswordButton]
                         } else {
-                            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton)]
+                            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton), shareShowPasswordButton]
                         }
                     }
                 }
@@ -108,6 +110,10 @@ class GamesViewController: UIViewController {
     @objc func pendingMatchesNotificationBadgeButtonTapped() {
         let pendingMatchesVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "pendingMatchesVC")
         present(pendingMatchesVC, animated: true, completion: nil)
+    }
+    
+    @objc func shareShowPasswordButtonTapped() {
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
