@@ -113,7 +113,11 @@ class GamesViewController: UIViewController {
     }
     
     @objc func shareShowPasswordButtonTapped() {
-        
+        guard let playspacePassword = PlayspaceController.shared.currentPlayspace?.password, let playspaceName = PlayspaceController.shared.currentPlayspace?.name else { return }
+        let textToShare = "My playspace \(playspaceName)'s password is: \(playspacePassword)"
+        let share = [textToShare]
+        let activityVC = UIActivityViewController(activityItems: share, applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
