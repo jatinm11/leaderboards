@@ -54,6 +54,9 @@ class CurrentPlayerProfileViewController: UIViewController {
                                             guard let matches = matches else { return }
                                             self.matches.append(matches)
                                             self.processMatches()
+                                            DispatchQueue.main.async {
+                                                self.tableView.reloadData()
+                                            }
                                         }
                                     })
                                 }
@@ -75,13 +78,13 @@ class CurrentPlayerProfileViewController: UIViewController {
         guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
         
         for (index, gameMatches) in matches.enumerated() {
-            guard let played = playerStatsArrayOfDictionaries[index]["played"] as? Int,
-                let wins = playerStatsArrayOfDictionaries[index]["wins"] as? Int,
-                let losses = playerStatsArrayOfDictionaries[index]["losses"] as? Int,
-                let pointsFor = playerStatsArrayOfDictionaries[index]["pointsFor"] as? Int,
-                let pointsAgainst = playerStatsArrayOfDictionaries[index]["pointsAgainst"] as? Int else { return }
-            
             for match in gameMatches {
+                guard let played = playerStatsArrayOfDictionaries[index]["played"] as? Int,
+                    let wins = playerStatsArrayOfDictionaries[index]["wins"] as? Int,
+                    let losses = playerStatsArrayOfDictionaries[index]["losses"] as? Int,
+                    let pointsFor = playerStatsArrayOfDictionaries[index]["pointsFor"] as? Int,
+                    let pointsAgainst = playerStatsArrayOfDictionaries[index]["pointsAgainst"] as? Int else { return }
+                
                 if match.winner.recordID == currentPlayer.recordID {
                     playerStatsArrayOfDictionaries[index]["played"] = played + 1
                     playerStatsArrayOfDictionaries[index]["wins"] = wins + 1
@@ -121,6 +124,10 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "gameStatsCell", for: indexPath) as? GameStatsTableViewCell else { return GameStatsTableViewCell() }
         cell.updateViewsWith(playerStatsArrayOfDictionaries[indexPath.section])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 146
     }
     
 }

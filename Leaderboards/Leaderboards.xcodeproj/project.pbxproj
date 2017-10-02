@@ -491,6 +491,7 @@
 				CODE_SIGN_ENTITLEMENTS = Leaderboards/Leaderboards.entitlements;
 				DEVELOPMENT_TEAM = M67BJVKLC2;
 				INFOPLIST_FILE = Leaderboards/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jatinmenghani.Leaderboards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -506,6 +507,7 @@
 				CODE_SIGN_ENTITLEMENTS = Leaderboards/Leaderboards.entitlements;
 				DEVELOPMENT_TEAM = M67BJVKLC2;
 				INFOPLIST_FILE = Leaderboards/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jatinmenghani.Leaderboards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
