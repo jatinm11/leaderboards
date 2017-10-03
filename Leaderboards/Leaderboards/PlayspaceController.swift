@@ -85,28 +85,82 @@ class PlayspaceController {
             let index = currentPlayer.playspaces.index(of: CKReference(recordID: playspace.recordID, action: .none)) else { completion(false); return }
         
         currentPlayer.playspaces.remove(at: index)
-        GameController.shared.fetchGamesFor(playspace) { (games, success) in
-            if success {
-                guard let games = games else { completion(false); return }
-                var updatedGameRecords = [CKRecord]()
-                for game in games {
-                    var game = game
-                    guard let index = game.players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(false); return }
-                    game.players.remove(at: index)
-                    updatedGameRecords.append(game.CKRepresentation)
-                }
-                
-                var updatedRecords = updatedGameRecords
-                updatedRecords.append(currentPlayer.CKRepresentation)
-                CloudKitManager.shared.updateRecords(updatedRecords, perRecordCompletion: nil, completion: { (_, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        completion(false)
-                        return
+        CloudKitManager.shared.updateRecords([currentPlayer.CKRepresentation], perRecordCompletion: nil) { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+
+            GameController.shared.fetchGamesFor(playspace) { (games, success) in
+                if success {
+                    guard let games = games else { completion(false); return }
+                    var updatedGameRecords = [CKRecord]()
+                    for game in games {
+                        guard var players = game.object(forKey: Game.playersKey) as? [CKReference],
+                            let index = players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { continue }
+                        players.remove(at: index)
+                        game.setObject(players as CKRecordValue, forKey: Game.playersKey)
+                        updatedGameRecords.append(game)
                     }
                     
-                    completion(true)
-                })
+                    CloudKitManager.shared.updateRecordsIfServerRecordChanged(updatedGameRecords, perRecordCompletion: { (_, error) in
+                        if let error = error as? CKError,
+                            error.code == CKError.Code.serverRecordChanged,
+                            let game = error.serverRecord {
+                            
+                            guard var players = game.object(forKey: Game.playersKey) as? [CKReference],
+                                let index = players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { return }
+                            players.remove(at: index)
+                            game.setObject(players as CKRecordValue, forKey: Game.playersKey)
+                            CloudKitManager.shared.updateRecordsIfServerRecordChanged([game], perRecordCompletion: { (_, error) in
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                    completion(false)
+                                    return
+                                }
+                            }, completion: { (_, error) in
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                    completion(false)
+                                    return
+                                }
+                                
+                                PlayerController.shared.fetchCurrentPlayer(completion: { (success) in
+                                    if success {
+                                        completion(true)
+                                    }
+                                })
+                            })
+                        }
+                    }, completion: { (_, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            completion(false)
+                            return
+                        }
+                        
+                        PlayerController.shared.fetchCurrentPlayer(completion: { (success) in
+                            if success {
+                                completion(true)
+                            }
+                        })
+                    })
+                    
+//                    CloudKitManager.shared.updateRecords(updatedGameRecords, perRecordCompletion: nil, completion: { (_, error) in
+//                        if let error = error {
+//                            print(error.localizedDescription)
+//                            completion(false)
+//                            return
+//                        }
+//
+//                        PlayerController.shared.fetchCurrentPlayer(completion: { (success) in
+//                            if success {
+//                                completion(true)
+//                            }
+//                        })
+//                    })
+                }
             }
         }
     }

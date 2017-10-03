@@ -19,7 +19,7 @@
         <!--Player View Controller-->
         <scene sceneID="yix-hj-lxN">
             <objects>
-                <viewController id="Jud-JW-8a3" customClass="PlayerViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Jud-JW-8a3" customClass="PlayerViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oZK-xj-oFk"/>
                         <viewControllerLayoutGuide type="bottom" id="qOG-EL-rtS"/>

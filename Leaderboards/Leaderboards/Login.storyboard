@@ -169,7 +169,7 @@
         <!--Playspaces View Controller-->
         <scene sceneID="XBh-Ig-tdr">
             <objects>
-                <viewController storyboardIdentifier="playspacesViewController" id="dUO-SC-5ba" customClass="PlayspacesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playspacesViewController" automaticallyAdjustsScrollViewInsets="NO" id="dUO-SC-5ba" customClass="PlayspacesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cvR-4b-h5b"/>
                         <viewControllerLayoutGuide type="bottom" id="mR6-ZB-dJt"/>
@@ -273,7 +273,7 @@
         <!--Games View Controller-->
         <scene sceneID="jas-BI-SI9">
             <objects>
-                <viewController storyboardIdentifier="gamesVC" id="pYk-H8-mmj" customClass="GamesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gamesVC" automaticallyAdjustsScrollViewInsets="NO" id="pYk-H8-mmj" customClass="GamesViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Yc-HV-L96"/>
                         <viewControllerLayoutGuide type="bottom" id="FWa-Fw-CA5"/>
@@ -504,7 +504,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameTitleCell" id="h0I-6y-HJp">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameTitleCell" id="h0I-6y-HJp">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h0I-6y-HJp" id="fWs-3A-Qop">
