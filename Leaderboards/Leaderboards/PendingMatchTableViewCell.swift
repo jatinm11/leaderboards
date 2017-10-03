@@ -14,6 +14,8 @@ class PendingMatchTableViewCell: UITableViewCell {
     @IBOutlet weak var opponentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet var opponenetNameLabel: UILabel!
+    @IBOutlet var winnerNameLabel: UILabel!
     
     
     func updateViewsWith(_ pendingMatch: Match) {
@@ -25,14 +27,18 @@ class PendingMatchTableViewCell: UITableViewCell {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateStyle = .full
                     self.dateLabel.text = dateFormatter.string(from: pendingMatch.timestamp)
-                    
+                    if let opponent = opponent {
+                        self.opponenetNameLabel.text = "(\(opponent.username))"
+                    }
                     if let currentPlayer = PlayerController.shared.currentPlayer {
                         if pendingMatch.winner.recordID == currentPlayer.recordID {
                             // current player won
                             self.scoreLabel.text = "\(pendingMatch.winnerScore) - \(pendingMatch.loserScore)"
+                            self.winnerNameLabel.text = "You"
                         } else {
                             // current player lost
                             self.scoreLabel.text = "\(pendingMatch.loserScore) - \(pendingMatch.winnerScore)"
+                            self.winnerNameLabel.text = opponent?.username
                         }
                     }
                 }
