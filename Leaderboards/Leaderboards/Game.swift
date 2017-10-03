@@ -47,7 +47,11 @@ extension Game {
         
         record.setValue(name, forKey: Game.nameKey)
         record.setValue(playspace, forKey: Game.playspaceKey)
-        record.setValue(players, forKey: Game.playersKey)
+        if players.count == 0 {
+            record.setValue(nil, forKey: Game.playersKey)
+        } else {
+            record.setValue(players, forKey: Game.playersKey)
+        }
         
         return record
     }

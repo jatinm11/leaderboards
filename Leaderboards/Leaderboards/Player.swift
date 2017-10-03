@@ -70,7 +70,11 @@ extension Player {
     var CKRepresentation: CKRecord {
         let record = CKRecord(recordType: Player.recordType, recordID: recordID)
         
-        record.setValue(playspaces, forKey: Player.playspacesKey)
+        if playspaces.count == 0 {
+            record.setValue(nil, forKey: Player.playspacesKey)
+        } else {
+            record.setValue(playspaces, forKey: Player.playspacesKey)
+        }
         record.setValue(username, forKey: Player.usernameKey)
         record.setValue(photoAsset, forKey: Player.photoKey)
         record.setValue(appleUserRef, forKey: Player.appleUserRefKey)

@@ -31,11 +31,6 @@ class GamesViewController: UIViewController {
         addgameButtonViewContainer.layer.cornerRadius = 5
         addgameButtonViewContainer.clipsToBounds = true
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         GameController.shared.fetchGamesForCurrentPlayspace { (success) in
             if success {
                 DispatchQueue.main.async {
@@ -43,6 +38,13 @@ class GamesViewController: UIViewController {
                 }
             }
         }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
         
         if let currentPlayer = PlayerController.shared.currentPlayer {
             let playerImageButton = UIButton(type: .custom)
@@ -166,7 +168,7 @@ extension GamesViewController: UITableViewDataSource, UITableViewDelegate {
         let leaveTableViewRowAction = UITableViewRowAction(style: .normal, title: "Leave") { (_, indexPath) in
             let game = GameController.shared.gamesBelongingToCurrentPlayer[indexPath.row - 1]
             
-            GameController.shared.removeCurrentPlayerFrom(game, completion: { (game, success) in
+            GameController.shared.removeCurrentPlayerFrom2(game, completion: { (game, success) in
                 if success {
                     DispatchQueue.main.async {
                         guard let game = game else { return }
