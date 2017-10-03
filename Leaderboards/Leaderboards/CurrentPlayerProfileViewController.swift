@@ -27,9 +27,17 @@ class CurrentPlayerProfileViewController: UIViewController {
     var playerStatsArrayOfDictionaries = [[[String: Any]]]()
     
     let operationQueue = OperationQueue()
+    let colorProvider = BackgroundColorProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let randomColor = colorProvider.randomColor()
+        self.view.backgroundColor = randomColor
+        tableView.backgroundColor = randomColor
+        
+        playerImageView.layer.cornerRadius = playerImageView.frame.width / 2
+        playerImageView.clipsToBounds = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -192,7 +200,7 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 146
+        return 50
     }
     
 }
