@@ -25,6 +25,7 @@ class GameStatsTableViewCell: UITableViewCell {
             let pointsFor = gameDictionary["pointsFor"] as? Int,
             let pointsAgainst = gameDictionary["pointsAgainst"] as? Int else { return }
         
+        
         playedLabel.text = "\(played)"
         winsLabel.text = "\(wins)"
         lossesLabel.text = "\(losses)"

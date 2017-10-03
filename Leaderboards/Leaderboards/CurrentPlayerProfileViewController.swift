@@ -15,6 +15,7 @@ class CurrentPlayerProfileViewController: UIViewController {
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+
     
     @IBAction func backBarButtonItemTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -35,9 +36,11 @@ class CurrentPlayerProfileViewController: UIViewController {
         let randomColor = colorProvider.randomColor()
         self.view.backgroundColor = randomColor
         tableView.backgroundColor = randomColor
-        
+        tableView.tableFooterView = UIView()
         playerImageView.layer.cornerRadius = playerImageView.frame.width / 2
         playerImageView.clipsToBounds = true
+        playerImageView.layer.borderWidth = 3.0
+        playerImageView.layer.borderColor = UIColor.white.cgColor
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -91,6 +94,11 @@ class CurrentPlayerProfileViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     func createPlayerStatsDictionaries() {
@@ -193,9 +201,26 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
         return playerStatsArrayOfDictionaries[section].count
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = UIColor.white
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "gameStatsCell", for: indexPath) as? GameStatsTableViewCell else { return GameStatsTableViewCell() }
         cell.updateViewsWith(playerStatsArrayOfDictionaries[indexPath.section][indexPath.row])
+        
+        GameController.shared.fetchAllGamesForCurrentPlayer { (games, success) in
+            if success {
+                DispatchQueue.main.async {
+                    if let game = games {
+                        
+                    }
+                }
+            }
+        }
+        
         return cell
     }
     

@@ -12,6 +12,7 @@ class PendingMatchesViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
+    @IBOutlet var approveMessageLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -67,18 +68,20 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchesTitleCell", for: indexPath)
+            approveMessageLabel.text = "You have no pending matches."
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchCell", for: indexPath) as? PendingMatchTableViewCell else { return PendingMatchTableViewCell() }
         cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row - 1])
+        approveMessageLabel.text = " Swipe to approve or decline matches."
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 44
+            return 55
         }
-        return 125
+        return 160
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
