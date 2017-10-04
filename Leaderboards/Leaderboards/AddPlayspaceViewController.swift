@@ -22,13 +22,10 @@ class AddPlayspaceViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         playspaceTextField.delegate = self
-        
         let randomColor = colorProvider.randomColor()
         view.backgroundColor = randomColor
-        
-        
+        playspaceTextField.becomeFirstResponder()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true

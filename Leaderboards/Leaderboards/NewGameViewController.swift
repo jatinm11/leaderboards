@@ -24,7 +24,7 @@ class NewGameViewController: UIViewController {
         
         let randomColor = colorProvider.randomColor()
         view.backgroundColor = randomColor
-        
+        nameTextField.becomeFirstResponder()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true

@@ -19,7 +19,7 @@ class JoinPlayspaceViewController: UIViewController {
         super.viewDidLoad()
         let randomColor = colorProvider.randomColor()
         self.view.backgroundColor = randomColor
-        
+        passwordTextField.becomeFirstResponder()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
@@ -34,7 +34,11 @@ class JoinPlayspaceViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        guard let password = passwordTextField.text, !password.isEmpty else { return }
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            let failedScreen = UIStoryboard(name: "playspaceJoiningFailedAlertController", bundle: nil).instantiateViewController(withIdentifier: "playspaceJoiningFailed")
+            present(failedScreen, animated: true, completion: nil)
+            return
+        }
         PlayspaceController.shared.joinPlayspaceWith(password: password) { (success) in
             if success {
                 DispatchQueue.main.async {

@@ -14,6 +14,7 @@
 		6123C9351F7DD7400029D48D /* JoinPlayspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123C9341F7DD7400029D48D /* JoinPlayspaceViewController.swift */; };
 		6123C9371F7DD8CD0029D48D /* NewGame.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6123C9361F7DD8CD0029D48D /* NewGame.storyboard */; };
 		6123C9391F7DDB800029D48D /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123C9381F7DDB800029D48D /* NewGameViewController.swift */; };
+		6124165B1F85337700406DA7 /* playspaceJoiningFailedAlertController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6124165A1F85337700406DA7 /* playspaceJoiningFailedAlertController.storyboard */; };
 		6132D4891F829EB500C035F1 /* playspaceCreated.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6132D4881F829EB500C035F1 /* playspaceCreated.storyboard */; };
 		6132D48B1F82A0C600C035F1 /* PlayspaceCreatedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6132D48A1F82A0C600C035F1 /* PlayspaceCreatedAlertViewController.swift */; };
 		6132D48D1F82BBA700C035F1 /* playspaceFailed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6132D48C1F82BBA700C035F1 /* playspaceFailed.storyboard */; };
@@ -66,6 +67,7 @@
 		6123C9341F7DD7400029D48D /* JoinPlayspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPlayspaceViewController.swift; sourceTree = "<group>"; };
 		6123C9361F7DD8CD0029D48D /* NewGame.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewGame.storyboard; sourceTree = "<group>"; };
 		6123C9381F7DDB800029D48D /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
+		6124165A1F85337700406DA7 /* playspaceJoiningFailedAlertController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = playspaceJoiningFailedAlertController.storyboard; sourceTree = "<group>"; };
 		6132D4881F829EB500C035F1 /* playspaceCreated.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = playspaceCreated.storyboard; sourceTree = "<group>"; };
 		6132D48A1F82A0C600C035F1 /* PlayspaceCreatedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayspaceCreatedAlertViewController.swift; sourceTree = "<group>"; };
 		6132D48C1F82BBA700C035F1 /* playspaceFailed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = playspaceFailed.storyboard; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				6123C9361F7DD8CD0029D48D /* NewGame.storyboard */,
 				6132D4881F829EB500C035F1 /* playspaceCreated.storyboard */,
 				6132D48C1F82BBA700C035F1 /* playspaceFailed.storyboard */,
+				6124165A1F85337700406DA7 /* playspaceJoiningFailedAlertController.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6124165B1F85337700406DA7 /* playspaceJoiningFailedAlertController.storyboard in Resources */,
 				74DEFFA01F71986F00030ED9 /* Login.storyboard in Resources */,
 				6123C9331F7DD2100029D48D /* JoinPlayspace.storyboard in Resources */,
 				6132D4891F829EB500C035F1 /* playspaceCreated.storyboard in Resources */,
