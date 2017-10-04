@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Game View Controller-->
+        <scene sceneID="2hC-9H-oep">
+            <objects>
+                <viewController storyboardIdentifier="newGameVC" id="4bU-RT-gf9" customClass="NewGameViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HXz-rd-lZ4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Game" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlK-gs-acC">
+                                <rect key="frame" x="16" y="64" width="160" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joingameicon" translatesAutoresizingMaskIntoConstraints="NO" id="h8c-r2-U61">
+                                <rect key="frame" x="104" y="114" width="167" height="151"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="167" id="3hO-tl-yoG"/>
+                                    <constraint firstAttribute="height" constant="151" id="4J8-i5-ZHH"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9U-TI-eaS">
+                                <rect key="frame" x="16" y="313.5" width="343" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Name Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="psO-Vi-rTX">
+                                        <rect key="frame" x="8" y="0.0" width="327" height="40"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="psO-Vi-rTX" firstAttribute="leading" secondItem="k9U-TI-eaS" secondAttribute="leading" constant="8" id="9q0-xr-jDZ"/>
+                                    <constraint firstItem="psO-Vi-rTX" firstAttribute="top" secondItem="k9U-TI-eaS" secondAttribute="top" id="HNf-RG-uro"/>
+                                    <constraint firstAttribute="bottom" secondItem="psO-Vi-rTX" secondAttribute="bottom" id="M8d-6m-yUU"/>
+                                    <constraint firstAttribute="trailing" secondItem="psO-Vi-rTX" secondAttribute="trailing" constant="8" id="qfX-pt-SsF"/>
+                                    <constraint firstAttribute="height" constant="40" id="vqa-QU-JsU"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a name for game." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGG-0Z-jKj">
+                                <rect key="frame" x="16" y="275.5" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTE: Your game will be visible to every member on your playspace." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrK-jY-Ogh">
+                                <rect key="frame" x="16" y="611" width="343" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3D3-HQ-lKL">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="D0R-nT-lOm">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="iWE-Na-fC9">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="4bU-RT-gf9" id="7e8-O3-IBm"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Create" id="b7E-xh-vFX">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="submitButtonTapped:" destination="4bU-RT-gf9" id="jko-f1-1lH"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.32002565890000001" blue="0.35870357650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="k9U-TI-eaS" firstAttribute="leading" secondItem="GTG-Yz-wdT" secondAttribute="leading" constant="16" id="07b-PY-DJ7"/>
+                            <constraint firstItem="GTG-Yz-wdT" firstAttribute="bottom" secondItem="wrK-jY-Ogh" secondAttribute="bottom" constant="20" id="0sM-bZ-xRO"/>
+                            <constraint firstItem="wrK-jY-Ogh" firstAttribute="leading" secondItem="GTG-Yz-wdT" secondAttribute="leading" constant="16" id="0vK-qe-MA2"/>
+                            <constraint firstItem="GTG-Yz-wdT" firstAttribute="trailing" secondItem="hGG-0Z-jKj" secondAttribute="trailing" constant="16" id="8Yt-bq-1r9"/>
+                            <constraint firstItem="GTG-Yz-wdT" firstAttribute="trailing" secondItem="wrK-jY-Ogh" secondAttribute="trailing" constant="16" id="AEN-ZJ-5ET"/>
+                            <constraint firstItem="hGG-0Z-jKj" firstAttribute="leading" secondItem="GTG-Yz-wdT" secondAttribute="leading" constant="16" id="AyF-Nz-qsg"/>
+                            <constraint firstItem="h8c-r2-U61" firstAttribute="centerX" secondItem="HXz-rd-lZ4" secondAttribute="centerX" id="DlO-pI-1BT"/>
+                            <constraint firstItem="3D3-HQ-lKL" firstAttribute="leading" secondItem="GTG-Yz-wdT" secondAttribute="leading" id="Kl1-fx-JZ9"/>
+                            <constraint firstItem="GTG-Yz-wdT" firstAttribute="trailing" secondItem="k9U-TI-eaS" secondAttribute="trailing" constant="16" id="OcA-VZ-n4C"/>
+                            <constraint firstItem="psO-Vi-rTX" firstAttribute="top" secondItem="hGG-0Z-jKj" secondAttribute="bottom" constant="17" id="Xko-ox-7GS"/>
+                            <constraint firstItem="3D3-HQ-lKL" firstAttribute="trailing" secondItem="GTG-Yz-wdT" secondAttribute="trailing" id="czU-4r-vUm"/>
+                            <constraint firstItem="3D3-HQ-lKL" firstAttribute="top" secondItem="GTG-Yz-wdT" secondAttribute="top" id="imW-NS-3Jq"/>
+                            <constraint firstItem="h8c-r2-U61" firstAttribute="top" secondItem="3D3-HQ-lKL" secondAttribute="bottom" constant="50" id="ncx-nL-BDK"/>
+                            <constraint firstItem="DlK-gs-acC" firstAttribute="top" secondItem="3D3-HQ-lKL" secondAttribute="bottom" id="sce-Rw-3jf"/>
+                            <constraint firstItem="k9U-TI-eaS" firstAttribute="centerY" secondItem="HXz-rd-lZ4" secondAttribute="centerY" id="ySh-GA-Sat"/>
+                            <constraint firstItem="DlK-gs-acC" firstAttribute="leading" secondItem="GTG-Yz-wdT" secondAttribute="leading" constant="16" id="yrk-aM-Sku"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GTG-Yz-wdT"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="psO-Vi-rTX" id="eRG-rY-dva"/>
+                        <outlet property="navigationBar" destination="3D3-HQ-lKL" id="Xgj-6u-U3R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lDi-6Y-VLX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-279.19999999999999" y="194.75262368815595"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="joingameicon" width="512" height="512"/>
+    </resources>
+</document>

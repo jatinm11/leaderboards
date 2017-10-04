@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugq-aC-uJS">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Join Playspace View Controller-->
+        <scene sceneID="iK1-9S-o0Y">
+            <objects>
+                <viewController storyboardIdentifier="joinPlayspaceVC" id="ugq-aC-uJS" customClass="JoinPlayspaceViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bcD-sh-JYf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Playspace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-nw-ydE">
+                                <rect key="frame" x="16" y="64" width="228" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxD-UO-cXV">
+                                <rect key="frame" x="16" y="313.5" width="343" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter password here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MgK-Q8-bg8">
+                                        <rect key="frame" x="8" y="0.0" width="327" height="40"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="MgK-Q8-bg8" firstAttribute="leading" secondItem="cxD-UO-cXV" secondAttribute="leading" constant="8" id="Ayg-FD-8Oo"/>
+                                    <constraint firstItem="MgK-Q8-bg8" firstAttribute="top" secondItem="cxD-UO-cXV" secondAttribute="top" id="IFj-lr-gz2"/>
+                                    <constraint firstAttribute="bottom" secondItem="MgK-Q8-bg8" secondAttribute="bottom" id="Tu0-G3-eYd"/>
+                                    <constraint firstAttribute="trailing" secondItem="MgK-Q8-bg8" secondAttribute="trailing" constant="8" id="kVq-1H-WRE"/>
+                                    <constraint firstAttribute="height" constant="40" id="w8Q-3n-Sqi"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter password to join a playspace." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-UI-5l3">
+                                <rect key="frame" x="16" y="281" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcl-W0-lY1">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="hTI-FF-Fbo">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="p9g-vA-Lab">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="ugq-aC-uJS" id="psF-xL-zx6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Join" id="Pac-a3-eBZ">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="submitButtonTapped:" destination="ugq-aC-uJS" id="dz5-DH-w5S"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PasswordImage" translatesAutoresizingMaskIntoConstraints="NO" id="aVD-Yo-yIu">
+                                <rect key="frame" x="119.5" y="145" width="136" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="TCa-Af-sp6"/>
+                                    <constraint firstAttribute="width" constant="136" id="iSF-Zi-GNt"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.32002565890000001" blue="0.35870357650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EH6-dh-IbB" firstAttribute="trailing" secondItem="cxD-UO-cXV" secondAttribute="trailing" constant="16" id="2PF-Y7-bIb"/>
+                            <constraint firstItem="EH6-dh-IbB" firstAttribute="trailing" secondItem="QdG-UI-5l3" secondAttribute="trailing" constant="16" id="58g-Yn-CQl"/>
+                            <constraint firstItem="Rhw-nw-ydE" firstAttribute="top" secondItem="hcl-W0-lY1" secondAttribute="bottom" id="7LF-uO-r0w"/>
+                            <constraint firstItem="QdG-UI-5l3" firstAttribute="leading" secondItem="EH6-dh-IbB" secondAttribute="leading" constant="16" id="7Wa-SI-JHs"/>
+                            <constraint firstItem="aVD-Yo-yIu" firstAttribute="top" secondItem="Rhw-nw-ydE" secondAttribute="bottom" constant="45" id="8BK-Mi-1ij"/>
+                            <constraint firstItem="aVD-Yo-yIu" firstAttribute="centerX" secondItem="bcD-sh-JYf" secondAttribute="centerX" id="CYX-ga-rtK"/>
+                            <constraint firstItem="hcl-W0-lY1" firstAttribute="leading" secondItem="EH6-dh-IbB" secondAttribute="leading" id="Cyo-XI-jlP"/>
+                            <constraint firstItem="cxD-UO-cXV" firstAttribute="centerY" secondItem="bcD-sh-JYf" secondAttribute="centerY" id="MgX-fE-GDv"/>
+                            <constraint firstItem="cxD-UO-cXV" firstAttribute="leading" secondItem="EH6-dh-IbB" secondAttribute="leading" constant="16" id="SQx-eS-bjK"/>
+                            <constraint firstItem="MgK-Q8-bg8" firstAttribute="top" secondItem="QdG-UI-5l3" secondAttribute="bottom" constant="11.5" id="iBM-y5-s3G"/>
+                            <constraint firstItem="hcl-W0-lY1" firstAttribute="trailing" secondItem="EH6-dh-IbB" secondAttribute="trailing" id="kjc-jl-E0m"/>
+                            <constraint firstItem="hcl-W0-lY1" firstAttribute="top" secondItem="EH6-dh-IbB" secondAttribute="top" id="nOn-Xr-xcU"/>
+                            <constraint firstItem="Rhw-nw-ydE" firstAttribute="leading" secondItem="EH6-dh-IbB" secondAttribute="leading" constant="16" id="zde-66-Bka"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EH6-dh-IbB"/>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="hcl-W0-lY1" id="awq-Kd-yq2"/>
+                        <outlet property="passwordTextField" destination="MgK-Q8-bg8" id="rEt-68-Iqr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KDo-gs-NAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-191.19999999999999" y="165.06746626686657"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="PasswordImage" width="300" height="294"/>
+    </resources>
+</document>
