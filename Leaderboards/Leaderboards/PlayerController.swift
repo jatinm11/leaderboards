@@ -29,9 +29,12 @@ class PlayerController {
             CloudKitManager.shared.saveRecord(playerRecord) { (record, error) in
                 if let error = error { print(error.localizedDescription) }
                 
+                
                 guard let record = record,
                     let currentPlayer = Player(record: record) else { completion(false); return }
                 
+                let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(record.recordID.recordName + ".dat")
+                try? FileManager.default.removeItem(at: tempURL)
                 self.currentPlayer = currentPlayer
                 completion(true)
             }

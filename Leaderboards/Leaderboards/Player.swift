@@ -24,7 +24,6 @@ struct Player {
             let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(recordID.recordName + ".dat")
             try data?.write(to: tempURL)
             let asset = CKAsset(fileURL: tempURL)
-            try? FileManager.default.removeItem(at: tempURL)
             return asset
         } catch {
             print("Error writing photo data", error)
