@@ -14,31 +14,32 @@ class PendingMatchTableViewCell: UITableViewCell {
     @IBOutlet weak var opponentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet var opponenetNameLabel: UILabel!
-    @IBOutlet var winnerNameLabel: UILabel!
+    @IBOutlet weak var opponentImage: UIImageView!
     
     
     func updateViewsWith(_ pendingMatch: Match) {
         MatchController.shared.fetchGameAndOpponentFor(pendingMatch) { (game, opponent, success) in
             if success {
                 DispatchQueue.main.async {
+                    self.opponentImage.image = opponent?.photo
+                    self.opponentImage.layer.cornerRadius = self.opponentImage.frame.size.width / 2
+                    self.opponentImage.clipsToBounds = true
                     self.gameLabel.text = game?.name
                     self.opponentLabel.text = opponent?.username
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateStyle = .full
+                    dateFormatter.dateStyle = .medium
                     self.dateLabel.text = dateFormatter.string(from: pendingMatch.timestamp)
-                    if let opponent = opponent {
-                        self.opponenetNameLabel.text = "(\(opponent.username))"
-                    }
                     if let currentPlayer = PlayerController.shared.currentPlayer {
                         if pendingMatch.winner.recordID == currentPlayer.recordID {
                             // current player won
+                            self.opponentImage.layer.borderColor = UIColor.green.cgColor
+                            self.opponentImage.layer.borderWidth = 3.0
                             self.scoreLabel.text = "\(pendingMatch.winnerScore) - \(pendingMatch.loserScore)"
-                            self.winnerNameLabel.text = "You"
                         } else {
                             // current player lost
+                            self.opponentImage.layer.borderColor = UIColor.red.cgColor
+                            self.opponentImage.layer.borderWidth = 3.0
                             self.scoreLabel.text = "\(pendingMatch.loserScore) - \(pendingMatch.winnerScore)"
-                            self.winnerNameLabel.text = opponent?.username
                         }
                     }
                 }

@@ -121,7 +121,7 @@ extension UIImage {
         let maxWidth: Float = 200.0
         var imgRatio: Float = actualWidth / actualHeight
         let maxRatio: Float = maxWidth / maxHeight
-        let compressionQuality: Float = 0.5
+        let compressionQuality: Float = 1.0
         //50 percent compression
         
         if actualHeight > maxHeight || actualWidth > maxWidth {

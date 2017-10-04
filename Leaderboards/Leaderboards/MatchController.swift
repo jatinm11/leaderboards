@@ -180,4 +180,33 @@ class MatchController {
         }
     }
     
+    func fetchOpponentsForMatches(_ matches: [Match], player: Player, completion: @escaping (_ opponents: [Player]?, _ success: Bool) -> Void = { _, _  in }) {
+        var opponentRecordIDs = [CKRecordID]()
+        for match in matches {
+            for playerReference in match.participants {
+                if playerReference.recordID != player.recordID {
+                    opponentRecordIDs.append(playerReference.recordID)
+                }
+            }
+        }
+        
+        CloudKitManager.shared.fetchRecords(withIDs: opponentRecordIDs) { (opponentRecordsDict, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            var opponents = [Player]()
+            guard let opponentRecordsDict = opponentRecordsDict else { completion(nil, false); return }
+            for opponentRecordID in opponentRecordIDs {
+                if let opponentRecord = opponentRecordsDict[opponentRecordID],
+                    let opponent = Player(record: opponentRecord) {
+                    opponents.append(opponent)
+                }
+            }
+            completion(opponents, true)
+        }
+    }
+    
 }
