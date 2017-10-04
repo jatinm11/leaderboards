@@ -10,6 +10,7 @@ import UIKit
 
 class GameStatsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var gameLabel: UILabel!
     @IBOutlet weak var playedLabel: UILabel!
     @IBOutlet weak var winsLabel: UILabel!
     @IBOutlet weak var lossesLabel: UILabel!
@@ -18,14 +19,15 @@ class GameStatsTableViewCell: UITableViewCell {
     @IBOutlet weak var pointsAgainstLabel: UILabel!
     
     func updateViewsWith(_ gameDictionary: [String: Any]) {
-        guard let played = gameDictionary["played"] as? Int,
+        guard let game = gameDictionary["game"] as? Game,
+            let played = gameDictionary["played"] as? Int,
             let wins = gameDictionary["wins"] as? Int,
             let losses = gameDictionary["losses"] as? Int,
             let winPercentage = gameDictionary["winPercentage"] as? Double,
             let pointsFor = gameDictionary["pointsFor"] as? Int,
             let pointsAgainst = gameDictionary["pointsAgainst"] as? Int else { return }
         
-        
+        gameLabel.text = "\(game.name)"
         playedLabel.text = "\(played)"
         winsLabel.text = "\(wins)"
         lossesLabel.text = "\(losses)"

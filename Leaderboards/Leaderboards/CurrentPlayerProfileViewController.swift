@@ -15,7 +15,7 @@ class CurrentPlayerProfileViewController: UIViewController {
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-
+    
     
     @IBAction func backBarButtonItemTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -106,7 +106,7 @@ class CurrentPlayerProfileViewController: UIViewController {
             playerStatsArrayOfDictionaries.append([])
             for game in games {
                 if game.playspace.recordID == playspace.recordID {
-                    playerStatsArrayOfDictionaries[index].append(["game": game.recordID, "played": 0, "wins": 0, "losses": 0, "winPercentage": 0.0, "pointsFor": 0, "pointsAgainst": 0])
+                    playerStatsArrayOfDictionaries[index].append(["game": game, "played": 0, "wins": 0, "losses": 0, "winPercentage": 0.0, "pointsFor": 0, "pointsAgainst": 0])
                 }
             }
         }
@@ -119,8 +119,8 @@ class CurrentPlayerProfileViewController: UIViewController {
             for (gameIndex, game) in games.enumerated() {
                 if game.playspace.recordID == playspace.recordID {
                     for (gameStatsIndex, gameStats) in playerStatsArrayOfDictionaries[index].enumerated() {
-                        guard let gameRecordID = gameStats["game"] as? CKRecordID else { return }
-                        if game.recordID == gameRecordID {
+                        guard let gameFromDict = gameStats["game"] as? Game else { return }
+                        if game.recordID == gameFromDict.recordID {
                             for match in matches[gameIndex] {
                                 guard let played = playerStatsArrayOfDictionaries[index][gameStatsIndex]["played"] as? Int,
                                     let wins = playerStatsArrayOfDictionaries[index][gameStatsIndex]["wins"] as? Int,
@@ -210,17 +210,6 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "gameStatsCell", for: indexPath) as? GameStatsTableViewCell else { return GameStatsTableViewCell() }
         cell.updateViewsWith(playerStatsArrayOfDictionaries[indexPath.section][indexPath.row])
-        
-        GameController.shared.fetchAllGamesForCurrentPlayer { (games, success) in
-            if success {
-                DispatchQueue.main.async {
-                    if let game = games {
-                        
-                    }
-                }
-            }
-        }
-        
         return cell
     }
     

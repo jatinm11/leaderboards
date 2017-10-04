@@ -1,61 +1,26 @@
 //
-//  PlayerViewController.swift
+//  LeaderboardsViewController.swift
 //  Leaderboards
 //
-//  Created by Jatin Menghani on 19/09/17.
+//  Created by Mithun Reddy on 10/3/17.
 //  Copyright © 2017 Jatin Menghani. All rights reserved.
 //
 
 import UIKit
 
-class PlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    @IBOutlet weak var playerTableView: UITableView!
-    @IBOutlet weak var leaderboardsButton: UIButton!
-    @IBOutlet weak var leaderboardTableView: UITableView!
-    @IBOutlet weak var playersView: UIView!
-    @IBOutlet weak var leaderboardsView: UIView!
-    @IBOutlet weak var leaderboardsButtonViewContainer: UIView!
+class LeaderboardsViewController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
-    let colorProvider = BackgroundColorProvider()
+    var randomColor: UIColor?
+    static let fetchAllPlayersComplete = Notification.Name(rawValue:"fetchAllPlayersComplete")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        playerTableView.delegate = self
-        playerTableView.dataSource = self
-        playerTableView.tag = 0
-        playerTableView.alpha = 0
-        
-        leaderboardTableView.delegate = self
-        leaderboardTableView.dataSource = self
-        leaderboardTableView.tag = 1
-        leaderboardsView.alpha = 1
-        
-        leaderboardsButtonViewContainer.layer.cornerRadius = 5
-        leaderboardsButtonViewContainer.clipsToBounds = true
-        
-        randomColor()
-        
-        let addMatchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMatchBarButtonItemTapped))
-        navigationItem.rightBarButtonItem = addMatchBarButtonItem
-    }
-    
-    @IBAction func leaderboardsButtonTapped(_ sender: Any) {
-        if leaderboardsView.alpha == 0 {
-            leaderboardsView.alpha = 1
-            playersView.alpha = 0
-            leaderboardsButton.setTitle("Players", for: .normal)
-            leaderboardTableView.reloadData()
-            randomColor()
-        } else {
-            leaderboardsView.alpha = 0
-            playersView.alpha = 1
-            leaderboardsButton.setTitle("Leaderboards", for: .normal)
-            playerTableView.reloadData()
-            randomColor()
-        }
+
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +31,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
         GameController.shared.fetchAllPlayersForCurrentGame { (success) in
             if success {
                 DispatchQueue.main.async {
-                    self.playerTableView.reloadData()
+                    NotificationCenter.default.post(name: LeaderboardsViewController.fetchAllPlayersComplete, object: nil)
                     self.createPlayerStatsDictionaries()
                 }
                 MatchController.shared.fetchMatchesForCurrentGame(completion: { (success) in
@@ -78,16 +43,6 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
                 })
             }
         }
-    }
-    
-    func randomColor() {
-        let randomColor = colorProvider.randomColor()
-        view.backgroundColor = randomColor
-        playersView.backgroundColor = randomColor
-        leaderboardsView.backgroundColor = randomColor
-        leaderboardsButton.tintColor = randomColor
-        playerTableView.backgroundColor = randomColor
-        leaderboardTableView.backgroundColor = randomColor
     }
     
     func createPlayerStatsDictionaries() {
@@ -126,7 +81,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
         sortPlayersBy(.wins)
-        leaderboardTableView.reloadData()
+        tableView.reloadData()
     }
     
     func sortPlayersBy(_ column: Column) {
@@ -154,25 +109,22 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
             return false
         }
     }
-    
-    @objc func addMatchBarButtonItemTapped() {
-        let newMatchVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "newMatchVC")
-        present(newMatchVC, animated: true, completion: nil)
-    }
-    
-    // MARK:- TableView data source
+
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension LeaderboardsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if tableView.tag == 1 {
+        
             return 2
-        }
-        return 1
+    
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == 0 {
-            return GameController.shared.playersBelongingToCurrentGame.count + 1
-        }
+        
         
         if section == 0 {
             return 1
@@ -181,16 +133,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView.tag == 0 {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "playersTitleCell", for: indexPath)
-                return cell
-            }
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as? PlayerTableViewCell else { return PlayerTableViewCell() }
-            let player = GameController.shared.playersBelongingToCurrentGame[indexPath.row - 1]
-            cell.player = player
-            return cell
-        }
+        
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "leaderboardsTitleCell", for: indexPath)
@@ -203,9 +146,9 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if tableView.tag == 1 && section == 1 {
+        if section == 1 {
             let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.sectionHeaderHeight))
-            headerView.backgroundColor = view.backgroundColor
+            headerView.backgroundColor = randomColor
             
             let playerLabel = UILabel()
             playerLabel.text = "Player"
@@ -257,12 +200,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView.tag == 0 {
-            if indexPath.row == 0 {
-                return 44
-            }
-            return 87
-        }
+        
         
         if indexPath.section == 0 {
             return 44
@@ -271,9 +209,7 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if tableView.tag == 0 {
-            return 0
-        }
+        
         
         if section == 0 {
             return 0
@@ -282,31 +218,15 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.tag == 0 && indexPath.row == 0 {
-            title = GameController.shared.currentGame?.name
-        }
-        if tableView.tag == 1 && indexPath.section == 0 && indexPath.row == 0 {
-            title = GameController.shared.currentGame?.name
+        if indexPath.section == 0 && indexPath.row == 0 {
+            navigationController?.topViewController?.title = GameController.shared.currentGame?.name
         }
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.tag == 0 && indexPath.row == 0 {
-            title = "Players"
-        }
-        if tableView.tag == 1 && indexPath.section == 0 && indexPath.row == 0 {
-            title = "Leaderboards"
+        if indexPath.section == 0 && indexPath.row == 0 {
+            navigationController?.topViewController?.title = "Leaderboards"
         }
     }
     
 }
-
-
-
-
-
-
-
-
-
-
