@@ -17,6 +17,8 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var addgameButtonViewContainer: UIView!
     @IBOutlet weak var addGameButton: UIButton!
     
+    var isFirstTime = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -30,9 +32,18 @@ class GamesViewController: UIViewController {
         addgameButtonViewContainer.layer.cornerRadius = 5
         addgameButtonViewContainer.clipsToBounds = true
         
+        self.nogamesView.isHidden = true
+        
         GameController.shared.fetchGamesForCurrentPlayspace { (success) in
             if success {
                 DispatchQueue.main.async {
+                    if GameController.shared.gamesBelongingToCurrentPlayer.count == 0 {
+                        self.nogamesView.isHidden = false
+                    }
+                    else {
+                        self.nogamesView.isHidden = true
+                    }
+                    self.isFirstTime = false
                     self.tableView.reloadData()
                 }
             }
@@ -41,12 +52,13 @@ class GamesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if GameController.shared.gamesBelongingToCurrentPlayer.count == 0 {
-            self.nogamesView.isHidden = false
-        }
-        else {
-            self.nogamesView.isHidden = true
+        if !isFirstTime{
+            if GameController.shared.gamesBelongingToCurrentPlayer.count == 0 {
+                self.nogamesView.isHidden = false
+            }
+            else {
+                self.nogamesView.isHidden = true
+            }
         }
         
         tableView.reloadData()
@@ -88,7 +100,7 @@ class GamesViewController: UIViewController {
                 }
             }
         }
-    
+        
     }
     
     @IBAction func addGameButtonTapped(_ sender: Any) {
