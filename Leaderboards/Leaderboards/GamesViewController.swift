@@ -123,7 +123,7 @@ class GamesViewController: UIViewController {
     }
     
     @objc func playerImageButtonTapped() {
-        let currentPlayerProfileVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "currentPlayerProfileVC")
+        let currentPlayerProfileVC = UIStoryboard(name: "PlayerProfile", bundle: nil).instantiateViewController(withIdentifier: "currentPlayerProfileContainerVC")
         present(currentPlayerProfileVC, animated: true, completion: nil)
     }
     

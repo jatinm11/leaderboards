@@ -149,22 +149,6 @@ class GameController {
             })
             
         }
-        
-        
-        
-//        var game = game
-//        guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(nil, false); return }
-//        game.players.append(CKReference(record: currentPlayer.CKRepresentation, action: .none))
-//        CloudKitManager.shared.updateRecords([game.CKRepresentation], perRecordCompletion: nil) { (records, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                completion(nil, false)
-//                return
-//            }
-//            guard let gameRecord = records?.first,
-//                let game = Game(record: gameRecord) else { completion(nil, false); return }
-//            completion(game, true)
-//        }
     }
     
     func fetchOpponentsForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
@@ -340,25 +324,7 @@ class GameController {
             })
             
         }
-        
-//        var game = game
-//        guard let currentPlayer = PlayerController.shared.currentPlayer,
-//            let index = game.players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
-//
-//        game.players.remove(at: index)
-//
-//        CloudKitManager.shared.updateRecords([game.CKRepresentation], perRecordCompletion: nil) { (records, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                completion(nil, false)
-//                return
-//            }
-//
-//            guard let gameRecord = records?.first,
-//                let game = Game(record: gameRecord) else { completion(nil, false); return }
-//
-//            completion(game, true)
-//        }
+    
     }
     
     func fetchGamesFor(_ playspace: Playspace, completion: @escaping (_ games: [CKRecord]?, _ success: Bool) -> Void = { _, _ in }) {
