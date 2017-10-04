@@ -31,7 +31,7 @@ class GameStatsTableViewCell: UITableViewCell {
         playedLabel.text = "\(played)"
         winsLabel.text = "\(wins)"
         lossesLabel.text = "\(losses)"
-        winPercentageLabel.text = "\(winPercentage)"
+        winPercentageLabel.text = "\(Int(winPercentage * 100))%"
         pointsForLabel.text = "\(pointsFor)"
         pointsAgainstLabel.text = "\(pointsAgainst)"
     }
