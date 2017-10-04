@@ -12,22 +12,21 @@ class GamesViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
+    @IBOutlet var nogamesView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addgameButtonViewContainer: UIView!
     @IBOutlet weak var addGameButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.tableFooterView = UIView()
-        
         let randomColor = colorProvider.randomColor()
         tableView.backgroundColor = randomColor
         view.backgroundColor = randomColor
         addGameButton.tintColor = randomColor
+        nogamesView.backgroundColor = randomColor
         addgameButtonViewContainer.layer.cornerRadius = 5
         addgameButtonViewContainer.clipsToBounds = true
         
@@ -38,11 +37,17 @@ class GamesViewController: UIViewController {
                 }
             }
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if GameController.shared.gamesBelongingToCurrentPlayer.count == 0 {
+            self.nogamesView.isHidden = false
+        }
+        else {
+            self.nogamesView.isHidden = true
+        }
         
         tableView.reloadData()
         
@@ -83,6 +88,7 @@ class GamesViewController: UIViewController {
                 }
             }
         }
+    
     }
     
     @IBAction func addGameButtonTapped(_ sender: Any) {

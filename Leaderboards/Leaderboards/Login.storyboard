@@ -227,11 +227,29 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRY-c0-AKq">
+                                <rect key="frame" x="0.0" y="208.5" width="375" height="250"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looks like you don't have any playspace. Tap Add Playspace button below to join or create a new playspace." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnE-ON-ehn">
+                                        <rect key="frame" x="16" y="92.5" width="343" height="64.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="vnE-ON-ehn" secondAttribute="trailing" constant="16" id="L5t-s1-7x9"/>
+                                    <constraint firstItem="vnE-ON-ehn" firstAttribute="leading" secondItem="eRY-c0-AKq" secondAttribute="leading" constant="16" id="NsW-SN-BE6"/>
+                                    <constraint firstItem="vnE-ON-ehn" firstAttribute="centerY" secondItem="eRY-c0-AKq" secondAttribute="centerY" id="VNx-DJ-d13"/>
+                                    <constraint firstAttribute="height" constant="250" id="gfx-Db-4OY"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lje-4K-IBT">
-                                <rect key="frame" x="136" y="623" width="103" height="36"/>
+                                <rect key="frame" x="132" y="623" width="111" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydC-nw-Fgr">
-                                        <rect key="frame" x="0.0" y="0.0" width="103" height="36"/>
+                                        <rect key="frame" x="4" y="0.0" width="103" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Add Playspace"/>
                                         <connections>
@@ -241,27 +259,31 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="103" id="Bnj-YQ-oe3"/>
+                                    <constraint firstAttribute="width" constant="111" id="Bnj-YQ-oe3"/>
                                     <constraint firstAttribute="height" constant="36" id="HCK-fq-yoO"/>
                                     <constraint firstAttribute="bottom" secondItem="ydC-nw-Fgr" secondAttribute="bottom" id="SoM-6V-Rpj"/>
                                     <constraint firstItem="ydC-nw-Fgr" firstAttribute="top" secondItem="lje-4K-IBT" secondAttribute="top" id="ZO5-8R-MDv"/>
-                                    <constraint firstAttribute="trailing" secondItem="ydC-nw-Fgr" secondAttribute="trailing" id="cw1-x5-HIM"/>
-                                    <constraint firstItem="ydC-nw-Fgr" firstAttribute="leading" secondItem="lje-4K-IBT" secondAttribute="leading" id="gxE-KH-3dH"/>
+                                    <constraint firstAttribute="trailing" secondItem="ydC-nw-Fgr" secondAttribute="trailing" constant="4" id="cw1-x5-HIM"/>
+                                    <constraint firstItem="ydC-nw-Fgr" firstAttribute="leading" secondItem="lje-4K-IBT" secondAttribute="leading" constant="4" id="gxE-KH-3dH"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="eRY-c0-AKq" firstAttribute="centerY" secondItem="gll-DY-3Zg" secondAttribute="centerY" id="Gvd-Kd-nDm"/>
+                            <constraint firstItem="eRY-c0-AKq" firstAttribute="leading" secondItem="gll-DY-3Zg" secondAttribute="leading" id="Rfl-j3-0su"/>
                             <constraint firstItem="mor-Zg-lKW" firstAttribute="top" secondItem="cvR-4b-h5b" secondAttribute="bottom" id="awc-IY-Nma"/>
                             <constraint firstItem="lje-4K-IBT" firstAttribute="centerX" secondItem="gll-DY-3Zg" secondAttribute="centerX" id="hB4-qO-rYG"/>
                             <constraint firstAttribute="trailing" secondItem="mor-Zg-lKW" secondAttribute="trailing" id="sAk-4u-pov"/>
                             <constraint firstItem="lje-4K-IBT" firstAttribute="top" secondItem="mor-Zg-lKW" secondAttribute="bottom" constant="8" id="tMM-Wm-kbe"/>
+                            <constraint firstAttribute="trailing" secondItem="eRY-c0-AKq" secondAttribute="trailing" id="ueU-t5-YaC"/>
                             <constraint firstItem="mR6-ZB-dJt" firstAttribute="top" secondItem="lje-4K-IBT" secondAttribute="bottom" constant="8" id="vPq-Vv-z2f"/>
                             <constraint firstItem="mor-Zg-lKW" firstAttribute="leading" secondItem="gll-DY-3Zg" secondAttribute="leading" id="yef-Pe-rsT"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addplayspaceButton" destination="ydC-nw-Fgr" id="Hci-HK-Cnr"/>
+                        <outlet property="noPlayspaceView" destination="eRY-c0-AKq" id="XCU-CJ-Eoa"/>
                         <outlet property="playspaceButtonViewContainer" destination="lje-4K-IBT" id="Kr5-j4-jzj"/>
                         <outlet property="tableView" destination="mor-Zg-lKW" id="ERS-Tk-krf"/>
                     </connections>
@@ -291,11 +313,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e56-g9-Csp" id="IYS-No-ygE">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UfH-BC-Cmy">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -312,7 +334,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lQC-kA-1I8" id="cVP-rK-vyU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Games" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYe-GN-2E8">
@@ -331,6 +353,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSE-Bg-gpV">
+                                <rect key="frame" x="0.0" y="208.5" width="375" height="250"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looks like you don't have any games. Tap Add game button below to join or create a new game." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xc-iV-9cm">
+                                        <rect key="frame" x="8" y="93" width="359" height="64.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="4Xc-iV-9cm" firstAttribute="leading" secondItem="oSE-Bg-gpV" secondAttribute="leading" constant="8" id="LPg-gC-Eae"/>
+                                    <constraint firstItem="4Xc-iV-9cm" firstAttribute="centerX" secondItem="oSE-Bg-gpV" secondAttribute="centerX" id="Qny-6i-sgQ"/>
+                                    <constraint firstItem="4Xc-iV-9cm" firstAttribute="centerY" secondItem="oSE-Bg-gpV" secondAttribute="centerY" id="V7Z-uS-vg3"/>
+                                    <constraint firstAttribute="height" constant="250" id="fbL-qu-rmp"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Xc-iV-9cm" secondAttribute="trailing" constant="8" id="jpe-Zy-rsc"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tdc-69-dDD">
                                 <rect key="frame" x="136" y="623" width="103" height="36"/>
                                 <subviews>
@@ -357,8 +398,11 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="FWa-Fw-CA5" firstAttribute="top" secondItem="Tdc-69-dDD" secondAttribute="bottom" constant="8" id="8qH-eg-ety"/>
+                            <constraint firstItem="oSE-Bg-gpV" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" id="ANL-WW-uqc"/>
+                            <constraint firstAttribute="trailing" secondItem="oSE-Bg-gpV" secondAttribute="trailing" id="MeL-jt-4eH"/>
                             <constraint firstAttribute="trailing" secondItem="RXh-Ez-mrs" secondAttribute="trailing" id="OAB-dF-7LN"/>
                             <constraint firstItem="RXh-Ez-mrs" firstAttribute="leading" secondItem="jpL-qF-NYc" secondAttribute="leading" id="ST6-4s-nCt"/>
+                            <constraint firstItem="oSE-Bg-gpV" firstAttribute="centerY" secondItem="jpL-qF-NYc" secondAttribute="centerY" id="c1L-eS-ycg"/>
                             <constraint firstItem="Tdc-69-dDD" firstAttribute="centerX" secondItem="jpL-qF-NYc" secondAttribute="centerX" id="dba-tt-uWl"/>
                             <constraint firstItem="RXh-Ez-mrs" firstAttribute="top" secondItem="1Yc-HV-L96" secondAttribute="bottom" id="ftF-g6-CVc"/>
                             <constraint firstItem="Tdc-69-dDD" firstAttribute="top" secondItem="RXh-Ez-mrs" secondAttribute="bottom" constant="8" id="vz3-EJ-57q"/>
@@ -367,6 +411,7 @@
                     <connections>
                         <outlet property="addGameButton" destination="jDf-n1-PG5" id="2tl-Db-N0w"/>
                         <outlet property="addgameButtonViewContainer" destination="Tdc-69-dDD" id="0rL-h9-HHp"/>
+                        <outlet property="nogamesView" destination="oSE-Bg-gpV" id="jVl-o6-UBl"/>
                         <outlet property="tableView" destination="RXh-Ez-mrs" id="GRP-gQ-6rv"/>
                     </connections>
                 </viewController>
@@ -499,7 +544,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pXN-az-AyR" id="uxY-ap-HMn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -508,7 +553,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h0I-6y-HJp" id="fWs-3A-Qop">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Game" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jW7-N3-OdE">
