@@ -198,7 +198,7 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playerStatsArrayOfDictionaries[section].count
+        return playerStatsArrayOfDictionaries[section].count + 1
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -208,12 +208,19 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath)
+            return cell
+        }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "gameStatsCell", for: indexPath) as? GameStatsTableViewCell else { return GameStatsTableViewCell() }
-        cell.updateViewsWith(playerStatsArrayOfDictionaries[indexPath.section][indexPath.row])
+        cell.updateViewsWith(playerStatsArrayOfDictionaries[indexPath.section][indexPath.row - 1])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 40
+        }
         return 50
     }
     
