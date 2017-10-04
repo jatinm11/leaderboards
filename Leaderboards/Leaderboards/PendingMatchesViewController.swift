@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class PendingMatchesViewController: UIViewController {
     
@@ -53,6 +54,21 @@ class PendingMatchesViewController: UIViewController {
     
     @IBAction func backButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func updateBadge(number: Int) {
+        let operation = CKModifyBadgeOperation(badgeValue: number)
+        operation.modifyBadgeCompletionBlock = {(error) in
+            if let error = error{
+                print("\(error)")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = number
+            }
+        }
+        CKContainer.default().add(operation)
     }
     
 }
@@ -103,6 +119,7 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
                     DispatchQueue.main.async {
                         MatchController.shared.clearPendingMatch(at: indexPath.row - 1)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self.updateBadge(number: MatchController.shared.pendingMatches.count)
                     }
                 }
             })
@@ -114,6 +131,7 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
                     DispatchQueue.main.async {
                         MatchController.shared.clearPendingMatch(at: indexPath.row - 1)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self.updateBadge(number: MatchController.shared.pendingMatches.count)
                     }
                 }
             })

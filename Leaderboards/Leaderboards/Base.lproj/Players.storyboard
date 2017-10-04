@@ -288,7 +288,7 @@
         <!--Leaderboards Players List Container View Controller-->
         <scene sceneID="HbL-Wc-XrH">
             <objects>
-                <viewController id="NVn-JZ-3Vc" customClass="LeaderboardsPlayersListContainerViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="NVn-JZ-3Vc" customClass="LeaderboardsPlayersListContainerViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jjq-Kh-AcR"/>
                         <viewControllerLayoutGuide type="bottom" id="SaZ-5H-zyb"/>
@@ -363,7 +363,7 @@
         <!--Leaderboards View Controller-->
         <scene sceneID="sn9-FO-0KF">
             <objects>
-                <viewController storyboardIdentifier="leaderboardsVC" id="0YW-Pd-9JI" customClass="LeaderboardsViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leaderboardsVC" automaticallyAdjustsScrollViewInsets="NO" id="0YW-Pd-9JI" customClass="LeaderboardsViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y6p-OJ-5bh"/>
                         <viewControllerLayoutGuide type="bottom" id="WCd-Bx-gTq"/>
@@ -522,7 +522,11 @@
         <!--Players List View Controller-->
         <scene sceneID="Jfl-kf-n6d">
             <objects>
-                <viewController storyboardIdentifier="playersListVC" id="btf-9W-dc6" customClass="PlayersListViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playersListVC" automaticallyAdjustsScrollViewInsets="NO" id="btf-9W-dc6" customClass="PlayersListViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CUZ-Ln-PdR"/>
+                        <viewControllerLayoutGuide type="bottom" id="ygd-O8-0wt"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Jtr-9L-ogp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

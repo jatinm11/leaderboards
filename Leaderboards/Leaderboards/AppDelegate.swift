@@ -67,34 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        MatchController.shared.fetchPendingMatchesForCurrentPlayer { (success) in
-            if success {
-                completionHandler(.newData)
-            } else {
-                completionHandler(.failed)
-            }
-        }
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
-        
-        let operation = CKModifyBadgeOperation(badgeValue: 0)
-        operation.modifyBadgeCompletionBlock = {(error) in
-            if let error = error{
-                print("\(error)")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                application.applicationIconBadgeNumber = 0
-            }
-        }
-        CKContainer.default().add(operation)
-    }
 
 }
 
