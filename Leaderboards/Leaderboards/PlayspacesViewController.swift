@@ -10,6 +10,7 @@ class PlayspacesViewController: UIViewController {
     @IBOutlet weak var playspaceButtonViewContainer: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addplayspaceButton: UIButton!
+    @IBOutlet var noPlayspaceView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +19,12 @@ class PlayspacesViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.tableFooterView = UIView()
-        
+        noPlayspaceView.isHidden = true
         let randomColor = colorProvider.randomColor()
         tableView.backgroundColor = randomColor
         view.backgroundColor = randomColor
         addplayspaceButton.tintColor = randomColor
-        
+        noPlayspaceView.backgroundColor = randomColor
         playspaceButtonViewContainer.layer.cornerRadius = 5
         playspaceButtonViewContainer.clipsToBounds = true
         
@@ -59,6 +60,12 @@ class PlayspacesViewController: UIViewController {
             PlayerController.shared.fetchPlayspacesFor(currentPlayer, completion: { (success) in
                 if success {
                     DispatchQueue.main.async {
+                        if PlayspaceController.shared.playspaces.count == 0 {
+                            self.noPlayspaceView.isHidden = false
+                        }
+                        else {
+                            self.noPlayspaceView.isHidden = true
+                        }
                         self.tableView.reloadData()
                         MatchController.shared.fetchPendingMatchesForCurrentPlayer(completion: { (success) in
                             if success {
@@ -161,6 +168,7 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
                     DispatchQueue.main.async {
                         PlayspaceController.shared.playspaces.remove(at: indexPath.row - 1)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self.tableView.reloadData()
                     }
                 }
             })

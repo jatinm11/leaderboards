@@ -34,7 +34,12 @@ class JoinPlayspaceViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        guard let password = passwordTextField.text, !password.isEmpty else { return }
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            
+            let failedstoryboard = UIStoryboard(name: "playspaceJoiningFailed", bundle: nil).instantiateViewController(withIdentifier: "failedToJoinPS")
+            present(failedstoryboard, animated: true, completion: nil)
+            return
+        }
         PlayspaceController.shared.joinPlayspaceWith(password: password) { (success) in
             if success {
                 DispatchQueue.main.async {
