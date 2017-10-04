@@ -9,12 +9,12 @@
 import UIKit
 
 class PlayersListViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -24,7 +24,15 @@ class PlayersListViewController: UIViewController {
     @objc func reloadTableView() {
         tableView.reloadData()
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPlayerDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let playerProfileVC = segue.destination as? PlayerProfileViewController
+            playerProfileVC?.player = GameController.shared.playersBelongingToCurrentGame[indexPath.row - 1]
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -36,31 +44,27 @@ extension PlayersListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-            return GameController.shared.playersBelongingToCurrentGame.count + 1
-        
-        
-        
+        return GameController.shared.playersBelongingToCurrentGame.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "playersTitleCell", for: indexPath)
-                return cell
-            }
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as? PlayerTableViewCell else { return PlayerTableViewCell() }
-            let player = GameController.shared.playersBelongingToCurrentGame[indexPath.row - 1]
-            cell.player = player
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "playersTitleCell", for: indexPath)
             return cell
+        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as? PlayerTableViewCell else { return PlayerTableViewCell() }
+        let player = GameController.shared.playersBelongingToCurrentGame[indexPath.row - 1]
+        cell.player = player
+        return cell
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-            if indexPath.row == 0 {
-                return 44
-            }
-            return 87
+        if indexPath.row == 0 {
+            return 44
+        }
+        return 87
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
