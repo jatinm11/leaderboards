@@ -60,7 +60,6 @@ extension PlayersListViewController: UITableViewDataSource, UITableViewDelegate 
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.row == 0 {
             return 44
         }
@@ -71,14 +70,12 @@ extension PlayersListViewController: UITableViewDataSource, UITableViewDelegate 
         if indexPath.row == 0 {
             navigationController?.topViewController?.title = GameController.shared.currentGame?.name
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             navigationController?.topViewController?.title = "Players"
         }
-        
     }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class LeaderboardsViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
@@ -18,15 +18,9 @@ class LeaderboardsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        playerStatsArrayOfDictionaries.removeAll()
         
         GameController.shared.fetchAllPlayersForCurrentGame { (success) in
             if success {
@@ -55,7 +49,6 @@ class LeaderboardsViewController: UIViewController {
         let matchesInCurrentGame = MatchController.shared.matchesInCurrentGame
         for match in matchesInCurrentGame {
             for (index, playerStatsDictionary) in playerStatsArrayOfDictionaries.enumerated() {
-                
                 if let winner = playerStatsDictionary["player"] as? Player,
                     winner.recordID == match.winner.recordID,
                     let playedForWinnerDictionary = playerStatsDictionary["played"] as? Int,
@@ -109,7 +102,7 @@ class LeaderboardsViewController: UIViewController {
             return false
         }
     }
-
+    
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -117,15 +110,10 @@ class LeaderboardsViewController: UIViewController {
 extension LeaderboardsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-            return 2
-    
-    
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         if section == 0 {
             return 1
         }
@@ -133,8 +121,6 @@ extension LeaderboardsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "leaderboardsTitleCell", for: indexPath)
             return cell
@@ -200,8 +186,6 @@ extension LeaderboardsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        
         if indexPath.section == 0 {
             return 44
         }
@@ -209,8 +193,6 @@ extension LeaderboardsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        
         if section == 0 {
             return 0
         }
