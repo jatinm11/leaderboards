@@ -92,6 +92,9 @@ class PlayspaceController {
                 return
             }
 
+            let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(currentPlayer.recordID.recordName + ".dat")
+            try? FileManager.default.removeItem(at: tempURL)
+            
             GameController.shared.fetchGamesFor(playspace) { (games, success) in
                 if success {
                     guard let games = games else { completion(false); return }
