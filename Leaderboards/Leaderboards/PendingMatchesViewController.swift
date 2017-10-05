@@ -13,10 +13,12 @@ class PendingMatchesViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
-    @IBOutlet var approveMessageLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    
+    var games: [Game]?
+    var opponents: [Player]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +45,23 @@ class PendingMatchesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
+        
         MatchController.shared.fetchPendingMatchesForCurrentPlayer { (success) in
             if success {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                MatchController.shared.fetchGamesForMatches(MatchController.shared.pendingMatches, completion: { (games, success) in
+                    self.games = games
+                    if success {
+                        MatchController.shared.fetchOpponentsForMatches(MatchController.shared.pendingMatches, player: currentPlayer, completion: { (opponents, success) in
+                            self.opponents = opponents
+                            if success {
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        })
+                    }
+                })
             }
         }
     }
@@ -84,12 +98,10 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchesTitleCell", for: indexPath)
-            approveMessageLabel.text = "You have no pending matches."
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchCell", for: indexPath) as? PendingMatchTableViewCell else { return PendingMatchTableViewCell() }
-        cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row - 1])
-        approveMessageLabel.text = " Swipe to approve or decline matches."
+        cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row - 1], opponent: opponents?[indexPath.row - 1], game: games?[indexPath.row - 1])
         return cell
     }
     

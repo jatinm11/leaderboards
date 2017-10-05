@@ -1,5 +1,6 @@
 
 import UIKit
+import CloudKit
 
 class PlayspacesViewController: UIViewController {
     
@@ -70,6 +71,18 @@ class PlayspacesViewController: UIViewController {
                         MatchController.shared.fetchPendingMatchesForCurrentPlayer(completion: { (success) in
                             if success {
                                 DispatchQueue.main.async {
+                                    let operation = CKModifyBadgeOperation(badgeValue: MatchController.shared.pendingMatches.count)
+                                    operation.modifyBadgeCompletionBlock = {(error) in
+                                        if let error = error{
+                                            print("\(error)")
+                                            return
+                                        }
+                                        
+                                        DispatchQueue.main.async {
+                                            UIApplication.shared.applicationIconBadgeNumber = MatchController.shared.pendingMatches.count
+                                        }
+                                    }
+                                    CKContainer.default().add(operation)
                                     if MatchController.shared.pendingMatches.count > 0 {
                                         pendingMatchesNotificationBadgeButton.setTitle("\(MatchController.shared.pendingMatches.count)", for: .normal)
                                         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton), UIBarButtonItem(customView: pendingMatchesNotificationBadgeButton)]

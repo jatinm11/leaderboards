@@ -504,7 +504,7 @@
                                     <outlet property="delegate" destination="RuP-zV-krD" id="xYB-KN-Iq2"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to approve or decline." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdG-g8-U8Y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to approve or decline matches." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdG-g8-U8Y">
                                 <rect key="frame" x="16" y="641" width="343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -540,7 +540,6 @@
                         <viewLayoutGuide key="safeArea" id="9uP-51-qRX"/>
                     </view>
                     <connections>
-                        <outlet property="approveMessageLabel" destination="OdG-g8-U8Y" id="dsy-sL-cHh"/>
                         <outlet property="backButton" destination="cxo-z8-idU" id="tA8-g3-Sej"/>
                         <outlet property="navigationBar" destination="V1z-Fo-8nY" id="bCh-qC-v96"/>
                         <outlet property="tableView" destination="cEP-fv-AwG" id="KVN-hN-Elz"/>
