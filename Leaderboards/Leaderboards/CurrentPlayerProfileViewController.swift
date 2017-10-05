@@ -19,8 +19,6 @@ class CurrentPlayerProfileViewController: UIViewController {
     var matches = [[Match]]()
     var playerStatsArrayOfDictionaries = [[[String: Any]]]()
     
-    let operationQueue = OperationQueue()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
