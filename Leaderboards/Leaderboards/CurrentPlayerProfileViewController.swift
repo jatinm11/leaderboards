@@ -106,7 +106,7 @@ class CurrentPlayerProfileViewController: UIViewController {
                                 if match.winner.recordID == currentPlayer.recordID {
                                     playerStatsArrayOfDictionaries[index][gameStatsIndex]["played"] = played + 1
                                     playerStatsArrayOfDictionaries[index][gameStatsIndex]["wins"] = wins + 1
-                                    playerStatsArrayOfDictionaries[index][gameStatsIndex]["winPercentage"] = Double(played + 1) / Double(wins + 1)
+                                    playerStatsArrayOfDictionaries[index][gameStatsIndex]["winPercentage"] = Double(wins + 1) / Double(played + 1)
                                     playerStatsArrayOfDictionaries[index][gameStatsIndex]["pointsFor"] = pointsFor + match.winnerScore
                                     playerStatsArrayOfDictionaries[index][gameStatsIndex]["pointsAgainst"] = pointsAgainst + match.loserScore
                                 } else {
