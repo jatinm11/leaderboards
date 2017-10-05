@@ -66,6 +66,9 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) -> Void in
                 imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = true
+                imagePicker.navigationBar.tintColor = .black
+                imagePicker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
@@ -73,6 +76,7 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
                 imagePicker.sourceType = .camera
+                imagePicker.allowsEditing = true
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
@@ -87,8 +91,8 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            playerImageView.image = image.resizeImage(image: image)
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            playerImageView.image = image
         }
     }
 }

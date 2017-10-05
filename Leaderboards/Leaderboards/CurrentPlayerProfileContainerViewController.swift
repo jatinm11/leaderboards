@@ -43,6 +43,9 @@ class CurrentPlayerProfileContainerViewController: UIViewController, UIImagePick
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) -> Void in
                 imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = true
+                imagePicker.navigationBar.tintColor = .black
+                imagePicker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
@@ -50,6 +53,7 @@ class CurrentPlayerProfileContainerViewController: UIViewController, UIImagePick
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
                 imagePicker.sourceType = .camera
+                imagePicker.allowsEditing = true
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
@@ -93,8 +97,8 @@ class CurrentPlayerProfileContainerViewController: UIViewController, UIImagePick
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let image = image.resizeImage(image: image)
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            let image = image
             PlayerController.shared.currentPlayer?.photo = image
             guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
             PlayerController.shared.updatePlayer(currentPlayer, completion: { (success) in
