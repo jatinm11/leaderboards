@@ -48,12 +48,16 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="yve-yJ-I4g"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="89u-Si-Ld1">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="89u-Si-Ld1">
                                 <rect key="frame" x="137" y="80" width="100" height="100"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="It0-K1-ehN"/>
                                     <constraint firstAttribute="height" constant="100" id="wo2-KT-JvL"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jiB-Qk-T5n" appends="YES" id="ypC-AA-KNe"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDZ-Og-qls">
                                 <rect key="frame" x="8" y="188" width="359" height="29"/>
@@ -114,6 +118,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JTE-ZZ-7qQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jiB-Qk-T5n">
+                    <connections>
+                        <action selector="playerImageViewTapped:" destination="QsB-ii-bQx" id="f7R-Hv-GfS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="772" y="-211.84407796101951"/>
         </scene>

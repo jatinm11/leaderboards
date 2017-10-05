@@ -14,7 +14,7 @@ struct Player {
     let recordID: CKRecordID
     var playspaces: [CKReference]
     let username: String
-    let photo: UIImage?
+    var photo: UIImage?
     let appleUserRef: CKReference
     
     var photoAsset: CKAsset? {
