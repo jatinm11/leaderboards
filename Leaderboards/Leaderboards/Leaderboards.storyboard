@@ -84,7 +84,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="84.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FPp-1J-Har">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FPp-1J-Har">
                                                     <rect key="frame" x="20" y="8" width="56" height="56"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="FPp-1J-Har" secondAttribute="height" multiplier="1:1" id="7Sz-Xo-7zZ"/>
