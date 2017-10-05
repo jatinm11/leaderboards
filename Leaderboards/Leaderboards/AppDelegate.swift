@@ -48,10 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let subscription = CKQuerySubscription(recordType: Match.recordType, predicate: pendingMatchesForCurrentPlayerCompoundPredicate, options: .firesOnRecordCreation)
                     
                     let notificationInfo = CKNotificationInfo()
-                    notificationInfo.alertBody = "New pending match awaiting approval."
-//                    notificationInfo.desiredKeys = ["creator", "game"]
-//                    notificationInfo.alertLocalizationKey = "New message: %1$@, %2$@"
-//                    notificationInfo.alertLocalizationArgs = ["creator", "game"]
+                    notificationInfo.desiredKeys = ["creatorString", "scoreString", "gameString"]
+                    notificationInfo.alertLocalizationKey = "New Pending Match: %1$@ submitted a %2$@ in %3$@"
+                    notificationInfo.alertLocalizationArgs = ["creatorString", "scoreString", "gameString"]
                     notificationInfo.soundName = "default"
                     notificationInfo.shouldBadge = true
                     

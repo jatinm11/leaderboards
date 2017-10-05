@@ -21,7 +21,14 @@ class MatchController {
     func createMatch(game: Game, winner: Player, winnerScore: Int, loser: Player, loserScore: Int, completion: @escaping (_ success: Bool) -> Void) {
         guard let creator = PlayerController.shared.currentPlayer else { completion(false); return }
         
-        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none), participants: [CKReference(record: winner.CKRepresentation, action: .none), CKReference(record: loser.CKRepresentation, action: .none)])
+        var scoreString = ""
+        if winner.recordID == creator.recordID {
+            scoreString = "\(loserScore) - \(winnerScore) loss"
+        } else {
+            scoreString = "\(winnerScore) - \(loserScore) win"
+        }
+        
+        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none), participants: [CKReference(record: winner.CKRepresentation, action: .none), CKReference(record: loser.CKRepresentation, action: .none)], creatorString: "\(creator.username.uppercased())", scoreString: scoreString.uppercased(), gameString: "\(game.name.uppercased())")
         
         CloudKitManager.shared.saveRecord(match.CKRepresentation) { (_, error) in
             if let error = error {
@@ -37,8 +44,6 @@ class MatchController {
     func fetchPendingMatchesForCurrentPlayer(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(false); return }
         
-        //let currentPlayerIsWinnerPredicate = NSPredicate(format: "winner == %@", currentPlayer.CKRepresentation)
-        //let currentPlayerIsLoserPredicate = NSPredicate(format: "loser == %@", currentPlayer.CKRepresentation)
         let currentPlayerIsParticipantPredicate = NSPredicate(format: "participants CONTAINS %@", currentPlayer.CKRepresentation)
         let matchIsNotVerifiedPredicate = NSPredicate(format: "verified == false")
         let currentPlayerIsNotCreatorPredicate = NSPredicate(format: "creator != %@", currentPlayer.CKRepresentation)
@@ -57,6 +62,28 @@ class MatchController {
             
             self.pendingMatches = pendingMatches
             completion(true)
+        }
+    }
+    
+    func fetchMatchesForCurrentPlayer(completion: @escaping (_ matches: [Match]?, _ success: Bool) -> Void = { _, _ in }) {
+        guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(nil, false); return }
+        
+        let currentPlayerIsParticipantPredicate = NSPredicate(format: "participants CONTAINS %@", currentPlayer.CKRepresentation)
+        let matchIsVerifiedPredicate = NSPredicate(format: "verified == true")
+        
+        let matchesForCurrentPlayerCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentPlayerIsParticipantPredicate, matchIsVerifiedPredicate])
+        
+        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchesForCurrentPlayerCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let matchRecords = records else { completion(nil, false); return }
+            let matches = matchRecords.flatMap { Match(record: $0) }
+            
+            completion(matches, true)
         }
     }
     
@@ -206,6 +233,31 @@ class MatchController {
                 }
             }
             completion(opponents, true)
+        }
+    }
+    
+    func fetchGamesForMatches(_ matches: [Match], completion: @escaping (_ games: [Game]?, _ success: Bool) -> Void = { _, _  in }) {
+        var gameRecordIDs = [CKRecordID]()
+        for match in matches {
+            gameRecordIDs.append(match.game.recordID)
+        }
+        
+        CloudKitManager.shared.fetchRecords(withIDs: gameRecordIDs) { (gameRecordsDict, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            var games = [Game]()
+            guard let gameRecordsDict = gameRecordsDict else { completion(nil, false); return }
+            for gameRecordID in gameRecordIDs {
+                if let gameRecord = gameRecordsDict[gameRecordID],
+                    let game = Game(record: gameRecord) {
+                    games.append(game)
+                }
+            }
+            completion(games, true)
         }
     }
     

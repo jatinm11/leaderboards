@@ -21,6 +21,9 @@ struct Match {
     let timestamp: Date
     let creator: CKReference
     let participants: [CKReference]
+    let creatorString: String
+    let scoreString: String
+    let gameString: String
     
 }
 
@@ -37,6 +40,9 @@ extension Match {
     static let loserScoreKey = "loserScore"
     static let creatorKey = "creator"
     static let participantsKey = "participants"
+    static let creatorStringKey = "creatorString"
+    static let scoreStringKey = "scoreString"
+    static let gameStringKey = "gameString"
     static let recordType = "Match"
     
     init?(record: CKRecord) {
@@ -48,7 +54,10 @@ extension Match {
             let loser = record[Match.loserKey] as? CKReference,
             let loserScore = record[Match.loserScoreKey] as? Int,
             let creator = record[Match.creatorKey] as? CKReference,
-            let participants = record[Match.participantsKey] as? [CKReference] else { return nil }
+            let participants = record[Match.participantsKey] as? [CKReference],
+            let creatorString = record[Match.creatorStringKey] as? String,
+            let scoreString = record[Match.scoreStringKey] as? String,
+            let gameString = record[Match.gameStringKey] as? String else { return nil }
         
         self.recordID = record.recordID
         self.verified = verified
@@ -60,6 +69,9 @@ extension Match {
         self.loserScore = loserScore
         self.creator = creator
         self.participants = participants
+        self.creatorString = creatorString
+        self.scoreString = scoreString
+        self.gameString = gameString
     }
     
     var CKRepresentation: CKRecord {
@@ -74,6 +86,9 @@ extension Match {
         record.setValue(timestamp, forKey: Match.timestampKey)
         record.setValue(creator, forKey: Match.creatorKey)
         record.setValue(participants, forKey: Match.participantsKey)
+        record.setValue(creatorString, forKey: Match.creatorStringKey)
+        record.setValue(scoreString, forKey: Match.scoreStringKey)
+        record.setValue(gameString, forKey: Match.gameStringKey)
         
         return record
     }

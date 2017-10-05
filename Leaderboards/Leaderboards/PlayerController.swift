@@ -74,6 +74,8 @@ class PlayerController {
                 completion(false)
                 return
             }
+            let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(player.recordID.recordName + ".dat")
+            try? FileManager.default.removeItem(at: tempURL)
             completion(true)
         }
     }

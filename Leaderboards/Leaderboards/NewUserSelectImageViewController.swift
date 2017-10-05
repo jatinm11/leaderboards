@@ -45,25 +45,6 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
 
     }
     
-    @IBAction func backBarButtonTapped(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func skipRegisterBarButtonTapped(_ sender: Any) {
-        guard let username = username else { return }
-        PlayerController.shared.createPlayerWith(username: username, photo: playerImageView.image) { (success) in
-            DispatchQueue.main.async {
-                if !success {
-                    self.presentSimpleAlert(title: "Unable to create an account", message: "Make sure you have a network connection, and please try again.")
-                } else {
-                    let playspacesViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
-                    self.present(playspacesViewController, animated: true, completion: nil)
-                }
-            }
-        }
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }

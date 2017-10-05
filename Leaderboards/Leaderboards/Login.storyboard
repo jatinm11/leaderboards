@@ -34,15 +34,6 @@
                                     <outlet property="delegate" destination="uVk-D3-EKg" id="KE4-cW-fCS"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKl-dQ-Xfo">
-                                <rect key="frame" x="16" y="318" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="kjM-qK-ZS0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please make sure you are signed in to your iCloud Account before signing in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVj-tD-bdd">
                                 <rect key="frame" x="16" y="623" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -67,14 +58,11 @@
                             <constraint firstItem="IYD-7T-aOk" firstAttribute="centerY" secondItem="DeO-2p-3AN" secondAttribute="centerY" id="8ft-dY-XK1"/>
                             <constraint firstItem="mVj-tD-bdd" firstAttribute="leading" secondItem="DeO-2p-3AN" secondAttribute="leading" constant="16" id="NDa-Zx-bkB"/>
                             <constraint firstItem="IYD-7T-aOk" firstAttribute="leading" secondItem="DeO-2p-3AN" secondAttribute="leadingMargin" id="OWm-Dj-YAj"/>
-                            <constraint firstItem="oKl-dQ-Xfo" firstAttribute="centerY" secondItem="IYD-7T-aOk" secondAttribute="centerY" id="UNy-5Z-O6b"/>
                             <constraint firstItem="xRP-3e-JzT" firstAttribute="top" secondItem="mVj-tD-bdd" secondAttribute="bottom" constant="20" id="YfY-d2-H0P"/>
                             <constraint firstItem="otD-uZ-NpB" firstAttribute="leading" secondItem="DeO-2p-3AN" secondAttribute="leading" constant="16" id="a8U-pe-QKF"/>
                             <constraint firstItem="THF-IT-imt" firstAttribute="leading" secondItem="DeO-2p-3AN" secondAttribute="leadingMargin" id="f2I-nk-5nK"/>
-                            <constraint firstItem="oKl-dQ-Xfo" firstAttribute="leading" secondItem="DeO-2p-3AN" secondAttribute="leadingMargin" id="i2t-Og-KQV"/>
                             <constraint firstItem="otD-uZ-NpB" firstAttribute="top" secondItem="mqV-63-CW2" secondAttribute="bottom" id="kdU-Lw-DbW"/>
                             <constraint firstAttribute="trailing" secondItem="mVj-tD-bdd" secondAttribute="trailing" constant="16" id="ngA-a9-1fE"/>
-                            <constraint firstItem="oKl-dQ-Xfo" firstAttribute="trailing" secondItem="DeO-2p-3AN" secondAttribute="trailingMargin" id="pm8-LF-3ph"/>
                             <constraint firstItem="IYD-7T-aOk" firstAttribute="trailing" secondItem="DeO-2p-3AN" secondAttribute="trailingMargin" id="vgf-Ux-upW"/>
                             <constraint firstItem="THF-IT-imt" firstAttribute="top" secondItem="otD-uZ-NpB" secondAttribute="bottom" constant="5" id="vgr-Zz-SK1"/>
                         </constraints>
@@ -88,8 +76,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="createUserNameCenterYConstraint" destination="UNy-5Z-O6b" id="cQl-QI-ctg"/>
-                        <outlet property="createUsernameLabel" destination="oKl-dQ-Xfo" id="xuL-tn-w8M"/>
                         <outlet property="usernameTextField" destination="IYD-7T-aOk" id="ToZ-Op-PZa"/>
                     </connections>
                 </viewController>
@@ -313,11 +299,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e56-g9-Csp" id="IYS-No-ygE">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UfH-BC-Cmy">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -334,7 +320,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lQC-kA-1I8" id="cVP-rK-vyU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Games" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYe-GN-2E8">
@@ -544,7 +530,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pXN-az-AyR" id="uxY-ap-HMn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -553,7 +539,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h0I-6y-HJp" id="fWs-3A-Qop">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Game" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jW7-N3-OdE">

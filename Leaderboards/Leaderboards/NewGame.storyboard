@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joingameicon" translatesAutoresizingMaskIntoConstraints="NO" id="h8c-r2-U61">
-                                <rect key="frame" x="104" y="114" width="167" height="151"/>
+                                <rect key="frame" x="104" y="94" width="167" height="151"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="167" id="3hO-tl-yoG"/>
                                     <constraint firstAttribute="height" constant="151" id="4J8-i5-ZHH"/>
@@ -96,7 +96,7 @@
                             <constraint firstItem="psO-Vi-rTX" firstAttribute="top" secondItem="hGG-0Z-jKj" secondAttribute="bottom" constant="17" id="Xko-ox-7GS"/>
                             <constraint firstItem="3D3-HQ-lKL" firstAttribute="trailing" secondItem="GTG-Yz-wdT" secondAttribute="trailing" id="czU-4r-vUm"/>
                             <constraint firstItem="3D3-HQ-lKL" firstAttribute="top" secondItem="GTG-Yz-wdT" secondAttribute="top" id="imW-NS-3Jq"/>
-                            <constraint firstItem="h8c-r2-U61" firstAttribute="top" secondItem="3D3-HQ-lKL" secondAttribute="bottom" constant="50" id="ncx-nL-BDK"/>
+                            <constraint firstItem="h8c-r2-U61" firstAttribute="top" secondItem="3D3-HQ-lKL" secondAttribute="bottom" constant="30" id="ncx-nL-BDK"/>
                             <constraint firstItem="DlK-gs-acC" firstAttribute="top" secondItem="3D3-HQ-lKL" secondAttribute="bottom" id="sce-Rw-3jf"/>
                             <constraint firstItem="k9U-TI-eaS" firstAttribute="centerY" secondItem="HXz-rd-lZ4" secondAttribute="centerY" id="ySh-GA-Sat"/>
                             <constraint firstItem="DlK-gs-acC" firstAttribute="leading" secondItem="GTG-Yz-wdT" secondAttribute="leading" constant="16" id="yrk-aM-Sku"/>

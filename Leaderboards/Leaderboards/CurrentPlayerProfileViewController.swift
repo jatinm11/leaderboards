@@ -11,15 +11,7 @@ import CloudKit
 
 class CurrentPlayerProfileViewController: UIViewController {
     
-    @IBOutlet weak var playerImageView: UIImageView!
-    @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    
-    
-    @IBAction func backBarButtonItemTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     var games = [Game]()
     var playspaces = [Playspace]()
@@ -27,30 +19,13 @@ class CurrentPlayerProfileViewController: UIViewController {
     var matches = [[Match]]()
     var playerStatsArrayOfDictionaries = [[[String: Any]]]()
     
-    let operationQueue = OperationQueue()
-    let colorProvider = BackgroundColorProvider()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let randomColor = colorProvider.randomColor()
-        self.view.backgroundColor = randomColor
-        tableView.backgroundColor = randomColor
+
         tableView.tableFooterView = UIView()
-        playerImageView.layer.cornerRadius = playerImageView.frame.width / 2
-        playerImageView.clipsToBounds = true
-        playerImageView.layer.borderWidth = 3.0
-        playerImageView.layer.borderColor = UIColor.white.cgColor
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        playerNameLabel.text = PlayerController.shared.currentPlayer?.username
-        playerImageView.image = PlayerController.shared.currentPlayer?.photo
-        
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
         
         guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
         GameController.shared.fetchAllGamesForCurrentPlayer { (games, success) in
@@ -147,30 +122,7 @@ class CurrentPlayerProfileViewController: UIViewController {
                 }
             }
         }
-        
-        //        for (index, gameMatches) in matches.enumerated() {
-        //            for match in gameMatches {
-        //                guard let played = playerStatsArrayOfDictionaries[index]["played"] as? Int,
-        //                    let wins = playerStatsArrayOfDictionaries[index]["wins"] as? Int,
-        //                    let losses = playerStatsArrayOfDictionaries[index]["losses"] as? Int,
-        //                    let pointsFor = playerStatsArrayOfDictionaries[index]["pointsFor"] as? Int,
-        //                    let pointsAgainst = playerStatsArrayOfDictionaries[index]["pointsAgainst"] as? Int else { return }
-        //
-        //                if match.winner.recordID == currentPlayer.recordID {
-        //                    playerStatsArrayOfDictionaries[index]["played"] = played + 1
-        //                    playerStatsArrayOfDictionaries[index]["wins"] = wins + 1
-        //                    playerStatsArrayOfDictionaries[index]["winPercentage"] = Double(played + 1) / Double(wins + 1)
-        //                    playerStatsArrayOfDictionaries[index]["pointsFor"] = pointsFor + match.winnerScore
-        //                    playerStatsArrayOfDictionaries[index]["pointsAgainst"] = pointsAgainst + match.loserScore
-        //                } else {
-        //                    playerStatsArrayOfDictionaries[index]["played"] = played + 1
-        //                    playerStatsArrayOfDictionaries[index]["losses"] = losses + 1
-        //                    playerStatsArrayOfDictionaries[index]["winPercentage"] = Double(wins) / Double(played + 1)
-        //                    playerStatsArrayOfDictionaries[index]["pointsFor"] = pointsFor + match.loserScore
-        //                    playerStatsArrayOfDictionaries[index]["pointsAgainst"] = pointsAgainst + match.winnerScore
-        //                }
-        //            }
-        //        }
+    
     }
     
     func processPlayspaces() {
@@ -203,7 +155,7 @@ extension CurrentPlayerProfileViewController: UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
-            headerTitle.textLabel?.textColor = UIColor.white
+            headerTitle.textLabel?.textColor = UIColor.lightGray
         }
     }
     

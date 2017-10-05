@@ -66,7 +66,7 @@ extension PlayerProfileViewController2: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pendingMatchCell", for: indexPath) as? PendingMatchTableViewCell else { return PendingMatchTableViewCell() }
-        cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row])
+        //cell.updateViewsWith(MatchController.shared.pendingMatches[indexPath.row])
         return cell
     }
     

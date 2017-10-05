@@ -69,7 +69,7 @@
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PasswordImage" translatesAutoresizingMaskIntoConstraints="NO" id="aVD-Yo-yIu">
-                                <rect key="frame" x="119.5" y="145" width="136" height="113"/>
+                                <rect key="frame" x="119.5" y="120" width="136" height="113"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="113" id="TCa-Af-sp6"/>
                                     <constraint firstAttribute="width" constant="136" id="iSF-Zi-GNt"/>
@@ -82,7 +82,7 @@
                             <constraint firstItem="EH6-dh-IbB" firstAttribute="trailing" secondItem="QdG-UI-5l3" secondAttribute="trailing" constant="16" id="58g-Yn-CQl"/>
                             <constraint firstItem="Rhw-nw-ydE" firstAttribute="top" secondItem="hcl-W0-lY1" secondAttribute="bottom" id="7LF-uO-r0w"/>
                             <constraint firstItem="QdG-UI-5l3" firstAttribute="leading" secondItem="EH6-dh-IbB" secondAttribute="leading" constant="16" id="7Wa-SI-JHs"/>
-                            <constraint firstItem="aVD-Yo-yIu" firstAttribute="top" secondItem="Rhw-nw-ydE" secondAttribute="bottom" constant="45" id="8BK-Mi-1ij"/>
+                            <constraint firstItem="aVD-Yo-yIu" firstAttribute="top" secondItem="Rhw-nw-ydE" secondAttribute="bottom" constant="20" id="8BK-Mi-1ij"/>
                             <constraint firstItem="aVD-Yo-yIu" firstAttribute="centerX" secondItem="bcD-sh-JYf" secondAttribute="centerX" id="CYX-ga-rtK"/>
                             <constraint firstItem="hcl-W0-lY1" firstAttribute="leading" secondItem="EH6-dh-IbB" secondAttribute="leading" id="Cyo-XI-jlP"/>
                             <constraint firstItem="cxD-UO-cXV" firstAttribute="centerY" secondItem="bcD-sh-JYf" secondAttribute="centerY" id="MgX-fE-GDv"/>

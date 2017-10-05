@@ -45,6 +45,11 @@ class JoinPlayspaceViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
+            } else {
+                DispatchQueue.main.async {
+                    let failedstoryboard = UIStoryboard(name: "playspaceJoiningFailed", bundle: nil).instantiateViewController(withIdentifier: "failedToJoinPS")
+                    self.present(failedstoryboard, animated: true, completion: nil)
+                }
             }
         }
     }
