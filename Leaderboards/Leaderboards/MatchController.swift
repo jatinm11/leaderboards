@@ -21,7 +21,14 @@ class MatchController {
     func createMatch(game: Game, winner: Player, winnerScore: Int, loser: Player, loserScore: Int, completion: @escaping (_ success: Bool) -> Void) {
         guard let creator = PlayerController.shared.currentPlayer else { completion(false); return }
         
-        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none), participants: [CKReference(record: winner.CKRepresentation, action: .none), CKReference(record: loser.CKRepresentation, action: .none)])
+        var scoreString = ""
+        if winner.recordID == creator.recordID {
+            scoreString = "\(loserScore) - \(winnerScore) loss"
+        } else {
+            scoreString = "\(winnerScore) - \(loserScore) win"
+        }
+        
+        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none), participants: [CKReference(record: winner.CKRepresentation, action: .none), CKReference(record: loser.CKRepresentation, action: .none)], creatorString: "\(creator.username.uppercased())", scoreString: scoreString.uppercased(), gameString: "\(game.name.uppercased())")
         
         CloudKitManager.shared.saveRecord(match.CKRepresentation) { (_, error) in
             if let error = error {
