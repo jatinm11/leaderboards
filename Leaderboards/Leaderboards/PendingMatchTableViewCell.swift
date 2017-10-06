@@ -36,6 +36,7 @@ class PendingMatchTableViewCell: UITableViewCell {
                 self.opponentImage.layer.borderColor = UIColor.red.cgColor
                 self.opponentImage.layer.borderWidth = 3.0
                 self.scoreLabel.text = "\(pendingMatch.loserScore) - \(pendingMatch.winnerScore)"
+                self.scoreLabel.textColor = UIColor.red
             }
         }
     }
