@@ -13,6 +13,7 @@ class LeaderboardsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
+    let colorProvider = BackgroundColorProvider()
     var randomColor: UIColor?
     static let fetchAllPlayersComplete = Notification.Name(rawValue:"fetchAllPlayersComplete")
     
@@ -21,6 +22,13 @@ class LeaderboardsViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        randomColor = colorProvider.randomColor()
+        view.backgroundColor = randomColor
+        tableView.backgroundColor = randomColor
+        
+        let addMatchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMatchBarButtonItemTapped))
+        navigationItem.rightBarButtonItem = addMatchBarButtonItem
         
         GameController.shared.fetchAllPlayersForCurrentGame { (success) in
             if success {
@@ -100,6 +108,19 @@ class LeaderboardsViewController: UIViewController {
                 }
             }
             return false
+        }
+    }
+    
+    @objc func addMatchBarButtonItemTapped() {
+        let newMatchVC = UIStoryboard(name: "Match", bundle: nil).instantiateViewController(withIdentifier: "newMatchVC")
+        present(newMatchVC, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPlayerDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let playerProfileVC = segue.destination as? PlayerProfileViewController
+            playerProfileVC?.player = playerStatsArrayOfDictionaries[indexPath.row]["player"] as? Player
         }
     }
     

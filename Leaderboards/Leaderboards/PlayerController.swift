@@ -106,6 +106,22 @@ class PlayerController {
         }
     }
     
+    func fetchPlayersFor(_ playspace: Playspace, completion: @escaping (_ players: [Player]?, _ success: Bool) -> Void = { _, _ in }) {
+        let playerIsInPlayspacePredicate = NSPredicate(format: "playspaces CONTAINS %@", playspace.recordID)
+        
+        CloudKitManager.shared.fetchRecordsWithType(Player.recordType, predicate: playerIsInPlayspacePredicate, recordFetchedBlock: nil) { (playerRecords, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, false)
+                return
+            }
+            
+            guard let playerRecords = playerRecords else { completion(nil, false); return }
+            let players = playerRecords.flatMap { Player(record: $0) }
+            completion(players, true)
+        }
+    }
+    
     func fetchPlayer(_ playerRecordID: CKRecordID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _,_  in }) {
         
         CloudKitManager.shared.fetchRecord(withID: playerRecordID) { (record, error) in

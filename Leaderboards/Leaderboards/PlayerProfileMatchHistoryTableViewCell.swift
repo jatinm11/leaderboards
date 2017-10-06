@@ -20,6 +20,8 @@ class PlayerProfileMatchHistoryTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         scoreView.layer.cornerRadius = 5
         scoreView.clipsToBounds = true
         playerImage.layer.cornerRadius = playerImage.frame.width / 2

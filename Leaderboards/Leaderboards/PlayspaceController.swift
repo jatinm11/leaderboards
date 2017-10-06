@@ -149,20 +149,6 @@ class PlayspaceController {
                             }
                         })
                     })
-                    
-//                    CloudKitManager.shared.updateRecords(updatedGameRecords, perRecordCompletion: nil, completion: { (_, error) in
-//                        if let error = error {
-//                            print(error.localizedDescription)
-//                            completion(false)
-//                            return
-//                        }
-//
-//                        PlayerController.shared.fetchCurrentPlayer(completion: { (success) in
-//                            if success {
-//                                completion(true)
-//                            }
-//                        })
-//                    })
                 }
             }
         }

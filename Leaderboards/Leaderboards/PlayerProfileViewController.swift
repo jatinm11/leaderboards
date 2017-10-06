@@ -12,7 +12,6 @@ class PlayerProfileViewController: UIViewController {
     
     let colorProvider = BackgroundColorProvider()
     
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var matches: [Match]?
@@ -22,6 +21,8 @@ class PlayerProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = player?.username
+        
         let randomColor = colorProvider.randomColor()
         self.view.backgroundColor = randomColor
         self.tableView.backgroundColor = randomColor
@@ -29,10 +30,6 @@ class PlayerProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        
-        if let player = player {
-            usernameLabel.text = ("\(player.username)'s Match History")
-        }
         
         guard let currentGame = GameController.shared.currentGame,
             let player = player else { return }
@@ -58,12 +55,15 @@ extension PlayerProfileViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = matches?.count else { return 0 }
-        return count + 1
+        return count + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "matchHistoryTitleCell", for: indexPath)
+            return cell
+        }
+        if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "lastFiveCell", for: indexPath) as? PlayerProfileLastFiveTableViewCell,
                 let matches = matches,
                 let player = player else { return PlayerProfileLastFiveTableViewCell() }
@@ -75,22 +75,27 @@ extension PlayerProfileViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "matchCell", for: indexPath) as? PlayerProfileMatchHistoryTableViewCell else { return PlayerProfileMatchHistoryTableViewCell() }
-        cell.updateViewsWith(opponent: opponents?[indexPath.row - 1], match: matches?[indexPath.row - 1], player: player)
+        cell.updateViewsWith(opponent: opponents?[indexPath.row - 2], match: matches?[indexPath.row - 2], player: player)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.row == 0 {
-            return 140
+            return 44
         }
-        else {
-            return 140
-        }
+        return 140
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor.clear
+        if indexPath.row == 0 {
+            title = player?.username
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            title = "Match History"
+        }
     }
     
 }

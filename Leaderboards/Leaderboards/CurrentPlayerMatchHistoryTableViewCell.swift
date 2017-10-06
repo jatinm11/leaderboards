@@ -21,6 +21,8 @@ class CurrentPlayerMatchHistoryTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         playerImage.layer.cornerRadius = playerImage.frame.width / 2
         playerImage.clipsToBounds = true
         playerImage.layer.borderWidth = 2.0

@@ -9,6 +9,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="Qjc-2r-7CO">
@@ -316,7 +321,7 @@
                                             <segue destination="l1Q-QG-KAJ" kind="show" identifier="toGameDetail" id="Z0K-hM-UXG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gamesTitleCell" id="lQC-kA-1I8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gamesTitleCell" id="lQC-kA-1I8">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lQC-kA-1I8" id="cVP-rK-vyU">
@@ -329,9 +334,22 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y99-nf-wGH">
+                                                    <rect key="frame" x="327" y="11.5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="5D2-hZ-GoQ"/>
+                                                        <constraint firstAttribute="height" constant="32" id="IoK-SO-wIs"/>
+                                                    </constraints>
+                                                    <state key="normal" image="membersicon"/>
+                                                    <connections>
+                                                        <segue destination="xgS-bB-8da" kind="show" id="thb-wP-Z8J"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ZYe-GN-2E8" firstAttribute="leading" secondItem="cVP-rK-vyU" secondAttribute="leading" constant="16" id="1wz-DA-dtq"/>
+                                                <constraint firstAttribute="trailing" secondItem="Y99-nf-wGH" secondAttribute="trailing" constant="16" id="3Dz-WP-CqH"/>
+                                                <constraint firstAttribute="bottom" secondItem="Y99-nf-wGH" secondAttribute="bottom" id="Lau-vo-0s7"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZYe-GN-2E8" secondAttribute="bottom" id="eGC-VQ-ONN"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -509,6 +527,97 @@
             </objects>
             <point key="canvasLocation" x="3598" y="607"/>
         </scene>
+        <!--Playspace Members List View Controller-->
+        <scene sceneID="BR4-w0-xMW">
+            <objects>
+                <viewController id="xgS-bB-8da" customClass="PlayspaceMembersListViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TZc-uf-Nh4"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Ms-Ma-42J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2hu-43-is1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kTf-iN-8Nb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="memberCell" rowHeight="80" id="T6g-w4-p0d" customClass="PlayspaceMemberTableViewCell" customModule="Leaderboards" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T6g-w4-p0d" id="Itr-ZG-lNS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HYf-Rm-RoD">
+                                                    <rect key="frame" x="16" y="12" width="56" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="56" id="Ywa-4F-aMI"/>
+                                                        <constraint firstAttribute="height" constant="56" id="h4l-E2-pml"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vez-3K-YxP">
+                                                    <rect key="frame" x="93" y="20.5" width="266" height="38.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="28"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Vez-3K-YxP" firstAttribute="centerY" secondItem="Itr-ZG-lNS" secondAttribute="centerY" id="3kf-hD-esl"/>
+                                                <constraint firstItem="HYf-Rm-RoD" firstAttribute="leading" secondItem="Itr-ZG-lNS" secondAttribute="leading" constant="16" id="MS8-co-YbX"/>
+                                                <constraint firstItem="Vez-3K-YxP" firstAttribute="leading" secondItem="HYf-Rm-RoD" secondAttribute="trailing" constant="21" id="PBY-oS-G1C"/>
+                                                <constraint firstItem="HYf-Rm-RoD" firstAttribute="centerY" secondItem="Itr-ZG-lNS" secondAttribute="centerY" id="dnN-at-iwL"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vez-3K-YxP" secondAttribute="trailing" constant="16" id="lyW-sN-aRi"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="playerImageView" destination="HYf-Rm-RoD" id="cKG-36-PTS"/>
+                                            <outlet property="playerNameLabel" destination="Vez-3K-YxP" id="fCy-fR-tkM"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="memberTitleCell" id="o3d-jX-eA3" customClass="PlayspaceMemberTableViewCell" customModule="Leaderboards" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o3d-jX-eA3" id="4cY-QF-kAx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNR-4g-hnh">
+                                                    <rect key="frame" x="16" y="8" width="142" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sNR-4g-hnh" firstAttribute="leading" secondItem="4cY-QF-kAx" secondAttribute="leading" constant="16" id="Pdn-Wn-ER6"/>
+                                                <constraint firstAttribute="bottom" secondItem="sNR-4g-hnh" secondAttribute="bottom" id="q8N-AZ-FJc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kTf-iN-8Nb" firstAttribute="top" secondItem="TZc-uf-Nh4" secondAttribute="bottom" id="8H5-E0-Fux"/>
+                            <constraint firstItem="kTf-iN-8Nb" firstAttribute="leading" secondItem="2hu-43-is1" secondAttribute="leading" id="JYH-Jl-9kr"/>
+                            <constraint firstAttribute="trailing" secondItem="kTf-iN-8Nb" secondAttribute="trailing" id="L9S-ZU-eJJ"/>
+                            <constraint firstItem="5Ms-Ma-42J" firstAttribute="top" secondItem="kTf-iN-8Nb" secondAttribute="bottom" id="qtm-be-oYh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="kTf-iN-8Nb" id="urX-qE-T29"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-Ma-ajQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4364" y="872.11394302848578"/>
+        </scene>
         <!--Join Game View Controller-->
         <scene sceneID="o2M-NP-p0O">
             <objects>
@@ -652,6 +761,7 @@
     <resources>
         <image name="LogoWhite" width="202" height="110"/>
         <image name="image_placeholder" width="191" height="191"/>
+        <image name="membersicon" width="300" height="300"/>
         <image name="table_tennis_2 copy" width="512" height="331"/>
     </resources>
 </document>
