@@ -298,10 +298,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bK-cH-tWh">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="595"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gPh-DE-8wJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -427,21 +427,47 @@
                                     <constraint firstItem="gPh-DE-8wJ" firstAttribute="top" secondItem="9bK-cH-tWh" secondAttribute="top" id="nkq-zj-ShV"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6y-QI-Uxb">
+                                <rect key="frame" x="136" y="623" width="103" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mJ-VK-xGd">
+                                        <rect key="frame" x="0.0" y="0.0" width="103" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="All Time"/>
+                                        <connections>
+                                            <action selector="allTimeCurrentMonthButtonTapped:" destination="0YW-Pd-9JI" eventType="touchUpInside" id="0cD-3K-FyK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="4Ci-6h-rMw"/>
+                                    <constraint firstItem="4mJ-VK-xGd" firstAttribute="leading" secondItem="v6y-QI-Uxb" secondAttribute="leading" id="IVq-N8-T8H"/>
+                                    <constraint firstAttribute="bottom" secondItem="4mJ-VK-xGd" secondAttribute="bottom" id="WUk-f7-5lb"/>
+                                    <constraint firstAttribute="width" constant="103" id="eP8-49-NID"/>
+                                    <constraint firstAttribute="trailing" secondItem="4mJ-VK-xGd" secondAttribute="trailing" id="ott-Xk-GMv"/>
+                                    <constraint firstItem="4mJ-VK-xGd" firstAttribute="top" secondItem="v6y-QI-Uxb" secondAttribute="top" id="pu2-Js-vTF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="9bK-cH-tWh" secondAttribute="trailing" id="Khg-rp-wrY"/>
-                            <constraint firstItem="WCd-Bx-gTq" firstAttribute="top" secondItem="9bK-cH-tWh" secondAttribute="bottom" id="YMe-zR-GRv"/>
                             <constraint firstItem="9bK-cH-tWh" firstAttribute="top" secondItem="y6p-OJ-5bh" secondAttribute="bottom" id="a5q-m0-ffE"/>
+                            <constraint firstItem="WCd-Bx-gTq" firstAttribute="top" secondItem="v6y-QI-Uxb" secondAttribute="bottom" constant="8" id="aG3-TZ-lnd"/>
+                            <constraint firstItem="v6y-QI-Uxb" firstAttribute="centerX" secondItem="yl6-AE-fPe" secondAttribute="centerX" id="f3V-zH-i2d"/>
+                            <constraint firstItem="v6y-QI-Uxb" firstAttribute="top" secondItem="9bK-cH-tWh" secondAttribute="bottom" constant="8" id="svX-8w-abP"/>
                             <constraint firstItem="9bK-cH-tWh" firstAttribute="leading" secondItem="yl6-AE-fPe" secondAttribute="leading" id="uha-Xa-cLt"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allTimeCurrentMonthButton" destination="4mJ-VK-xGd" id="08T-aY-iNx"/>
+                        <outlet property="allTimeCurrentMonthButtonContainer" destination="v6y-QI-Uxb" id="k6s-Z0-aKQ"/>
                         <outlet property="tableView" destination="gPh-DE-8wJ" id="bBW-AS-pwc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3H-LJ-hoC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="436" y="170"/>
+            <point key="canvasLocation" x="436" y="169.56521739130437"/>
         </scene>
         <!--Players List View Controller-->
         <scene sceneID="Jfl-kf-n6d">

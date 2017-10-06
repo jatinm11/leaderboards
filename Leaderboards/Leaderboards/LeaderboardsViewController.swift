@@ -11,10 +11,57 @@ import UIKit
 class LeaderboardsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var allTimeCurrentMonthButton: UIButton!
+    @IBOutlet weak var allTimeCurrentMonthButtonContainer: UIView!
+    
+    @IBAction func allTimeCurrentMonthButtonTapped(_ sender: Any) {
+        showingAllTime = !showingAllTime
+        playerStatsArrayOfDictionaries = []
+        allTimeCurrentMonthButton.isEnabled = false
+        
+        if showingAllTime {
+            GameController.shared.fetchAllPlayersForCurrentGame { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: LeaderboardsViewController.fetchAllPlayersComplete, object: nil)
+                        self.createPlayerStatsDictionaries()
+                    }
+                    MatchController.shared.fetchMatchesForCurrentGame(completion: { (success) in
+                        if success {
+                            DispatchQueue.main.async {
+                                self.updatePlayerStatsDictionaries()
+                                self.allTimeCurrentMonthButton.setTitle("Current Month", for: .normal)
+                                self.allTimeCurrentMonthButton.isEnabled = true
+                            }
+                        }
+                    })
+                }
+            }
+        } else {
+            GameController.shared.fetchAllPlayersForCurrentGame { (success) in
+                if success {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: LeaderboardsViewController.fetchAllPlayersComplete, object: nil)
+                        self.createPlayerStatsDictionaries()
+                    }
+                    MatchController.shared.fetchMatchesForCurrentGameAndCurrentMonth(completion: { (success) in
+                        if success {
+                            DispatchQueue.main.async {
+                                self.updatePlayerStatsDictionaries()
+                                self.allTimeCurrentMonthButton.setTitle("All Time", for: .normal)
+                                self.allTimeCurrentMonthButton.isEnabled = true
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    }
     
     var playerStatsArrayOfDictionaries = [[String: Any]]()
     let colorProvider = BackgroundColorProvider()
     var randomColor: UIColor?
+    var showingAllTime = false
     static let fetchAllPlayersComplete = Notification.Name(rawValue:"fetchAllPlayersComplete")
     
     override func viewDidLoad() {
@@ -26,6 +73,10 @@ class LeaderboardsViewController: UIViewController {
         randomColor = colorProvider.randomColor()
         view.backgroundColor = randomColor
         tableView.backgroundColor = randomColor
+        allTimeCurrentMonthButton.tintColor = randomColor
+        
+        allTimeCurrentMonthButtonContainer.layer.cornerRadius = 5
+        allTimeCurrentMonthButtonContainer.clipsToBounds = true
         
         let addMatchBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMatchBarButtonItemTapped))
         navigationItem.rightBarButtonItem = addMatchBarButtonItem
@@ -36,7 +87,7 @@ class LeaderboardsViewController: UIViewController {
                     NotificationCenter.default.post(name: LeaderboardsViewController.fetchAllPlayersComplete, object: nil)
                     self.createPlayerStatsDictionaries()
                 }
-                MatchController.shared.fetchMatchesForCurrentGame(completion: { (success) in
+                MatchController.shared.fetchMatchesForCurrentGameAndCurrentMonth(completion: { (success) in
                     if success {
                         DispatchQueue.main.async {
                             self.updatePlayerStatsDictionaries()

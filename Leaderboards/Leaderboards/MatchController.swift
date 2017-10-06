@@ -221,6 +221,35 @@ class MatchController {
         }
     }
     
+    func fetchMatchesForCurrentGameAndCurrentMonth(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
+        guard let currentGame = GameController.shared.currentGame else { completion(false); return }
+        
+        let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", currentGame.recordID)
+        let matchIsVerifiedPredicate = NSPredicate(format: "verified == true")
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let interval = calendar.dateInterval(of: .month, for: Date())
+        guard let monthStartDate = interval?.start else { completion(false); return }
+        
+        let matchIsInCurrentMonthPredicate = NSPredicate(format: "timestamp > %@", monthStartDate as NSDate)
+        
+        let matchCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [matchIsForCurrentGamePredicate, matchIsVerifiedPredicate, matchIsInCurrentMonthPredicate])
+        
+        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            
+            guard let matchRecords = records else { completion(false); return }
+            
+            let matches = matchRecords.flatMap( { Match(record: $0) })
+            self.matchesInCurrentGame = matches
+            completion(true)
+        }
+    }
+    
     func fetchMatchesForGame(_ game: Game, andPlayer player: Player, completion: @escaping (_ matches: [Match]?, _ success: Bool) -> Void = { _, _  in }) {
         let matchIsForCurrentGamePredicate = NSPredicate(format: "game == %@", game.recordID)
         let matchIsVerifiedPredicate = NSPredicate(format: "verified == true")
