@@ -147,7 +147,7 @@ class GamesViewController: UIViewController {
     
     @objc func shareShowPasswordButtonTapped() {
         guard let playspacePassword = PlayspaceController.shared.currentPlayspace?.password, let playspaceName = PlayspaceController.shared.currentPlayspace?.name else { return }
-        let textToShare = "\(playspaceName)'s password is: \(playspacePassword)"
+        let textToShare = "Hey come join me at my playspace \(playspaceName) the password to join is: \(playspacePassword)"
         let share = [textToShare]
         let activityVC = UIActivityViewController(activityItems: share, applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)

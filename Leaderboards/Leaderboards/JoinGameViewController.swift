@@ -4,6 +4,7 @@ class JoinGameViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var noGamesView: UIView!
     
     let colorProvider = BackgroundColorProvider()
     
@@ -43,14 +44,24 @@ class JoinGameViewController: UIViewController {
         let randomColor = colorProvider.randomColor()
         view.backgroundColor = randomColor
         tableView.backgroundColor = randomColor
-        
+        noGamesView.backgroundColor = randomColor
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if GameController.shared.gamesNotBelongingToCurrentPlayer.count == 0 {
+            self.noGamesView.isHidden = false
+        }
+        else {
+            self.noGamesView.isHidden = true
+        }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
