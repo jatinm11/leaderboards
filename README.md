@@ -1,4 +1,4 @@
-# leaderboards
+# Leaderboards
 
 Leaderboards is an application that can be used to create your personal leaderboards, challenge your friends with any game, and see who's the best among all & crushing the charts. 
 
