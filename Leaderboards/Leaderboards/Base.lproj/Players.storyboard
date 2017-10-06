@@ -758,14 +758,14 @@
                                                         <constraint firstItem="rfn-XH-4Ag" firstAttribute="centerY" secondItem="iwY-PE-ebr" secondAttribute="centerY" id="osm-mC-HdV"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZo-Y7-g5N">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZo-Y7-g5N">
                                                     <rect key="frame" x="116" y="52" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="hBr-O8-qbM"/>
                                                         <constraint firstAttribute="width" constant="36" id="kNe-ZP-IUz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-Kh-GZO">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-Kh-GZO">
                                                     <rect key="frame" x="223" y="52" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="36" id="MVO-kU-FV2"/>

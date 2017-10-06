@@ -530,7 +530,7 @@
         <!--Playspace Members List View Controller-->
         <scene sceneID="BR4-w0-xMW">
             <objects>
-                <viewController id="xgS-bB-8da" customClass="PlayspaceMembersListViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xgS-bB-8da" customClass="PlayspaceMembersListViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TZc-uf-Nh4"/>
                         <viewControllerLayoutGuide type="bottom" id="5Ms-Ma-42J"/>
@@ -550,7 +550,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HYf-Rm-RoD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HYf-Rm-RoD">
                                                     <rect key="frame" x="16" y="12" width="56" height="56"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="Ywa-4F-aMI"/>
@@ -616,7 +616,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgb-Ma-ajQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4364" y="872.11394302848578"/>
+            <point key="canvasLocation" x="4359" y="909"/>
         </scene>
         <!--Join Game View Controller-->
         <scene sceneID="o2M-NP-p0O">
@@ -680,20 +680,42 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wci-va-ulH">
+                                <rect key="frame" x="0.0" y="258.5" width="375" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looks like there are no games in your playspace. Go back to create one." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-0y-8a8">
+                                        <rect key="frame" x="16" y="50.5" width="343" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Hgc-0y-8a8" secondAttribute="trailing" constant="16" id="AK4-ID-x1i"/>
+                                    <constraint firstAttribute="height" constant="150" id="Xjp-Xj-lGb"/>
+                                    <constraint firstItem="Hgc-0y-8a8" firstAttribute="centerY" secondItem="wci-va-ulH" secondAttribute="centerY" id="cIF-Jz-lAb"/>
+                                    <constraint firstItem="Hgc-0y-8a8" firstAttribute="leading" secondItem="wci-va-ulH" secondAttribute="leading" constant="16" id="hEZ-II-xib"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Wha-GM-dDc" secondAttribute="trailing" id="27i-99-qgp"/>
                             <constraint firstItem="Wha-GM-dDc" firstAttribute="top" secondItem="LDb-U9-jOc" secondAttribute="bottom" id="DUq-2P-FM3"/>
+                            <constraint firstItem="wci-va-ulH" firstAttribute="leading" secondItem="AtL-L8-HAU" secondAttribute="leading" id="OSW-Ls-sVg"/>
                             <constraint firstAttribute="trailing" secondItem="rf0-QE-oWf" secondAttribute="trailing" id="Y1w-wb-4kE"/>
                             <constraint firstItem="rf0-QE-oWf" firstAttribute="top" secondItem="Wha-GM-dDc" secondAttribute="bottom" id="avM-tu-Bin"/>
                             <constraint firstItem="Vl9-YM-vTC" firstAttribute="top" secondItem="rf0-QE-oWf" secondAttribute="bottom" id="c78-0b-4Wn"/>
+                            <constraint firstAttribute="trailing" secondItem="wci-va-ulH" secondAttribute="trailing" id="cUg-Bk-EPT"/>
                             <constraint firstItem="Wha-GM-dDc" firstAttribute="leading" secondItem="AtL-L8-HAU" secondAttribute="leading" id="k7f-sr-6jM"/>
+                            <constraint firstItem="wci-va-ulH" firstAttribute="centerY" secondItem="AtL-L8-HAU" secondAttribute="centerY" id="mD6-Q0-qAb"/>
                             <constraint firstItem="rf0-QE-oWf" firstAttribute="leading" secondItem="AtL-L8-HAU" secondAttribute="leading" id="qUd-JJ-UAf"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="navigationBar" destination="Wha-GM-dDc" id="OSr-BG-p2U"/>
+                        <outlet property="noGamesView" destination="wci-va-ulH" id="1EH-BG-AJq"/>
                         <outlet property="tableView" destination="rf0-QE-oWf" id="pda-H6-9PR"/>
                     </connections>
                 </viewController>
