@@ -346,4 +346,43 @@ class MatchController {
         }
     }
     
+    func sendApprovedMatchToSlack(_ match: Match, opponent: Player?, game: Game?) {
+        guard let opponent = opponent,
+            let game = game,
+            let currentPlayer = PlayerController.shared.currentPlayer else { return }
+        
+        if game.playspace == CKReference(recordID: CKRecordID(recordName: "E9CAD4D2-9C70-4D78-ADF0-618FB3494E9A"), action: .none) {
+            
+            var matchString = ""
+            if match.winner.recordID == currentPlayer.recordID {
+                matchString = "*\(currentPlayer.username)* `won` vs. *\(opponent.username)* `\(match.winnerScore) - \(match.loserScore)` in *\(game.name.uppercased())*"
+            } else {
+                matchString = "*\(currentPlayer.username)* `lost` vs. *\(opponent.username)* `\(match.loserScore) - \(match.winnerScore)` in *\(game.name.uppercased())*"
+            }
+
+            let json: [String: Any] = ["text": matchString]
+            
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            
+            let url = URL(string: "https://hooks.slack.com/services/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")!
+            var request = URLRequest(url: url)
+            request.setValue("application/json", forHTTPHeaderField: "Content-type")
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print(responseJSON)
+                }
+            }
+            
+            task.resume()
+        }
+    }
+    
 }

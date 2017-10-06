@@ -129,7 +129,10 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
             MatchController.shared.updateMatch(verifiedMatch, completion: { (success) in
                 if success {
                     DispatchQueue.main.async {
+                    MatchController.shared.sendApprovedMatchToSlack(MatchController.shared.pendingMatches[indexPath.row - 1], opponent: self.opponents?[indexPath.row - 1], game: self.games?[indexPath.row - 1])
                         MatchController.shared.clearPendingMatch(at: indexPath.row - 1)
+                        self.games?.remove(at: indexPath.row - 1)
+                        self.opponents?.remove(at: indexPath.row - 1)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                         self.updateBadge(number: MatchController.shared.pendingMatches.count)
                     }
@@ -142,6 +145,8 @@ extension PendingMatchesViewController: UITableViewDelegate, UITableViewDataSour
                 if success {
                     DispatchQueue.main.async {
                         MatchController.shared.clearPendingMatch(at: indexPath.row - 1)
+                        self.games?.remove(at: indexPath.row - 1)
+                        self.opponents?.remove(at: indexPath.row - 1)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                         self.updateBadge(number: MatchController.shared.pendingMatches.count)
                     }
