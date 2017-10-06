@@ -50,7 +50,11 @@ class MatchController {
         
         let pendingMatchesForCurrentPlayerCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentPlayerIsParticipantPredicate, matchIsNotVerifiedPredicate, currentPlayerIsNotCreatorPredicate])
         
-        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: pendingMatchesForCurrentPlayerCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+        let query = CKQuery(recordType: Match.recordType, predicate: pendingMatchesForCurrentPlayerCompoundPredicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        
+        
+        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(false)
@@ -63,6 +67,20 @@ class MatchController {
             self.pendingMatches = pendingMatches
             completion(true)
         }
+        
+        //        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: pendingMatchesForCurrentPlayerCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+        //            if let error = error {
+        //                print(error.localizedDescription)
+        //                completion(false)
+        //                return
+        //            }
+        //
+        //            guard let pendingMatchRecords = records else { completion(false); return }
+        //            let pendingMatches = pendingMatchRecords.flatMap { Match(record: $0) }
+        //
+        //            self.pendingMatches = pendingMatches
+        //            completion(true)
+        //        }
     }
     
     func fetchMatchesForCurrentPlayer(completion: @escaping (_ matches: [Match]?, _ success: Bool) -> Void = { _, _ in }) {
@@ -73,7 +91,11 @@ class MatchController {
         
         let matchesForCurrentPlayerCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentPlayerIsParticipantPredicate, matchIsVerifiedPredicate])
         
-        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchesForCurrentPlayerCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+        let query = CKQuery(recordType: Match.recordType, predicate: matchesForCurrentPlayerCompoundPredicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        
+        
+        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil, false)
@@ -85,6 +107,19 @@ class MatchController {
             
             completion(matches, true)
         }
+        
+        //        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchesForCurrentPlayerCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+        //            if let error = error {
+        //                print(error.localizedDescription)
+        //                completion(nil, false)
+        //                return
+        //            }
+        //
+        //            guard let matchRecords = records else { completion(nil, false); return }
+        //            let matches = matchRecords.flatMap { Match(record: $0) }
+        //
+        //            completion(matches, true)
+        //        }
     }
     
     func fetchGameAndOpponentFor(_ match: Match, completion: @escaping (_ game: Game?, _ opponent: Player?, _ success: Bool) -> Void = { _,_,_  in }) {
@@ -151,7 +186,7 @@ class MatchController {
     
     func deletePendingMatch(at index: Int, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         let deletedPendingMatch = pendingMatches[index]
-
+        
         CloudKitManager.shared.deleteRecordWithID(deletedPendingMatch.recordID) { (_, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -193,7 +228,12 @@ class MatchController {
         
         let matchCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [matchIsForCurrentGamePredicate, matchIsVerifiedPredicate, matchIncludesPlayerPredicate])
         
-        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+        
+        let query = CKQuery(recordType: Match.recordType, predicate: matchCompoundPredicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        
+        
+        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil, false)
@@ -201,10 +241,26 @@ class MatchController {
             }
             
             guard let matchRecords = records else { completion(nil, false); return }
+            let matches = matchRecords.flatMap { Match(record: $0) }
             
-            let matches = matchRecords.flatMap( { Match(record: $0) })
             completion(matches, true)
         }
+        
+        
+        
+        
+        //        CloudKitManager.shared.fetchRecordsWithType(Match.recordType, predicate: matchCompoundPredicate, recordFetchedBlock: nil) { (records, error) in
+        //            if let error = error {
+        //                print(error.localizedDescription)
+        //                completion(nil, false)
+        //                return
+        //            }
+        //
+        //            guard let matchRecords = records else { completion(nil, false); return }
+        //
+        //            let matches = matchRecords.flatMap( { Match(record: $0) })
+        //            completion(matches, true)
+        //        }
     }
     
     func fetchOpponentsForMatches(_ matches: [Match], player: Player, completion: @escaping (_ opponents: [Player]?, _ success: Bool) -> Void = { _, _  in }) {
