@@ -11,17 +11,20 @@ import UIKit
 class NewUserSelectImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let colorProvider = BackgroundColorProvider()
-    
     var username: String?
+    
     @IBOutlet weak var playerImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var registerButton: UIBarButtonItem!
     
     @IBAction func registerButtonTapped(_ sender: Any) {
+        registerButton.isEnabled = false
         guard let username = username else { return }
         PlayerController.shared.createPlayerWith(username: username, photo: playerImageView.image) { (success) in
             DispatchQueue.main.async {
                 if !success {
                     self.presentSimpleAlert(title: "Unable to create an account", message: "Make sure you have a network connection, and please try again.")
+                    self.registerButton.isEnabled = true
                 } else {
                     let playspacesViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
                     self.navigationController?.pushViewController(playspacesViewController, animated: true)

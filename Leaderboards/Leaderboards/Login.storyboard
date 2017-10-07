@@ -145,6 +145,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="playerImageView" destination="WIc-RK-y5G" id="bgO-sX-nvE"/>
+                        <outlet property="registerButton" destination="iPB-4b-0PY" id="tZj-YX-kYx"/>
                         <outlet property="usernameLabel" destination="Vbv-o7-eUS" id="zT4-51-5r9"/>
                     </connections>
                 </viewController>
@@ -170,7 +171,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mor-Zg-lKW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="531"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
