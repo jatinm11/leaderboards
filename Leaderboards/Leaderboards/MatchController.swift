@@ -351,7 +351,7 @@ class MatchController {
             let game = game,
             let currentPlayer = PlayerController.shared.currentPlayer else { return }
         
-        if game.playspace == CKReference(recordID: CKRecordID(recordName: "E9CAD4D2-9C70-4D78-ADF0-618FB3494E9A"), action: .none) {
+        if game.playspace == CKReference(recordID: CKRecordID(recordName: "03E8257B-5BF0-4A43-98DD-B8B276B79F60"), action: .none) {
             
             var matchString = ""
             if match.winner.recordID == currentPlayer.recordID {
