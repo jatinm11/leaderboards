@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lhm-zJ-32O">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Playspace Joining Failed View Controller-->
+        <scene sceneID="bjY-k1-9jR">
+            <objects>
+                <viewController storyboardIdentifier="failedToJoinPS" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="lhm-zJ-32O" customClass="playspaceJoiningFailedViewController" customModule="Leaderboards" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b9S-B9-VW6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Klo-yk-iJf">
+                                <rect key="frame" x="52" y="143" width="270" height="380"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KQ3-gt-iEY">
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="110"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cross copy" translatesAutoresizingMaskIntoConstraints="NO" id="uEc-LC-Vmf">
+                                                <rect key="frame" x="108" y="28" width="55" height="55"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.8901122212" green="0.29653960470000001" blue="0.37048310039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Oh no!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiA-wU-aT3">
+                                        <rect key="frame" x="8" y="118" width="254" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unable to join playspace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBb-TM-HSq">
+                                        <rect key="frame" x="8" y="174" width="254" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9p-Aj-WA8">
+                                        <rect key="frame" x="72" y="290" width="127" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPq-Hu-k7s">
+                                                <rect key="frame" x="36" y="6" width="54" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Dismiss">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="dismissButtonTapped:" destination="lhm-zJ-32O" eventType="touchUpInside" id="Ihv-Iy-Rga"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.8901122212" green="0.29653960470000001" blue="0.37048310039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Make sure you write correct password before joining playspace." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Lx-aL-4Uv">
+                                        <rect key="frame" x="8" y="203" width="254" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="26s-Ep-NVe"/>
+                                    <constraint firstAttribute="height" constant="380" id="4tG-Fw-zaH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Klo-yk-iJf" firstAttribute="centerX" secondItem="b9S-B9-VW6" secondAttribute="centerX" id="B2B-Zd-Onz"/>
+                            <constraint firstItem="Klo-yk-iJf" firstAttribute="centerY" secondItem="b9S-B9-VW6" secondAttribute="centerY" id="imw-6u-0JV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xK4-bX-jlS"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonViewContainer" destination="i9p-Aj-WA8" id="3jK-Gu-18f"/>
+                        <outlet property="viewContainer" destination="Klo-yk-iJf" id="KSS-fe-dpJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JM5-y7-jo6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="64.799999999999997" y="171.36431784107947"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cross copy" width="86" height="87"/>
+    </resources>
+</document>
