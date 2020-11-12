@@ -34,7 +34,7 @@ class PlayerProfileViewController2: UIViewController {
         
         pendingMatchesView.alpha = 0
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
         
         PlayerController.shared.fetchCurrentPlayer { (success) in

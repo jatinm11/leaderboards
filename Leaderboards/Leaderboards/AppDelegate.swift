@@ -16,8 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().tintColor = .white
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in
@@ -39,15 +40,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if success {
                     guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
                     
-                    let currentPlayerIsParticipantPredicate = NSPredicate(format: "participants CONTAINS %@", CKReference(recordID: currentPlayer.recordID, action: .none))
+                    let currentPlayerIsParticipantPredicate = NSPredicate(format: "participants CONTAINS %@", CKRecord.Reference(recordID: currentPlayer.recordID, action: .none))
                     let matchIsNotVerifiedPredicate = NSPredicate(format: "verified == false")
-                    let currentPlayerIsNotCreatorPredicate = NSPredicate(format: "creator != %@", CKReference(recordID: currentPlayer.recordID, action: .none))
+                    let currentPlayerIsNotCreatorPredicate = NSPredicate(format: "creator != %@", CKRecord.Reference(recordID: currentPlayer.recordID, action: .none))
                     
                     let pendingMatchesForCurrentPlayerCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [currentPlayerIsParticipantPredicate, matchIsNotVerifiedPredicate, currentPlayerIsNotCreatorPredicate])
                     
                     let subscription = CKQuerySubscription(recordType: Match.recordType, predicate: pendingMatchesForCurrentPlayerCompoundPredicate, options: .firesOnRecordCreation)
                     
-                    let notificationInfo = CKNotificationInfo()
+                    let notificationInfo = CKSubscription.NotificationInfo()
                     notificationInfo.desiredKeys = ["creatorString", "scoreString", "gameString"]
                     notificationInfo.alertLocalizationKey = "New Pending Match: %1$@ submitted a %2$@ in %3$@"
                     notificationInfo.alertLocalizationArgs = ["creatorString", "scoreString", "gameString"]

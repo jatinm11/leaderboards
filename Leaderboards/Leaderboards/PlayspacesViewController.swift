@@ -21,29 +21,34 @@ class PlayspacesViewController: UIViewController {
         
         tableView.tableFooterView = UIView()
         noPlayspaceView.isHidden = true
-        let randomColor = colorProvider.randomColor()
-        tableView.backgroundColor = randomColor
-        view.backgroundColor = randomColor
-        addplayspaceButton.tintColor = randomColor
-        noPlayspaceView.backgroundColor = randomColor
+//        let randomColor = colorProvider.randomColor()
+//        tableView.backgroundColor = randomColor
+//        view.backgroundColor = randomColor
+//        addplayspaceButton.tintColor = randomColor
+//        noPlayspaceView.backgroundColor = randomColor
+        view.backgroundColor = .white
         playspaceButtonViewContainer.layer.cornerRadius = 5
         playspaceButtonViewContainer.clipsToBounds = true
         
         navigationItem.setHidesBackButton(true, animated: false)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let currentPlayer = PlayerController.shared.currentPlayer {
+            
             let playerImageButton = UIButton(type: .custom)
             playerImageButton.addTarget(self, action: #selector(playerImageButtonTapped), for: .touchUpInside)
             playerImageButton.setImage(currentPlayer.photo, for: .normal)
             playerImageButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
             playerImageButton.layer.cornerRadius = playerImageButton.frame.height / 2
             playerImageButton.clipsToBounds = true
-            playerImageButton.layer.borderColor = UIColor.white.cgColor
+            playerImageButton.layer.borderColor = UIColor.black.cgColor
             playerImageButton.layer.borderWidth = 2.0
             playerImageButton.addConstraint(NSLayoutConstraint(item: playerImageButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32))
             playerImageButton.addConstraint(NSLayoutConstraint(item: playerImageButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 32))
@@ -51,11 +56,11 @@ class PlayspacesViewController: UIViewController {
             let pendingMatchesNotificationBadgeButton = UIButton(type: .system)
             pendingMatchesNotificationBadgeButton.addTarget(self, action: #selector(pendingMatchesNotificationBadgeButtonTapped), for: .touchUpInside)
             pendingMatchesNotificationBadgeButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-            pendingMatchesNotificationBadgeButton.backgroundColor = .white
+            pendingMatchesNotificationBadgeButton.backgroundColor = .red
             pendingMatchesNotificationBadgeButton.tintColor = view.backgroundColor
             pendingMatchesNotificationBadgeButton.layer.cornerRadius = pendingMatchesNotificationBadgeButton.frame.height / 2
             pendingMatchesNotificationBadgeButton.clipsToBounds = true
-            pendingMatchesNotificationBadgeButton.layer.borderColor = UIColor.white.cgColor
+            pendingMatchesNotificationBadgeButton.layer.borderColor = UIColor.red.cgColor
             pendingMatchesNotificationBadgeButton.layer.borderWidth = 1.0
             
             PlayerController.shared.fetchPlayspacesFor(currentPlayer, completion: { (success) in
@@ -83,8 +88,9 @@ class PlayspacesViewController: UIViewController {
                                         }
                                     }
                                     CKContainer.default().add(operation)
-                                    if MatchController.shared.pendingMatches.count > 0 {
-                                        pendingMatchesNotificationBadgeButton.setTitle("\(MatchController.shared.pendingMatches.count)", for: .normal)
+                                    if MatchController.shared.pendingMatches.count == 0 {
+//                                        pendingMatchesNotificationBadgeButton.setTitle("\(MatchController.shared.pendingMatches.count)", for: .normal)
+                                        pendingMatchesNotificationBadgeButton.setTitle("5", for: .normal)
                                         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton), UIBarButtonItem(customView: pendingMatchesNotificationBadgeButton)]
                                     } else {
                                         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: playerImageButton)]
@@ -148,6 +154,7 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "playspacesTitleCell", for: indexPath)
             return cell
@@ -155,7 +162,7 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "playspaceCell", for: indexPath)
         cell.textLabel?.text = "\(PlayspaceController.shared.playspaces[indexPath.row - 1].name)"
-        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell
     }
@@ -199,4 +206,11 @@ extension PlayspacesViewController: UITableViewDataSource, UITableViewDelegate {
         return true
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 55
+        }
+        
+        return 100
+    }
 }

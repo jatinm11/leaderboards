@@ -11,16 +11,16 @@ import CloudKit
 
 struct Player {
     
-    let recordID: CKRecordID
-    var playspaces: [CKReference]
+    let recordID: CKRecord.ID
+    var playspaces: [CKRecord.Reference]
     let username: String
     var photo: UIImage?
-    let appleUserRef: CKReference
+    let appleUserRef: CKRecord.Reference
     
     var photoAsset: CKAsset? {
         do {
             guard let photo = photo else { return nil }
-            let data = UIImagePNGRepresentation(photo)
+            let data = photo.pngData()
             let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(recordID.recordName + ".dat")
             try data?.write(to: tempURL)
             let asset = CKAsset(fileURL: tempURL)
@@ -45,11 +45,11 @@ extension Player {
     
     init?(record: CKRecord) {
         guard let username = record[Player.usernameKey] as? String,
-            let appleUserRef = record[Player.appleUserRefKey] as? CKReference else { return nil }
+            let appleUserRef = record[Player.appleUserRefKey] as? CKRecord.Reference else { return nil }
         
         self.recordID = record.recordID
         
-        if let playspaces = record[Player.playspacesKey] as? [CKReference] {
+        if let playspaces = record[Player.playspacesKey] as? [CKRecord.Reference] {
             self.playspaces = playspaces
         } else {
             self.playspaces = []
@@ -57,7 +57,7 @@ extension Player {
         
         self.username = username
         
-        if let photoAsset = record[Player.photoKey] as? CKAsset, let photoData = try? Data(contentsOf: photoAsset.fileURL) {
+        if let photoAsset = record[Player.photoKey] as? CKAsset, let photoData = try? Data(contentsOf: photoAsset.fileURL!) {
             let photo = UIImage(data: photoData)
             self.photo = photo
         } else {

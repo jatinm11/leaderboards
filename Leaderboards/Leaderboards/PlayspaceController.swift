@@ -20,7 +20,7 @@ class PlayspaceController {
     var currentPlayspace: Playspace?
     
     func createPlayspaceWith(name: String, completion: @escaping (_ password: String?, _ success: Bool) -> Void = { _,_  in }) {
-        let playspace = Playspace(recordID: CKRecordID(recordName: UUID().uuidString), name: name, password: randomString(length: 4))
+        let playspace = Playspace(recordID: CKRecord.ID(recordName: UUID().uuidString), name: name, password: randomString(length: 4))
         
         CloudKitManager.shared.saveRecord(playspace.CKRepresentation) { (_, error) in
             if let error = error {
@@ -58,7 +58,7 @@ class PlayspaceController {
     
     func addPlayer(_ player: Player, toPlayspaceRecord playspaceRecord: CKRecord, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         var player = player
-        player.playspaces.append(CKReference(record: playspaceRecord, action: .none))
+        player.playspaces.append(CKRecord.Reference(record: playspaceRecord, action: .none))
         PlayerController.shared.updatePlayer(player) { (success) in
             if success {
                 PlayerController.shared.fetchCurrentPlayer(completion: { (success) in
@@ -72,7 +72,7 @@ class PlayspaceController {
     
     func randomString(length:Int) -> String {
         let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var c = charSet.characters.map { String($0) }
+        let c = charSet.map { String($0) }
         var s:String = ""
         for _ in (1...length) {
             s.append(c[Int(arc4random()) % c.count])
@@ -82,7 +82,7 @@ class PlayspaceController {
     
     func removeCurrentPlayerFrom(_ playspace: Playspace, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard var currentPlayer = PlayerController.shared.currentPlayer,
-            let index = currentPlayer.playspaces.index(of: CKReference(recordID: playspace.recordID, action: .none)) else { completion(false); return }
+            let index = currentPlayer.playspaces.firstIndex(of: CKRecord.Reference(recordID: playspace.recordID, action: .none)) else { completion(false); return }
         
         currentPlayer.playspaces.remove(at: index)
         CloudKitManager.shared.updateRecords([currentPlayer.CKRepresentation], perRecordCompletion: nil) { (_, error) in
@@ -100,8 +100,8 @@ class PlayspaceController {
                     guard let games = games else { completion(false); return }
                     var updatedGameRecords = [CKRecord]()
                     for game in games {
-                        guard var players = game.object(forKey: Game.playersKey) as? [CKReference],
-                            let index = players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { continue }
+                        guard var players = game.object(forKey: Game.playersKey) as? [CKRecord.Reference],
+                            let index = players.firstIndex(of: CKRecord.Reference(recordID: currentPlayer.recordID, action: .none)) else { continue }
                         players.remove(at: index)
                         game.setObject(players as CKRecordValue, forKey: Game.playersKey)
                         updatedGameRecords.append(game)
@@ -112,8 +112,8 @@ class PlayspaceController {
                             error.code == CKError.Code.serverRecordChanged,
                             let game = error.serverRecord {
                             
-                            guard var players = game.object(forKey: Game.playersKey) as? [CKReference],
-                                let index = players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { return }
+                            guard var players = game.object(forKey: Game.playersKey) as? [CKRecord.Reference],
+                                let index = players.firstIndex(of: CKRecord.Reference(recordID: currentPlayer.recordID, action: .none)) else { return }
                             players.remove(at: index)
                             game.setObject(players as CKRecordValue, forKey: Game.playersKey)
                             CloudKitManager.shared.updateRecordsIfServerRecordChanged([game], perRecordCompletion: { (_, error) in

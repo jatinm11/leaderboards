@@ -25,11 +25,14 @@ class SplashViewController: UIViewController {
                     self.performSegue(withIdentifier: "toPlayspacesVC", sender: nil)
                     self.activityIndicator.stopAnimating()
                 } else {
-                    self.performSegue(withIdentifier: "toLoginVC", sender: nil)
+                    self.present(WelcomeViewController.controller(), animated: true, completion: nil)
                     self.activityIndicator.stopAnimating()
                 }
             }
         }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
 }
