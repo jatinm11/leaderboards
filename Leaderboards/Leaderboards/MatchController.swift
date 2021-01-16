@@ -28,7 +28,7 @@ class MatchController {
             scoreString = "\(winnerScore) - \(loserScore) win"
         }
         
-        let match = Match(recordID: CKRecordID(recordName: UUID().uuidString), game: CKReference(record: game.CKRepresentation, action: .none), winner: CKReference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKReference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKReference(record: creator.CKRepresentation, action: .none), participants: [CKReference(record: winner.CKRepresentation, action: .none), CKReference(record: loser.CKRepresentation, action: .none)], creatorString: "\(creator.username.uppercased())", scoreString: scoreString.uppercased(), gameString: "\(game.name.uppercased())")
+        let match = Match(recordID: CKRecord.ID(recordName: UUID().uuidString), game: CKRecord.Reference(record: game.CKRepresentation, action: .none), winner: CKRecord.Reference(record: winner.CKRepresentation, action: .none), winnerScore: winnerScore, loser: CKRecord.Reference(record: loser.CKRepresentation, action: .none), loserScore: loserScore, verified: false, timestamp: Date(), creator: CKRecord.Reference(record: creator.CKRepresentation, action: .none), participants: [CKRecord.Reference(record: winner.CKRepresentation, action: .none), CKRecord.Reference(record: loser.CKRepresentation, action: .none)], creatorString: "\(creator.username.uppercased())", scoreString: scoreString.uppercased(), gameString: "\(game.name.uppercased())")
         
         CloudKitManager.shared.saveRecord(match.CKRepresentation) { (_, error) in
             if let error = error {
@@ -62,7 +62,7 @@ class MatchController {
             }
             
             guard let pendingMatchRecords = records else { completion(false); return }
-            let pendingMatches = pendingMatchRecords.flatMap { Match(record: $0) }
+            let pendingMatches = pendingMatchRecords.compactMap { Match(record: $0) }
             
             self.pendingMatches = pendingMatches
             completion(true)
@@ -103,7 +103,7 @@ class MatchController {
             }
             
             guard let matchRecords = records else { completion(nil, false); return }
-            let matches = matchRecords.flatMap { Match(record: $0) }
+            let matches = matchRecords.compactMap { Match(record: $0) }
             
             completion(matches, true)
         }
@@ -215,7 +215,7 @@ class MatchController {
             
             guard let matchRecords = records else { completion(false); return }
             
-            let matches = matchRecords.flatMap( { Match(record: $0) })
+            let matches = matchRecords.compactMap( { Match(record: $0) })
             self.matchesInCurrentGame = matches
             completion(true)
         }
@@ -244,7 +244,7 @@ class MatchController {
             
             guard let matchRecords = records else { completion(false); return }
             
-            let matches = matchRecords.flatMap( { Match(record: $0) })
+            let matches = matchRecords.compactMap( { Match(record: $0) })
             self.matchesInCurrentGame = matches
             completion(true)
         }
@@ -270,7 +270,7 @@ class MatchController {
             }
             
             guard let matchRecords = records else { completion(nil, false); return }
-            let matches = matchRecords.flatMap { Match(record: $0) }
+            let matches = matchRecords.compactMap { Match(record: $0) }
             
             completion(matches, true)
         }
@@ -293,7 +293,7 @@ class MatchController {
     }
     
     func fetchOpponentsForMatches(_ matches: [Match], player: Player, completion: @escaping (_ opponents: [Player]?, _ success: Bool) -> Void = { _, _  in }) {
-        var opponentRecordIDs = [CKRecordID]()
+        var opponentRecordIDs = [CKRecord.ID]()
         for match in matches {
             for playerReference in match.participants {
                 if playerReference.recordID != player.recordID {
@@ -322,7 +322,7 @@ class MatchController {
     }
     
     func fetchGamesForMatches(_ matches: [Match], completion: @escaping (_ games: [Game]?, _ success: Bool) -> Void = { _, _  in }) {
-        var gameRecordIDs = [CKRecordID]()
+        var gameRecordIDs = [CKRecord.ID]()
         for match in matches {
             gameRecordIDs.append(match.game.recordID)
         }
@@ -351,7 +351,7 @@ class MatchController {
             let game = game,
             let currentPlayer = PlayerController.shared.currentPlayer else { return }
         
-        if game.playspace == CKReference(recordID: CKRecordID(recordName: "03E8257B-5BF0-4A43-98DD-B8B276B79F60"), action: .none) {
+        if game.playspace == CKRecord.Reference(recordID: CKRecord.ID(recordName: "03E8257B-5BF0-4A43-98DD-B8B276B79F60"), action: .none) {
             
             var matchString = ""
             if match.winner.recordID == currentPlayer.recordID {

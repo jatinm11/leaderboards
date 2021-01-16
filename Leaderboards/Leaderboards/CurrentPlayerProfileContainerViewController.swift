@@ -45,7 +45,7 @@ class CurrentPlayerProfileContainerViewController: UIViewController, UIImagePick
                 imagePicker.sourceType = .photoLibrary
                 imagePicker.allowsEditing = true
                 imagePicker.navigationBar.tintColor = .black
-                imagePicker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+                imagePicker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
@@ -95,9 +95,9 @@ class CurrentPlayerProfileContainerViewController: UIViewController, UIImagePick
     
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             let image = image
             PlayerController.shared.currentPlayer?.photo = image
             guard let currentPlayer = PlayerController.shared.currentPlayer else { return }
@@ -110,6 +110,16 @@ class CurrentPlayerProfileContainerViewController: UIViewController, UIImagePick
                 }
             })
         }
+        
     }
+}
 
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

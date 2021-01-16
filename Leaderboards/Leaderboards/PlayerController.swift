@@ -20,9 +20,9 @@ class PlayerController {
     func createPlayerWith(username: String, photo: UIImage?, completion: @escaping (_ success: Bool) -> Void) {
         CKContainer.default().fetchUserRecordID { (appleUsersRecordID, error) in
             guard let appleUsersRecordID = appleUsersRecordID else { completion(false); return }
-            let appleUserRef = CKReference(recordID: appleUsersRecordID, action: .deleteSelf)
+            let appleUserRef = CKRecord.Reference(recordID: appleUsersRecordID, action: .deleteSelf)
             
-            let player = Player(recordID: CKRecordID(recordName: UUID().uuidString), playspaces: [], username: username, photo: photo, appleUserRef: appleUserRef)
+            let player = Player(recordID: CKRecord.ID(recordName: UUID().uuidString), playspaces: [], username: username, photo: photo, appleUserRef: appleUserRef)
             
             let playerRecord = player.CKRepresentation
             
@@ -50,7 +50,7 @@ class PlayerController {
             guard let appleUserRecordID = appleUserRecordID else { completion(false); return }
             
             // Create a CKReference with the Apple 'Users' recordID so that we can fetch OUR cust user record
-            let appleUserReference = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
+            let appleUserReference = CKRecord.Reference(recordID: appleUserRecordID, action: .deleteSelf)
             
             // Create a predicate with the reference that was just created.
             // This predicate will search through all the Users and filter them based on a matching reference
@@ -81,7 +81,7 @@ class PlayerController {
     }
     
     func fetchPlayspacesFor(_ player: Player, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-        var playspaceRecordIDs = [CKRecordID]()
+        var playspaceRecordIDs = [CKRecord.ID]()
         
         for playspace in player.playspaces {
             playspaceRecordIDs.append(playspace.recordID)
@@ -100,7 +100,7 @@ class PlayerController {
                 playspaceRecords.append(playspaceRecord)
             }
             
-            let playspaces = playspaceRecords.flatMap { Playspace(record: $0) }
+            let playspaces = playspaceRecords.compactMap { Playspace(record: $0) }
             PlayspaceController.shared.playspaces = playspaces
             completion(true)
         }
@@ -121,7 +121,7 @@ class PlayerController {
             }
             
             guard let playerRecords = playerRecords else { completion(nil, false); return }
-            let players = playerRecords.flatMap { Player(record: $0) }
+            let players = playerRecords.compactMap { Player(record: $0) }
             completion(players, true)
         }
         
@@ -138,7 +138,7 @@ class PlayerController {
 //        }
     }
     
-    func fetchPlayer(_ playerRecordID: CKRecordID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _,_  in }) {
+    func fetchPlayer(_ playerRecordID: CKRecord.ID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _,_  in }) {
         
         CloudKitManager.shared.fetchRecord(withID: playerRecordID) { (record, error) in
             if let error = error {

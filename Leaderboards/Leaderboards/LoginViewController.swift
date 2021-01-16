@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         super.viewDidLoad()
         
         usernameTextField.attributedPlaceholder = NSAttributedString(string: "Enter Username",
-                                                                     attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         let randomColor = colorProvider.randomColor()
         view.backgroundColor = randomColor
