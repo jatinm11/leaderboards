@@ -17,70 +17,40 @@ class PlayerController {
     
     var opponents = [Player]()
     
-    func checkIfLoggedInToiCloud(completion: @escaping(_ status: iCloudStatus) -> Void) {
-        
-        CKContainer.default().accountStatus { (status, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            switch status.rawValue {
-            case 0:
-                print("Can't determine")
-                completion(.notLoggedIn)
-            case 1:
-                completion(.loggedIn)
-                
-            case 2:
-                print("Restricted")
-                completion(.notLoggedIn)
-            case 3:
-                print("Account not logged in")
-                completion(.notLoggedIn)
-            default:
-                print("ignore this !")
-            }
-        }
-    }
-    
-    func createPlayerWith(username: String, photo: UIImage?, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        
+    func createPlayerWith(username: String, photo: UIImage?, completion: @escaping (_ success: Bool) -> Void) {
         CKContainer.default().fetchUserRecordID { (appleUsersRecordID, error) in
+            guard let appleUsersRecordID = appleUsersRecordID else { completion(false); return }
+            let appleUserRef = CKReference(recordID: appleUsersRecordID, action: .deleteSelf)
             
-            guard let appleUsersRecordID = appleUsersRecordID else { completion(false, error); return }
-            
-            let appleUserRef = CKRecord.Reference(recordID: appleUsersRecordID, action: .deleteSelf)
-            
-            let player = Player(recordID: CKRecord.ID(recordName: UUID().uuidString), playspaces: [], username: username, photo: photo, appleUserRef: appleUserRef)
+            let player = Player(recordID: CKRecordID(recordName: UUID().uuidString), playspaces: [], username: username, photo: photo, appleUserRef: appleUserRef)
             
             let playerRecord = player.CKRepresentation
             
             CloudKitManager.shared.saveRecord(playerRecord) { (record, error) in
                 if let error = error { print(error.localizedDescription) }
                 
+                
                 guard let record = record,
-                      let currentPlayer = Player(record: record) else { completion(false, error); return }
+                    let currentPlayer = Player(record: record) else { completion(false); return }
                 
                 let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(record.recordID.recordName + ".dat")
                 try? FileManager.default.removeItem(at: tempURL)
                 self.currentPlayer = currentPlayer
-                
-                completion(true, nil)
+                completion(true)
             }
         }
+        
     }
     
     func fetchCurrentPlayer(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         // Fetch default Apple 'Users' recordID
         
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
-            
-            if let error = error { completion(false); print(error.localizedDescription); return }
-            
-            guard let appleUserRecordID = appleUserRecordID else { print("HERE 12"); completion(false); return }
+            if let error = error { print(error.localizedDescription) }
+            guard let appleUserRecordID = appleUserRecordID else { completion(false); return }
             
             // Create a CKReference with the Apple 'Users' recordID so that we can fetch OUR cust user record
-            let appleUserReference = CKRecord.Reference(recordID: appleUserRecordID, action: .deleteSelf)
+            let appleUserReference = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
             
             // Create a predicate with the reference that was just created.
             // This predicate will search through all the Users and filter them based on a matching reference
@@ -91,7 +61,6 @@ class PlayerController {
                 guard let currentPlayerRecord = records?.first else { completion(false); return }
                 let currentPlayer = Player(record: currentPlayerRecord)
                 self.currentPlayer = currentPlayer
-                
                 completion(true)
             })
         }
@@ -112,7 +81,7 @@ class PlayerController {
     }
     
     func fetchPlayspacesFor(_ player: Player, completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-        var playspaceRecordIDs = [CKRecord.ID]()
+        var playspaceRecordIDs = [CKRecordID]()
         
         for playspace in player.playspaces {
             playspaceRecordIDs.append(playspace.recordID)
@@ -131,8 +100,7 @@ class PlayerController {
                 playspaceRecords.append(playspaceRecord)
             }
             
-            let playspaces = playspaceRecords.compactMap({ Playspace(record: $0 ) })
-//            let playspaces = pcompactMapeRecords.compactMap { Playspace(record: $0) }
+            let playspaces = playspaceRecords.flatMap { Playspace(record: $0) }
             PlayspaceController.shared.playspaces = playspaces
             completion(true)
         }
@@ -153,8 +121,8 @@ class PlayerController {
             }
             
             guard let playerRecords = playerRecords else { completion(nil, false); return }
-            let compactMapRecords = playerRecords.compactMap({ Player(record: $0) })
-            completion(compactMapRecords, true)
+            let players = playerRecords.flatMap { Player(record: $0) }
+            completion(players, true)
         }
         
 //        CloudKitManager.shared.fetchRecordsWithType(Player.recordType, predicate: playerIsInPlayspacePredicate, recordFetchedBlock: nil) { (playerRecords, error) in
@@ -170,7 +138,7 @@ class PlayerController {
 //        }
     }
     
-    func fetchPlayer(_ playerRecordID: CKRecord.ID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _,_  in }) {
+    func fetchPlayer(_ playerRecordID: CKRecordID, completion: @escaping (_ player: Player?, _ success: Bool) -> Void = { _,_  in }) {
         
         CloudKitManager.shared.fetchRecord(withID: playerRecordID) { (record, error) in
             if let error = error {
@@ -184,9 +152,4 @@ class PlayerController {
         }
     }
     
-}
-
-enum iCloudStatus {
-    case loggedIn
-    case notLoggedIn
 }

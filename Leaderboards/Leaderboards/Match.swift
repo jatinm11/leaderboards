@@ -11,16 +11,16 @@ import CloudKit
 
 struct Match {
     
-    let recordID: CKRecord.ID
-    let game: CKRecord.Reference
-    let winner: CKRecord.Reference
+    let recordID: CKRecordID
+    let game: CKReference
+    let winner: CKReference
     let winnerScore: Int
-    let loser: CKRecord.Reference
+    let loser: CKReference
     let loserScore: Int
     var verified: Bool
     let timestamp: Date
-    let creator: CKRecord.Reference
-    let participants: [CKRecord.Reference]
+    let creator: CKReference
+    let participants: [CKReference]
     let creatorString: String
     let scoreString: String
     let gameString: String
@@ -48,13 +48,13 @@ extension Match {
     init?(record: CKRecord) {
         guard let verified = record[Match.verifiedKey] as? Bool,
             let timestamp = record[Match.timestampKey] as? Date,
-            let game = record[Match.gameKey] as? CKRecord.Reference,
-            let winner = record[Match.winnerKey] as? CKRecord.Reference,
+            let game = record[Match.gameKey] as? CKReference,
+            let winner = record[Match.winnerKey] as? CKReference,
             let winnerScore = record[Match.winnerScoreKey] as? Int,
-            let loser = record[Match.loserKey] as? CKRecord.Reference,
+            let loser = record[Match.loserKey] as? CKReference,
             let loserScore = record[Match.loserScoreKey] as? Int,
-            let creator = record[Match.creatorKey] as? CKRecord.Reference,
-            let participants = record[Match.participantsKey] as? [CKRecord.Reference],
+            let creator = record[Match.creatorKey] as? CKReference,
+            let participants = record[Match.participantsKey] as? [CKReference],
             let creatorString = record[Match.creatorStringKey] as? String,
             let scoreString = record[Match.scoreStringKey] as? String,
             let gameString = record[Match.gameStringKey] as? String else { return nil }

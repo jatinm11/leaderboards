@@ -15,13 +15,13 @@ class CloudKitManager {
     
     let publicDB = CKContainer.default().publicCloudDatabase
     
-    func fetchRecord(withID recordID: CKRecord.ID, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
+    func fetchRecord(withID recordID: CKRecordID, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
         publicDB.fetch(withRecordID: recordID) { (record, error) in
             completion?(record, error)
         }
     }
     
-    func fetchRecords(withIDs recordIDs: [CKRecord.ID], completion: ((_ records: [CKRecord.ID: CKRecord]?, _ error: Error?) -> Void)?) {
+    func fetchRecords(withIDs recordIDs: [CKRecordID], completion: ((_ records: [CKRecordID: CKRecord]?, _ error: Error?) -> Void)?) {
         let fetchRecordsOperation = CKFetchRecordsOperation(recordIDs: recordIDs)
         fetchRecordsOperation.fetchRecordsCompletionBlock = completion
         publicDB.add(fetchRecordsOperation)
@@ -41,8 +41,8 @@ class CloudKitManager {
         
         queryOperation.recordFetchedBlock = perRecordBlock
         
-        var queryCompletionBlock: (CKQueryOperation.Cursor?, Error?) -> Void = { (_, _) in }
-        queryCompletionBlock = { (queryCursor: CKQueryOperation.Cursor?, error: Error?) -> Void in
+        var queryCompletionBlock: (CKQueryCursor?, Error?) -> Void = { (_, _) in }
+        queryCompletionBlock = { (queryCursor: CKQueryCursor?, error: Error?) -> Void in
             if let queryCursor = queryCursor {
                 // there are more results
                 let continuedQueryOperation = CKQueryOperation(cursor: queryCursor)
@@ -98,7 +98,7 @@ class CloudKitManager {
         publicDB.add(operation)
     }
     
-    func deleteRecordWithID(_ recordID: CKRecord.ID, completion: ((_ recordID: CKRecord.ID?, _ error: Error?) -> Void)?) {
+    func deleteRecordWithID(_ recordID: CKRecordID, completion: ((_ recordID: CKRecordID?, _ error: Error?) -> Void)?) {
         
         publicDB.delete(withRecordID: recordID) { (recordID, error) in
             completion?(recordID, error)

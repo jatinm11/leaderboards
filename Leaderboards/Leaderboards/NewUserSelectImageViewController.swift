@@ -20,10 +20,10 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
     @IBAction func registerButtonTapped(_ sender: Any) {
         registerButton.isEnabled = false
         guard let username = username else { return }
-        PlayerController.shared.createPlayerWith(username: username, photo: playerImageView.image) { (success, error) in
+        PlayerController.shared.createPlayerWith(username: username, photo: playerImageView.image) { (success) in
             DispatchQueue.main.async {
                 if !success {
-                    self.presentSimpleAlert(title: "Unable to create an account", message: error?.localizedDescription ?? "Make sure you have a network connection, and please try again.")
+                    self.presentSimpleAlert(title: "Unable to create an account", message: "Make sure you have a network connection, and please try again.")
                     self.registerButton.isEnabled = true
                 } else {
                     let playspacesViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "playspacesViewController")
@@ -71,7 +71,7 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
                 imagePicker.sourceType = .photoLibrary
                 imagePicker.allowsEditing = true
                 imagePicker.navigationBar.tintColor = .black
-                imagePicker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+                imagePicker.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
                 self.present(imagePicker, animated: true, completion: nil)
             }))
         }
@@ -91,12 +91,10 @@ class NewUserSelectImageViewController: UIViewController, UIImagePickerControlle
     
     // MARK: UIImagePickerControllerDelegate
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
-        picker.dismiss(animated: true, completion: nil)        
-        if let image = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             playerImageView.image = image
         }
     }
@@ -137,18 +135,8 @@ extension UIImage {
         UIGraphicsBeginImageContext(rect.size)
         image.draw(in: rect)
         let img = UIGraphicsGetImageFromCurrentImageContext()
-        let imageData = img!.jpegData(compressionQuality: CGFloat(compressionQuality))
+        let imageData = UIImageJPEGRepresentation(img!,CGFloat(compressionQuality))
         UIGraphicsEndImageContext()
         return UIImage(data: imageData!)!
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }

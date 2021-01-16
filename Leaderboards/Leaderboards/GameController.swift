@@ -26,7 +26,7 @@ class GameController {
         guard let currentPlayerRecord = PlayerController.shared.currentPlayer?.CKRepresentation,
             let currentPlayspaceRecord = PlayspaceController.shared.currentPlayspace?.CKRepresentation else { completion(false); return }
         
-        let game = Game(recordID: CKRecord.ID(recordName: UUID().uuidString), name: name, playspace: CKRecord.Reference(record: currentPlayspaceRecord, action: .none), players: [CKRecord.Reference(record: currentPlayerRecord, action: .none)])
+        let game = Game(recordID: CKRecordID(recordName: UUID().uuidString), name: name, playspace: CKReference(record: currentPlayspaceRecord, action: .none), players: [CKReference(record: currentPlayerRecord, action: .none)])
         
         CloudKitManager.shared.saveRecord(game.CKRepresentation) { (record, error) in
             if let error = error {
@@ -53,7 +53,7 @@ class GameController {
             }
             
             guard let gamesRecords = records else { completion(false); return }
-            let games = gamesRecords.compactMap { Game(record: $0) }
+            let games = gamesRecords.flatMap { Game(record: $0) }
             self.games = games
             self.sortGamesForCurrentPlayer(completion: { (success) in
                 if success {
@@ -85,7 +85,7 @@ class GameController {
     func addCurrentPlayerToGame(_ game: Game, completion: @escaping (_ game: Game?, _ success: Bool) -> Void = { _, _ in }) {
         var game = game
         guard let currentPlayer = PlayerController.shared.currentPlayer else { completion(nil, false); return }
-        game.players.append(CKRecord.Reference(record: currentPlayer.CKRepresentation, action: .none))
+        game.players.append(CKReference(record: currentPlayer.CKRepresentation, action: .none))
         CloudKitManager.shared.updateRecords([game.CKRepresentation], perRecordCompletion: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -109,17 +109,17 @@ class GameController {
             }
             
             guard let game = game,
-                  var players = game.value(forKey: Game.playersKey) as? [CKRecord.Reference] else { completion(nil, false); return }
-            players.append(CKRecord.Reference(recordID: currentPlayer.recordID, action: .none))
+                var players = game.value(forKey: Game.playersKey) as? [CKReference] else { completion(nil, false); return }
+            players.append(CKReference(recordID: currentPlayer.recordID, action: .none))
             game.setValue(players, forKey: Game.playersKey)
             
             CloudKitManager.shared.updateRecordsIfServerRecordChanged([game], perRecordCompletion: { (_, error) in
                 if let error = error as? CKError,
                     error.code == CKError.Code.serverRecordChanged,
                     let gameServerRecord = error.serverRecord {
-                    guard var players = gameServerRecord.value(forKey: Game.playersKey) as? [CKRecord.Reference] else { completion(nil, false); return }
+                    guard var players = gameServerRecord.value(forKey: Game.playersKey) as? [CKReference] else { completion(nil, false); return }
                     
-                    players.append(CKRecord.Reference(recordID: currentPlayer.recordID, action: .none))
+                    players.append(CKReference(recordID: currentPlayer.recordID, action: .none))
                     gameServerRecord.setValue(players as CKRecordValue, forKey: Game.playersKey)
                     
                     CloudKitManager.shared.updateRecordsIfServerRecordChanged([gameServerRecord], perRecordCompletion: { (_, error) in
@@ -154,7 +154,7 @@ class GameController {
     func fetchOpponentsForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentGame = currentGame else { completion(false); return }
         
-        let opponentsRecordIDs = currentGame.players.compactMap { $0.recordID }.filter {
+        let opponentsRecordIDs = currentGame.players.flatMap { $0.recordID }.filter {
             if $0 == PlayerController.shared.currentPlayer?.recordID {
                 return false
             }
@@ -174,7 +174,7 @@ class GameController {
                 opponentsRecords.append(playerRecord)
             }
             
-            let opponents = opponentsRecords.compactMap { Player(record: $0) }
+            let opponents = opponentsRecords.flatMap { Player(record: $0) }
             PlayerController.shared.opponents = opponents
             completion(true)
         }
@@ -183,7 +183,7 @@ class GameController {
     func fetchAllPlayersForCurrentGame(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         guard let currentGame = currentGame else { completion(false); return }
         
-        let playerRecordIDs = currentGame.players.compactMap { $0.recordID }
+        let playerRecordIDs = currentGame.players.flatMap { $0.recordID }
         
         CloudKitManager.shared.fetchRecords(withIDs: playerRecordIDs) { (playerRecordsDictionary, error) in
             if let error = error {
@@ -198,7 +198,7 @@ class GameController {
                 playersRecords.append(playerRecord)
             }
             
-            let players = playersRecords.compactMap { Player(record: $0) }
+            let players = playersRecords.flatMap { Player(record: $0) }
             self.playersBelongingToCurrentGame = players
             completion(true)
         }
@@ -217,13 +217,13 @@ class GameController {
             }
             
             guard let gameRecords = records else { completion(nil, false); return }
-            let games = gameRecords.compactMap { Game(record: $0) }
+            let games = gameRecords.flatMap { Game(record: $0) }
             completion(games, true)
         }
     }
     
     func fetchPlayspacesForGames(_ games: [Game], completion: @escaping (_ playspaces: [Playspace]?, _ success: Bool) -> Void = { _, _  in }) {
-        let playspaceRecordIDs = games.compactMap { $0.playspace.recordID }
+        let playspaceRecordIDs = games.flatMap { $0.playspace.recordID }
         
         CloudKitManager.shared.fetchRecords(withIDs: playspaceRecordIDs) { (playspacesDictionary, error) in
             if let error = error {
@@ -242,7 +242,7 @@ class GameController {
                 }
             }
             
-            let playspaces = playspaceRecords.compactMap { Playspace(record: $0) }
+            let playspaces = playspaceRecords.flatMap { Playspace(record: $0) }
             completion(playspaces, true)
         }
     }
@@ -250,7 +250,7 @@ class GameController {
     func removeCurrentPlayerFrom(_ game: Game, completion: @escaping (_ game: Game?, _ success: Bool) -> Void = { _, _ in }) {
         var game = game
         guard let currentPlayer = PlayerController.shared.currentPlayer,
-            let index = game.players.firstIndex(of: CKRecord.Reference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
+            let index = game.players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
         
         game.players.remove(at: index)
         
@@ -280,8 +280,8 @@ class GameController {
             }
             
             guard let game = game,
-                  var players = game.value(forKey: Game.playersKey) as? [CKRecord.Reference],
-                  let index = players.firstIndex(of: CKRecord.Reference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
+                var players = game.value(forKey: Game.playersKey) as? [CKReference],
+                let index = players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
             
             players.remove(at: index)
             game.setObject(players as CKRecordValue, forKey: Game.playersKey)
@@ -290,8 +290,8 @@ class GameController {
                 if let error = error as? CKError,
                     error.code == CKError.Code.serverRecordChanged,
                     let gameServerRecord = error.serverRecord {
-                    guard var players = gameServerRecord.value(forKey: Game.playersKey) as? [CKRecord.Reference],
-                          let index = players.firstIndex(of: CKRecord.Reference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
+                    guard var players = gameServerRecord.value(forKey: Game.playersKey) as? [CKReference],
+                        let index = players.index(of: CKReference(recordID: currentPlayer.recordID, action: .none)) else { completion(nil, false); return }
                     
                     players.remove(at: index)
                     gameServerRecord.setValue(players as CKRecordValue, forKey: Game.playersKey)

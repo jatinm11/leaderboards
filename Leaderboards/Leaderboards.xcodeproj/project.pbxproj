@@ -63,8 +63,6 @@
 		74F65DD51F74262C00265D0B /* PlayerProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74F65DD41F74262C00265D0B /* PlayerProfile.storyboard */; };
 		74F65DD71F74282B00265D0B /* PlayerProfileViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F65DD61F74282B00265D0B /* PlayerProfileViewController2.swift */; };
 		74F65DD91F74488A00265D0B /* PendingMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F65DD81F74488A00265D0B /* PendingMatchTableViewCell.swift */; };
-		7C13814F255DC2C600990A76 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13814E255DC2C600990A76 /* WelcomeViewController.swift */; };
-		7C138154255DC54A00990A76 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C138153255DC54A00990A76 /* Extensions.swift */; };
 		AB36E4A51F731D9A00B93655 /* NewUserSelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */; };
 		AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DF1711F71845F00498B8B /* PlayspaceController.swift */; };
 		AB86E01E1F72BDF1001A0A4E /* Match.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB86E01D1F72BDF1001A0A4E /* Match.storyboard */; };
@@ -130,8 +128,6 @@
 		74F65DD41F74262C00265D0B /* PlayerProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayerProfile.storyboard; sourceTree = "<group>"; };
 		74F65DD61F74282B00265D0B /* PlayerProfileViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfileViewController2.swift; sourceTree = "<group>"; };
 		74F65DD81F74488A00265D0B /* PendingMatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingMatchTableViewCell.swift; sourceTree = "<group>"; };
-		7C13814E255DC2C600990A76 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		7C138153255DC54A00990A76 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSelectImageViewController.swift; sourceTree = "<group>"; };
 		AB3DF1711F71845F00498B8B /* PlayspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayspaceController.swift; sourceTree = "<group>"; };
 		AB86E01D1F72BDF1001A0A4E /* Match.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Match.storyboard; sourceTree = "<group>"; };
@@ -204,10 +200,10 @@
 		61FAEE6D1F717B1B00D509E6 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				74DEFF9F1F71986F00030ED9 /* Login.storyboard */,
 				61FAEE551F717A1A00D509E6 /* Players.storyboard */,
 				61FAEE781F71887100D509E6 /* Leaderboards.storyboard */,
 				61FAEE5A1F717A1A00D509E6 /* LaunchScreen.storyboard */,
+				74DEFF9F1F71986F00030ED9 /* Login.storyboard */,
 				AB86E01D1F72BDF1001A0A4E /* Match.storyboard */,
 				74F65DD41F74262C00265D0B /* PlayerProfile.storyboard */,
 				6123C9321F7DD2100029D48D /* JoinPlayspace.storyboard */,
@@ -242,10 +238,8 @@
 		61FAEE731F71819900D509E6 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7C13814E255DC2C600990A76 /* WelcomeViewController.swift */,
-				74DEFFA11F7199D200030ED9 /* LoginViewController.swift */,
-				747FDB221F7585F700210005 /* SplashViewController.swift */,
 				6111DD9A1F7969880098F51E /* PendingMatchesViewController.swift */,
+				74DEFFA11F7199D200030ED9 /* LoginViewController.swift */,
 				61FAEE741F71861A00D509E6 /* PlayerViewController.swift */,
 				61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */,
 				61FAEE7A1F718C0000D509E6 /* LeaderboardTableViewCell.swift */,
@@ -259,6 +253,7 @@
 				AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */,
 				74F65DD61F74282B00265D0B /* PlayerProfileViewController2.swift */,
 				74F65DD81F74488A00265D0B /* PendingMatchTableViewCell.swift */,
+				747FDB221F7585F700210005 /* SplashViewController.swift */,
 				61E18C1D1F787EE600583249 /* AddPlayspaceViewController.swift */,
 				610D3F8C1F799995000D953F /* CurrentPlayerProfileViewController.swift */,
 				6123C9341F7DD7400029D48D /* JoinPlayspaceViewController.swift */,
@@ -286,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				74DEFF9D1F718FE200030ED9 /* CloudKitManager.swift */,
-				7C138153255DC54A00990A76 /* Extensions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -324,7 +318,7 @@
 					61FAEE4D1F717A1A00D509E6 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = M67BJVKLC2;
-						LastSwiftMigration = 1210;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -345,7 +339,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -414,7 +407,6 @@
 				610D3F8F1F79AC2B000D953F /* ApprovalViewController.swift in Sources */,
 				6111DD9B1F7969880098F51E /* PendingMatchesViewController.swift in Sources */,
 				74F65DD71F74282B00265D0B /* PlayerProfileViewController2.swift in Sources */,
-				7C13814F255DC2C600990A76 /* WelcomeViewController.swift in Sources */,
 				74AAFA741F855F9A0073DB86 /* PlayerProfileMatchHistoryTableViewCell.swift in Sources */,
 				61E6729E1F85A52B0077EA7B /* PlayerProfileLastFiveTableViewCell.swift in Sources */,
 				74DEFFA21F7199D200030ED9 /* LoginViewController.swift in Sources */,
@@ -429,7 +421,6 @@
 				748E61F41F72DD2E00759243 /* GameController.swift in Sources */,
 				AB3DF1721F71845F00498B8B /* PlayspaceController.swift in Sources */,
 				74DEFFA61F71DD8B00030ED9 /* PlayspacesViewController.swift in Sources */,
-				7C138154255DC54A00990A76 /* Extensions.swift in Sources */,
 				74D444891F844E0A002D7C08 /* LeaderboardsPlayersListContainerViewController.swift in Sources */,
 				61FAEE6A1F717AB200D509E6 /* Playspace.swift in Sources */,
 				748E61F61F72F9A800759243 /* JoinGameViewController.swift in Sources */,
@@ -571,12 +562,12 @@
 				CODE_SIGN_ENTITLEMENTS = Leaderboards/Leaderboards.entitlements;
 				DEVELOPMENT_TEAM = M67BJVKLC2;
 				INFOPLIST_FILE = Leaderboards/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jatinmenghani.Leaderboards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -587,12 +578,12 @@
 				CODE_SIGN_ENTITLEMENTS = Leaderboards/Leaderboards.entitlements;
 				DEVELOPMENT_TEAM = M67BJVKLC2;
 				INFOPLIST_FILE = Leaderboards/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jatinmenghani.Leaderboards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

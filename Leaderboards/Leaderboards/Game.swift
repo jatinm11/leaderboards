@@ -11,10 +11,10 @@ import CloudKit
 
 struct Game {
     
-    let recordID: CKRecord.ID
+    let recordID: CKRecordID
     let name: String
-    let playspace: CKRecord.Reference
-    var players: [CKRecord.Reference]
+    let playspace: CKReference
+    var players: [CKReference]
     
 }
 
@@ -29,13 +29,13 @@ extension Game {
     
     init?(record: CKRecord) {
         guard let name = record[Game.nameKey] as? String,
-            let playspace = record[Game.playspaceKey] as? CKRecord.Reference else { return nil }
+            let playspace = record[Game.playspaceKey] as? CKReference else { return nil }
         
         self.recordID = record.recordID
         self.name = name
         self.playspace = playspace
         
-        if let players = record[Game.playersKey] as? [CKRecord.Reference] {
+        if let players = record[Game.playersKey] as? [CKReference] {
             self.players = players
         } else {
             self.players = []

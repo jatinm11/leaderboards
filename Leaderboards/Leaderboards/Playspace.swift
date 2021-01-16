@@ -11,7 +11,7 @@ import CloudKit
 
 struct Playspace {
     
-    let recordID: CKRecord.ID
+    let recordID: CKRecordID
     let name: String
     let password: String
     
