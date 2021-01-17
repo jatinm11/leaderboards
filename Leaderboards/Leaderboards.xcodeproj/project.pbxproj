@@ -238,8 +238,10 @@
 		61FAEE731F71819900D509E6 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6111DD9A1F7969880098F51E /* PendingMatchesViewController.swift */,
+				747FDB221F7585F700210005 /* SplashViewController.swift */,
 				74DEFFA11F7199D200030ED9 /* LoginViewController.swift */,
+				AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */,
+				6111DD9A1F7969880098F51E /* PendingMatchesViewController.swift */,
 				61FAEE741F71861A00D509E6 /* PlayerViewController.swift */,
 				61FAEE761F71874700D509E6 /* PlayerTableViewCell.swift */,
 				61FAEE7A1F718C0000D509E6 /* LeaderboardTableViewCell.swift */,
@@ -250,10 +252,8 @@
 				748E61F51F72F9A800759243 /* JoinGameViewController.swift */,
 				748E61F71F731C9B00759243 /* NewMatchViewController.swift */,
 				748E61F91F73316700759243 /* SelectOpponentViewController.swift */,
-				AB36E4A41F731D9A00B93655 /* NewUserSelectImageViewController.swift */,
 				74F65DD61F74282B00265D0B /* PlayerProfileViewController2.swift */,
 				74F65DD81F74488A00265D0B /* PendingMatchTableViewCell.swift */,
-				747FDB221F7585F700210005 /* SplashViewController.swift */,
 				61E18C1D1F787EE600583249 /* AddPlayspaceViewController.swift */,
 				610D3F8C1F799995000D953F /* CurrentPlayerProfileViewController.swift */,
 				6123C9341F7DD7400029D48D /* JoinPlayspaceViewController.swift */,
@@ -570,6 +570,7 @@
 				INFOPLIST_FILE = Leaderboards/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jatinmenghani.Leaderboards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -586,6 +587,7 @@
 				INFOPLIST_FILE = Leaderboards/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jatinmenghani.Leaderboards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

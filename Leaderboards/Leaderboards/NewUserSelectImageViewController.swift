@@ -151,3 +151,11 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
+
+extension NewUserSelectImageViewController {
+    class func controller(username: String) -> UIViewController {
+        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "selectImageVC") as! NewUserSelectImageViewController
+        vc.username = username
+        return vc
+    }
+}

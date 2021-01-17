@@ -10,9 +10,9 @@ import UIKit
 
 class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    let colorProvider = BackgroundColorProvider()
-    
     @IBOutlet weak var usernameTextField: UITextField!
+    
+    let colorProvider = BackgroundColorProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +41,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toNewUserSelectImageVC" {
             guard let username = usernameTextField.text, !username.isEmpty else {
-                self.presentSimpleAlert(title: "Unable to create an account", message: "Be sure you entered a valid username and try again.")
-                return
-            }
+                self.presentSimpleAlert(title: "Unable to create an account", message: "Be sure you entered a valid username and try again."); return }
             
             let newUserSelectImageVC = segue.destination as? NewUserSelectImageViewController
             newUserSelectImageVC?.username = username
@@ -55,4 +53,15 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         return true
     }
     
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        
+        if FileManager.default.ubiquityIdentityToken != nil {
+            guard let username = usernameTextField.text, !username.isEmpty else {
+                self.presentSimpleAlert(title: "Unable to create an account", message: "Be sure you entered a valid username and try again."); return }
+            self.navigationController?.pushViewController(NewUserSelectImageViewController.controller(username: username), animated: true)
+        }
+        else {
+            self.presentSimpleAlert(title: "Error.", message: "Seems like you're not logged in to your iCloud Account. Please login to continue.")
+        }
+    }
 }

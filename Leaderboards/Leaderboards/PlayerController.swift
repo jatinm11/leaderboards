@@ -18,6 +18,7 @@ class PlayerController {
     var opponents = [Player]()
     
     func createPlayerWith(username: String, photo: UIImage?, completion: @escaping (_ success: Bool) -> Void) {
+        
         CKContainer.default().fetchUserRecordID { (appleUsersRecordID, error) in
             guard let appleUsersRecordID = appleUsersRecordID else { completion(false); return }
             let appleUserRef = CKRecord.Reference(recordID: appleUsersRecordID, action: .deleteSelf)
@@ -27,7 +28,7 @@ class PlayerController {
             let playerRecord = player.CKRepresentation
             
             CloudKitManager.shared.saveRecord(playerRecord) { (record, error) in
-                if let error = error { print(error.localizedDescription) }
+                if let error = error { print(error.localizedDescription); completion(false); return }
                 
                 
                 guard let record = record,
@@ -43,10 +44,12 @@ class PlayerController {
     }
     
     func fetchCurrentPlayer(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
-        // Fetch default Apple 'Users' recordID
         
+        // Fetch default Apple 'Users' recordID
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
-            if let error = error { print(error.localizedDescription) }
+            
+            if let error = error { print("Here 2 -> \(error.localizedDescription)") }
+            
             guard let appleUserRecordID = appleUserRecordID else { completion(false); return }
             
             // Create a CKReference with the Apple 'Users' recordID so that we can fetch OUR cust user record
